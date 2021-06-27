@@ -57,9 +57,13 @@ dependencies {
     coil()
     ktx()
     hilt()
+    lib()
 
 }
-
+private void lib(){
+    // button
+    dependencies.implementation "com.royrodriguez:transitionbutton:0.2.0"
+}
 private void retrofit(){
     dependencies.implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     dependencies.implementation "com.google.code.gson:gson:$gson_version"
