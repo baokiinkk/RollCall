@@ -1,7 +1,9 @@
 package com.example.rollcall.ui.login
 
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentLoginBinding
 import com.example.rollcall.ui.admin.home.HomeAdminFragment
@@ -22,28 +24,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             viewmodel = viewMode
             btnLogin.setOnClickListener {
                 btnLogin.startAnimation()
-                val handler = Handler()
-                handler.postDelayed(Runnable {
-                    val isSuccessful = true
-
-                    // Choose a stop animation if your call was succesful or not
-                    if (isSuccessful) {
-                        btnLogin.stopAnimation(
-                            TransitionButton.StopAnimationStyle.EXPAND
-                        ) {
-                            requireActivity().supportFragmentManager.beginTransaction()
-                                .replace(R.id.container, HomeAdminFragment())
-                                .commit()
-                        }
-                    } else {
-                        btnLogin.stopAnimation(
-                            TransitionButton.StopAnimationStyle.SHAKE,
-                            null
-                        )
-                    }
-                }, 2000)
+                viewMode.login()
             }
         }
+        viewMode.user.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it.message == null) {
+                    baseBinding.btnLogin.stopAnimation(
+                        TransitionButton.StopAnimationStyle.EXPAND
+                    ) {
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.container, HomeAdminFragment())
+                            .commit()
+                    }
+                } else {
+                    baseBinding.btnLogin.stopAnimation(
+                        TransitionButton.StopAnimationStyle.SHAKE,
+                        null
+                    )
+                }
+                Log.d("quocbao", it.toString())
+            }
+        })
     }
 
 }

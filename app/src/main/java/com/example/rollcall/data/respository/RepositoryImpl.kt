@@ -1,19 +1,21 @@
 package com.example.rollcall.data.respository
 
-import android.util.Log
 import com.example.rollcall.data.api.ApiService
-import com.example.rollcall.data.model.Fruit
+import com.example.rollcall.data.model.LoginUser
+import com.example.rollcall.data.model.User
+import com.example.rollcall.data.model.UserLogin
+import retrofit2.HttpException
+import java.lang.Exception
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(val apiService: ApiService) : Repository {
-    override suspend fun getData(get: (Fruit) -> Unit) {
+    override suspend fun login(login: LoginUser): UserLogin =
         try {
-            Log.d("quocbao",apiService.getBooks().toString())
-            get(apiService.getBooks())
+            apiService.login(login)
+        } catch (cause: HttpException) {
+            UserLogin(message = cause.response()?.errorBody()?.string())
         }
-        catch (e:Exception){
-            Log.d("quocbao","error")
 
-        }
-    }
+
 }
+

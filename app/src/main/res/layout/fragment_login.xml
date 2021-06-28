@@ -13,9 +13,17 @@
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:background="@drawable/brlogin"
        >
-
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:loadImage="@{viewmodel.img}"
+           android:scaleType="centerCrop"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           />
        <View
            android:id="@+id/view"
            android:layout_width="match_parent"
@@ -23,10 +31,9 @@
            android:background="@drawable/br_login"
            app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.0"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toTopOf="parent"
-           app:layout_constraintVertical_bias="0.0" />
+            />
 
        <EditText
            android:id="@+id/edtEmail"
@@ -36,6 +43,7 @@
            android:layout_marginTop="340dp"
            android:layout_marginEnd="30dp"
            android:hint="UserName"
+           android:text="@={viewmodel.email}"
            android:textColorHint="#D3D1D1"
            android:paddingVertical="20dp"
            android:drawableStart="@drawable/ic_user"
@@ -54,6 +62,7 @@
            android:layout_marginEnd="30dp"
            android:inputType="textPassword"
            android:hint="Password"
+           android:text="@={viewmodel.password}"
            android:textColorHint="#D3D1D1"
            android:paddingVertical="20dp"
            android:drawableStart="@drawable/ic_pass"

@@ -41,7 +41,7 @@ object  ApiModule {
     @Singleton
     fun provideRetrofit(factory: Gson, client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://gateway.marvel.com/")
+            .baseUrl("https://be-checkin.herokuapp.com/api/")
             .addConverterFactory(GsonConverterFactory.create(factory))
             .client(client)
             .build()
