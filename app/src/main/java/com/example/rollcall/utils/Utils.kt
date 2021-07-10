@@ -14,6 +14,8 @@ object Utils {
     const val SNS_LOGIN_TYPE = "SNS_LOGIN_TYPE"
     const val USER = "user"
     const val TOKEN = "token"
+    const val STUDENT = "student"
+    const val TEACHER = "teacher"
     const val SNS_REQUEST_CODE_GOOGLE = 887
 
     const val SNS_REQUEST_CODE_PHONE = 886
