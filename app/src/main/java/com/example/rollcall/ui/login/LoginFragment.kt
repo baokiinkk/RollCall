@@ -1,13 +1,13 @@
 package com.example.rollcall.ui.login
 
-import android.os.Handler
-import android.util.Log
+import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentLoginBinding
 import com.example.rollcall.ui.admin.home.HomeAdminFragment
 import com.example.rollcall.utils.BaseFragment
+import com.example.rollcall.utils.Utils.TOKEN
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,8 +33,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     baseBinding.btnLogin.stopAnimation(
                         TransitionButton.StopAnimationStyle.EXPAND
                     ) {
+                        val fragment = HomeAdminFragment()
+                        fragment.arguments = Bundle().apply { putString(TOKEN, it.data?.get(0)?.token) }
                         requireActivity().supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, HomeAdminFragment())
+                            .replace(R.id.container, fragment)
                             .commit()
                     }
                 } else {
@@ -43,7 +45,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                         null
                     )
                 }
-                Log.d("quocbao", it.toString())
             }
         })
     }

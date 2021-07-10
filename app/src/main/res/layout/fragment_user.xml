@@ -7,20 +7,26 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.rollcall.ui.admin.home.HomeAdminViewModel" />
+            type="com.example.rollcall.ui.admin.user.UserViewModel" />
         <variable
             name="adapter"
-            type="com.example.rollcall.adapter.ItemHomeAdapter" />
+            type="com.example.rollcall.adapter.ItemUserAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_home_admin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/rv_user_fragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+
             android:adapter="@{adapter}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

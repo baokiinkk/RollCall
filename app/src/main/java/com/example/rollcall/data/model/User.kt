@@ -1,7 +1,7 @@
 package com.example.rollcall.data.model
 
 data class LoginUser(val id: String, val password: String)
-data class UserLogin(val user:User? = null,val message:String? = null)
+data class Users(val count:String? = null,val message:String? = null,val data:MutableList<User>? = null)
 data class User(
     val id: String,
     val name: String,
