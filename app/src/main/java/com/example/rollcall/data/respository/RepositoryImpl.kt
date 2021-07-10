@@ -1,6 +1,7 @@
 package com.example.rollcall.data.respository
 
 import com.example.rollcall.data.api.ApiService
+import com.example.rollcall.data.model.DashBoard
 import com.example.rollcall.data.model.LoginUser
 import com.example.rollcall.data.model.Users
 import retrofit2.HttpException
@@ -15,13 +16,26 @@ class RepositoryImpl @Inject constructor(val apiService: ApiService) : Repositor
             Users(message = cause.response()?.errorBody()?.string())
         }
 
-    override suspend fun getUses(tokenAdmin: String): Users =
+    override suspend fun getStudent(tokenAdmin: String): Users =
         try {
-            apiService.getUser(tokenAdmin)
-        }catch (cause:HttpException){
+            apiService.getStudents(tokenAdmin)
+        } catch (cause: HttpException) {
             Users(message = cause.response()?.errorBody()?.string())
         }
 
+    override suspend fun getTeachcer(tokenAdmin: String): Users =
+        try {
+            apiService.getTeachers(tokenAdmin)
+        } catch (cause: HttpException) {
+            Users(message = cause.response()?.errorBody()?.string())
+        }
+
+    override suspend fun getDashBoard(tokenAdmin: String): DashBoard =
+        try {
+            apiService.getDashBoard(tokenAdmin)
+        } catch (cause: HttpException) {
+            DashBoard(message = cause.response()?.errorBody()?.string())
+        }
 
 }
 
