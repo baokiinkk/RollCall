@@ -16,15 +16,25 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
     override fun getLayoutRes(): Int {
         return R.layout.fragment_user
     }
-
+    //-------------------------------- Variable ----------------------------------------
     val viewModel by viewModels<UserViewModel>()
     private var token: String? = null
     private var user: String? = null
+
+    //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
+        getArgument()
+        setup()
+    }
+
+    //-------------------------------- Func ----------------------------------------
+    private fun getArgument() {
         token = arguments?.getString(Utils.TOKEN)
         user = arguments?.getString(USER)
-        val itemUserAdapter = ItemUserAdapter {
+    }
 
+    private fun setup() {
+        val itemUserAdapter = ItemUserAdapter {
         }
         baseBinding.apply {
             viewmodel = viewModel
@@ -38,7 +48,6 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
                 }
             })
         }
-
     }
 
 }

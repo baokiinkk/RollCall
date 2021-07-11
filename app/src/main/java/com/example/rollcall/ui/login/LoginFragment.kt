@@ -8,6 +8,7 @@ import com.example.rollcall.databinding.FragmentLoginBinding
 import com.example.rollcall.ui.admin.home.HomeAdminFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils.TOKEN
+import com.example.rollcall.utils.Utils.gotoFragment
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,26 +19,33 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         return R.layout.fragment_login
     }
 
-    val viewMode by viewModels<LoginViewModel>()
+
+    //-------------------------------- Variable ----------------------------------------
+    val viewModel by viewModels<LoginViewModel>()
+
+
+    //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
+        setup()
+        clickView()
+    }
+
+    //-------------------------------- Func ----------------------------------------
+    private fun setup() {
         baseBinding.apply {
-            viewmodel = viewMode
-            btnLogin.setOnClickListener {
-                btnLogin.startAnimation()
-                viewMode.login()
-            }
+            viewmodel = viewModel
         }
-        viewMode.user.observe(viewLifecycleOwner, Observer {
+
+        viewModel.user.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it.message == null) {
                     baseBinding.btnLogin.stopAnimation(
                         TransitionButton.StopAnimationStyle.EXPAND
                     ) {
                         val fragment = HomeAdminFragment()
-                        fragment.arguments = Bundle().apply { putString(TOKEN, it.data?.get(0)?.token) }
-                        requireActivity().supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, fragment)
-                            .commit()
+                        fragment.arguments =
+                            Bundle().apply { putString(TOKEN, it.data?.get(0)?.token) }
+                        gotoFragment(requireActivity(), fragment)
                     }
                 } else {
                     baseBinding.btnLogin.stopAnimation(
@@ -47,6 +55,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 }
             }
         })
+
+    }
+
+    private fun clickView() {
+        baseBinding.btnLogin.apply {
+            setOnClickListener {
+                startAnimation()
+                viewModel.login()
+            }
+        }
     }
 
 }

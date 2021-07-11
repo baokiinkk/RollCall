@@ -1,9 +1,6 @@
 package com.example.rollcall.ui.admin.home
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentHomeAdminBinding
@@ -13,6 +10,7 @@ import com.example.rollcall.utils.Utils.STUDENT
 import com.example.rollcall.utils.Utils.TEACHER
 import com.example.rollcall.utils.Utils.TOKEN
 import com.example.rollcall.utils.Utils.USER
+import com.example.rollcall.utils.Utils.gotoFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -22,24 +20,36 @@ class HomeAdminFragment : BaseFragment<FragmentHomeAdminBinding>() {
         return R.layout.fragment_home_admin
     }
 
-    val viewMode by viewModels<HomeAdminViewModel>()
+    //-------------------------------- Variable ----------------------------------------
+    val viewModel by viewModels<HomeAdminViewModel>()
     private var token: String? = null
-    override fun onCreateViews() {
-        token = arguments?.getString(TOKEN)
 
-        baseBinding.apply {
-            viewmodel = viewMode
-        }
-        token?.let { viewMode.getData(it) }
-        viewMode.dashBoard.observe(viewLifecycleOwner,{
-            it?.let {
-                Log.d("quocbao",it.toString())
-            }
-        })
-        onClick()
+
+    //-------------------------------- createView ----------------------------------------
+    override fun onCreateViews() {
+        getArgument()
+        getData()
+        setup()
+        clickView()
     }
 
-    fun onClick() {
+
+    //-------------------------------- Func ----------------------------------------
+    private fun setup() {
+        baseBinding.apply {
+            viewmodel = viewModel
+        }
+    }
+
+    private fun getData() {
+        token?.let { viewModel.getData(it) }
+    }
+
+    private fun getArgument() {
+        token = arguments?.getString(TOKEN)
+    }
+
+    private fun clickView() {
         baseBinding.apply {
             cardViewStudent.setOnClickListener {
                 val fragment = UserFragment()
@@ -47,7 +57,7 @@ class HomeAdminFragment : BaseFragment<FragmentHomeAdminBinding>() {
                     putString(TOKEN, token)
                     putString(USER, STUDENT)
                 }
-                gotoFragment(fragment)
+                gotoFragment(requireActivity(), fragment)
             }
             cardViewTeacher.setOnClickListener {
                 val fragment = UserFragment()
@@ -55,18 +65,11 @@ class HomeAdminFragment : BaseFragment<FragmentHomeAdminBinding>() {
                     putString(TOKEN, token)
                     putString(USER, TEACHER)
                 }
-                gotoFragment(fragment)
+                gotoFragment(requireActivity(), fragment)
 
             }
         }
 
-    }
-
-    fun gotoFragment(fragment: Fragment) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment)
-            .addToBackStack(HomeAdminFragment::class.java.simpleName)
-            .commit()
     }
 
 }
