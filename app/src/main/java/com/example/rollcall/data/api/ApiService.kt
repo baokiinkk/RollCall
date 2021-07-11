@@ -2,6 +2,7 @@ package com.example.rollcall.data.api
 
 import com.example.rollcall.data.model.DashBoard
 import com.example.rollcall.data.model.LoginUser
+import com.example.rollcall.data.model.User
 import com.example.rollcall.data.model.Users
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -20,4 +21,7 @@ interface ApiService {
 
     @GET("dashboard")
     suspend fun getDashBoard(@Header("Authorization") tokenAdmin:String):DashBoard
+
+    @POST("users")
+    suspend fun createUser(@Header("Authorization") tokenAdmin:String, @Body user: User):Users
 }

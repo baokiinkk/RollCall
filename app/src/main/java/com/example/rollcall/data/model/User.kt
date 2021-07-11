@@ -7,8 +7,9 @@ data class User(
     val name: String,
     val email: String,
     val role: String,
-    val classes: MutableList<Class>,
-    val token: String
+    val password:String,
+    val classes: MutableList<Class>? = null,
+    val token: String? = null
 
 )
 

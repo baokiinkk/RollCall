@@ -20,7 +20,7 @@ class UserViewModel@Inject constructor(private val repo: Repository):ViewModel()
             if(user == STUDENT)
                 users.postValue(repo.getStudent(token))
             else
-                users.postValue(repo.getTeachcer(token))
+                users.postValue(repo.getTeacher(token))
         }
     }
 }
