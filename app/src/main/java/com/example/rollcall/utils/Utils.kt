@@ -16,6 +16,7 @@ import com.example.rollcall.data.model.User
 import com.example.rollcall.ui.admin.home.HomeAdminFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 
 object Utils {
@@ -41,7 +42,7 @@ object Utils {
             .commit()
     }
 
-    fun checkNull(text: String, hint: String, editText: TextInputEditText): Boolean {
+    fun checkNull(text: String, hint: String, editText: TextInputLayout): Boolean {
         if (text == "") {
             editText.error = hint.substring(5) + " không được phép rỗng"
             return false

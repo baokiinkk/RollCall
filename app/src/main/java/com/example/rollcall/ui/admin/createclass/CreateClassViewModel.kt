@@ -51,8 +51,8 @@ class CreateClassViewModel @Inject constructor(private val repo: Repository) : V
         }
     }
 
-    fun dataBuoi(): MutableList<String> {
-        return mutableListOf("sáng", "chiều")
+    fun dataBuoi(): List<String> {
+        return listOf("sáng", "chiều")
     }
 
     fun dataDateLearn(): MutableList<String> {

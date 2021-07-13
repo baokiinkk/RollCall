@@ -2,14 +2,11 @@ package com.example.rollcall.ui.admin.createclass
 
 
 import android.app.DatePickerDialog
-import android.util.Log
+
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.adapter.ItemUserAdapter
-import com.example.rollcall.adapter.SelectItemUserAdapter
-import com.example.rollcall.data.model.Class
-import com.example.rollcall.data.model.DataClass
 import com.example.rollcall.databinding.FragmentCreateClassBinding
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
@@ -18,6 +15,7 @@ import com.example.rollcall.utils.Utils.diaLogBottom
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -29,8 +27,8 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
     //-------------------------------- Variable ----------------------------------------
     val viewModel by viewModels<CreateClassViewModel>()
     private var token: String? = null
-    lateinit var adapterUser: ItemUserAdapter
-    lateinit var dialog: BottomSheetDialog
+    private lateinit var adapterUser: ItemUserAdapter
+    private lateinit var dialog: BottomSheetDialog
 
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
@@ -47,6 +45,8 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
     private fun setup() {
         baseBinding.apply {
             viewmodel = viewModel
+
+//
         }
         viewModel.apply {
             token?.let { token ->
@@ -54,7 +54,7 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
             }
         }
         adapterUser = ItemUserAdapter {
-            baseBinding.txtPickTeacher.text = it.name
+            baseBinding.txtPickTeacher.editText?.setText(it.name)
             viewModel.datateacher = it
             dialog.dismiss()
         }
@@ -80,16 +80,19 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
     }
 
     private fun clickView() {
-        val selectedYear = 2000
-        val selectedMonth = 5
-        val selectedDayOfMonth = 10
+        val date = Calendar.getInstance()
+        date.timeZone = TimeZone.getTimeZone("UTC")
+        val selectedYear = date.get(Calendar.YEAR)
+        val selectedMonth = date.get(Calendar.MONTH)
+        val selectedDayOfMonth = date.get(Calendar.DAY_OF_MONTH)
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                baseBinding.txtPickDate.setText(
-                    dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year
+                baseBinding.txtPickDate.editText?.setText(
+                    "$dayOfMonth-$monthOfYear-$year"
                 )
+
             }
-        baseBinding.txtPickDate.apply {
+        baseBinding.txtPickDate.editText?.apply {
             setOnClickListener {
                 val datePickerDialog = DatePickerDialog(
                     context,
@@ -102,7 +105,7 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
 
         viewModel.teacher.observe(viewLifecycleOwner, {
             it?.let { users ->
-                baseBinding.txtPickTeacher.apply {
+                baseBinding.txtPickTeacher.editText?.apply {
                     setOnClickListener {
                         users.data?.let { users ->
                             dialog = diaLogBottom(
@@ -121,10 +124,12 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
                 if (checkValidate()) {
                     startAnimation()
                     token?.let { it1 ->
+                        val buoiHoc = baseBinding.spBuoiHoc.editText?.text.toString()
+                        val ngayHoc = baseBinding.spNgayHoc.editText?.text.toString()
                         viewModel.createClass(
                             it1,
-                            baseBinding.spBuoiHoc.selectedItemPosition.toString(),
-                            (baseBinding.spNgayHoc.selectedItemPosition + 2).toString()
+                            if (buoiHoc == "chiều") "1" else "0",
+                            ngayHoc.substring(4)
                         )
                     }
                 } else {
@@ -140,9 +145,31 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
     }
 
     private fun checkValidate(): Boolean {
-        val checkDateStart = baseBinding.txtPickDate.text != ""
-        val checkTeacher = baseBinding.txtPickTeacher.text != ""
-
+        clearError()
+        val checkTeacher =
+            Utils.checkNull(
+                viewModel.nameTeacher,
+                baseBinding.txtPickTeacher.hint.toString(),
+                baseBinding.txtPickTeacher
+            )
+        val checkBuoiHoc =
+            Utils.checkNull(
+                baseBinding.spBuoiHoc.editText?.text.toString(),
+                baseBinding.spBuoiHoc.hint.toString(),
+                baseBinding.spBuoiHoc
+            )
+        val checkChonNgay =
+            Utils.checkNull(
+                baseBinding.spNgayHoc.editText?.text.toString(),
+                baseBinding.spNgayHoc.hint.toString(),
+                baseBinding.spNgayHoc
+            )
+        val checkDateStart =
+            Utils.checkNull(
+                viewModel.dateStart,
+                baseBinding.txtPickDate.hint.toString(),
+                baseBinding.txtPickDate
+            )
         val checkId =
             Utils.checkNull(
                 viewModel.id,
@@ -173,7 +200,21 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
                 baseBinding.textView19.hint.toString(),
                 baseBinding.textView19
             )
-        return checkDateStart && checkTeacher && checkId && checkName && checkCredit && checkPhong && checkDays
+        return checkChonNgay && checkBuoiHoc && checkDateStart && checkTeacher && checkId && checkName && checkCredit && checkPhong && checkDays
+    }
+
+    private fun clearError() {
+        baseBinding.apply {
+            textView14.error = null
+            textView12.error = null
+            textView15.error = null
+            textView17.error = null
+            textView19.error = null
+            spBuoiHoc.error = null
+            spNgayHoc.error = null
+            txtPickDate.error = null
+            txtPickTeacher.error = null
+        }
     }
 
 }
