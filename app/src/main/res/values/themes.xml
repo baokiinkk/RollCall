@@ -24,4 +24,8 @@
         <item name="android:backgroundDimAmount">0.3</item>
         <item name="android:windowIsFloating">true</item>
     </style>
+
+
+
+
 </resources>
