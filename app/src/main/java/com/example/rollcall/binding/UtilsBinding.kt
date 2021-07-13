@@ -1,6 +1,8 @@
 package com.example.rollcall.binding
 
+import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.Spinner
 
 import androidx.databinding.BindingAdapter
 
@@ -21,6 +23,12 @@ class UtilsBinding{
             image?.let {
                 view.load(it)
             }
+        }
+
+        @BindingAdapter("android:load_data")
+        @JvmStatic
+        fun loadImageURL(view: Spinner, data: MutableList<String>) {
+            view.adapter = ArrayAdapter(view.context,android.R.layout.simple_spinner_item,data)
         }
     }
 }

@@ -9,6 +9,7 @@ import com.example.rollcall.adapter.ItemClassAdapter
 import com.example.rollcall.adapter.ItemUserAdapter
 import com.example.rollcall.databinding.FragmentClassBinding
 import com.example.rollcall.databinding.FragmentUserBinding
+import com.example.rollcall.ui.admin.createclass.CreateClassFragment
 import com.example.rollcall.ui.admin.createuser.CreateUserFragment
 import com.example.rollcall.ui.admin.ediuser.EditUserFragment
 import com.example.rollcall.utils.BaseFragment
@@ -63,7 +64,9 @@ class ClassFragment : BaseFragment<FragmentClassBinding>() {
 
     private fun clickView() {
         baseBinding.btnCreateUser.setOnClickListener {
-
+            val fragment = CreateClassFragment()
+            fragment.arguments = Bundle().apply {putString(TOKEN,token)}
+            gotoFragment(requireActivity(),fragment)
         }
     }
 

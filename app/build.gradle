@@ -60,6 +60,9 @@ dependencies {
 private void lib(){
     // button
     dependencies.implementation "com.royrodriguez:transitionbutton:0.2.0"
+
+    //calender
+    dependencies.implementation 'com.code-troopers.betterpickers:library:3.1.0'
 }
 private void retrofit(){
     dependencies.implementation "com.squareup.retrofit2:retrofit:$retrofit_version"

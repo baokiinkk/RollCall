@@ -75,7 +75,7 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/br_btn_login"
             android:paddingVertical="20dp"
-            android:text="Create"
+            android:text="Tạo user"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:textSize="20sp"
