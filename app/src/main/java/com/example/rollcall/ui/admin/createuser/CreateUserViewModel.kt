@@ -1,6 +1,5 @@
 package com.example.rollcall.ui.admin.createuser
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,7 +25,7 @@ class CreateUserViewModel@Inject constructor(private val repo: Repository) :View
     fun createUser(token:String,typeUser:String){
         viewModelScope.launch(Dispatchers.IO){
             delay(1000)
-            val user = User(id,name,email,typeUser,password)
+            val user = User(id,name,email,typeUser,password=password)
             users.postValue(repo.createUser(token,user))
         }
     }

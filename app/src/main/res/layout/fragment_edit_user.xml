@@ -6,10 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewmodel"
-            type="com.example.rollcall.ui.admin.createuser.CreateUserViewModel" />
+            type="com.example.rollcall.ui.admin.ediuser.EditUserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +22,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
-            android:hint="Nhập Password"
+            android:hint="Nhập password"
             android:text="@={viewmodel.password}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -35,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:hint="nhập Email"
+            android:hint="nhập email"
             android:text="@={viewmodel.email}"
             app:layout_constraintEnd_toEndOf="@+id/edtId"
             app:layout_constraintHorizontal_bias="1.0"
@@ -50,6 +49,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="30dp"
             android:hint="Nhập Mã số sinh viên"
+            android:enabled="false"
             android:text="@={viewmodel.id}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,28 +60,49 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:hint="Nhập Tên"
+            android:hint="Nhập tên"
             android:text="@={viewmodel.name}"
             app:layout_constraintEnd_toEndOf="@+id/edtId"
             app:layout_constraintStart_toStartOf="@+id/edtId"
             app:layout_constraintTop_toBottomOf="@+id/edtId" />
 
         <com.royrodriguez.transitionbutton.TransitionButton
-            android:id="@+id/btnCreate"
+            android:id="@+id/btnOk"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="30dp"
+            android:background="@drawable/br_btn_edit_user"
+            android:paddingVertical="20dp"
+            android:text="EDIT"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:defaultColor="#2196F3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnDelete"
+            app:layout_constraintTop_toBottomOf="@+id/edtPassword"
+            app:loaderColor="#fff" />
+
+        <com.royrodriguez.transitionbutton.TransitionButton
+            android:id="@+id/btnDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/br_btn_login"
             android:paddingVertical="20dp"
-            android:text="Create"
+            android:text="DELETE"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:textSize="20sp"
             app:defaultColor="#FA3E7E"
-            app:layout_constraintEnd_toEndOf="@+id/edtPassword"
-            app:layout_constraintStart_toStartOf="@+id/edtPassword"
+            app:layout_constraintEnd_toStartOf="@+id/btnOk"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edtPassword"
             app:loaderColor="#fff" />
 

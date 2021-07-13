@@ -15,5 +15,12 @@ class UtilsBinding{
                 view.load(it)
             }
         }
+        @BindingAdapter("android:loadImage")
+        @JvmStatic
+        fun loadImageURL(view: ImageView, image: String?) {
+            image?.let {
+                view.load(it)
+            }
+        }
     }
 }

@@ -6,11 +6,8 @@
 
     <data>
         <variable
-            name="viewmodel"
-            type="com.example.rollcall.ui.admin.user.UserViewModel" />
-        <variable
             name="adapter"
-            type="com.example.rollcall.adapter.ItemUserAdapter" />
+            type="com.example.rollcall.adapter.ItemClassAdapter" />
 
     </data>
 
@@ -24,26 +21,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
             android:adapter="@{adapter}"
-            app:layout_constraintBottom_toTopOf="@+id/btnCreateUser"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btnCreateUser"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="20dp"
-            android:text="Add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

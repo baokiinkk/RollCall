@@ -10,6 +10,8 @@ import com.example.rollcall.ui.admin.home.HomeAdminFragment
 import com.example.rollcall.ui.admin.user.UserFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
+import com.example.rollcall.utils.Utils.checkNull
+import com.google.android.material.textfield.TextInputEditText
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,13 +50,13 @@ class CreateUserFragment : BaseFragment<FragmentCreateUserBinding>() {
                     ) {
                         requireActivity().supportFragmentManager.popBackStack()
                     }
-                    Toast.makeText(context,"Thành Công",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Thành Công", Toast.LENGTH_SHORT).show()
                 } else {
                     baseBinding.btnCreate.stopAnimation(
                         TransitionButton.StopAnimationStyle.SHAKE,
                         null
                     )
-                    Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -68,10 +70,27 @@ class CreateUserFragment : BaseFragment<FragmentCreateUserBinding>() {
     private fun clickView() {
         baseBinding.btnCreate.apply {
             setOnClickListener {
-                startAnimation()
-                token?.let { it1 -> user?.let { it2 -> viewModel.createUser(it1, it2) } }
+                if (checkValidate()) {
+                    startAnimation()
+                    token?.let { it1 -> user?.let { it2 -> viewModel.createUser(it1, it2) } }
+                }
             }
         }
     }
+
+    private fun checkValidate(): Boolean {
+        val checkId = checkNull(viewModel.id, baseBinding.edtId.hint.toString(), baseBinding.edtId)
+        val checkPassword = checkNull(
+            viewModel.password,
+            baseBinding.edtPassword.hint.toString(),
+            baseBinding.edtPassword
+        )
+        val checkEmail =
+            checkNull(viewModel.email, baseBinding.edtEmail.hint.toString(), baseBinding.edtEmail)
+        val checkName =
+            checkNull(viewModel.name, baseBinding.edtname.hint.toString(), baseBinding.edtname)
+        return checkEmail && checkPassword && checkId && checkName
+    }
+
 
 }
