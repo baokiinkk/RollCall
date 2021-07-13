@@ -1,10 +1,14 @@
 package com.example.rollcall.binding
 
+import android.widget.SearchView
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rollcall.adapter.ItemClassAdapter
 import com.example.rollcall.adapter.ItemUserAdapter
+import com.example.rollcall.data.model.User
+import com.example.rollcall.data.model.Users
 
 class RecycleViewBinding {
     companion object {
@@ -25,6 +29,28 @@ class RecycleViewBinding {
                 layoutManager = GridLayoutManager(view.context,1)
                 adapter = itemUserAdapter
             }
+        }
+        @BindingAdapter("android:adapter", "android:list")
+        @JvmStatic
+        fun editChange(
+            view: SearchView,
+            adapter: ItemUserAdapter,
+            list: MutableLiveData<Users?>
+        ) {
+            view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    list.value?.let {
+                        it.data?.let { it1 -> adapter.filter(newText, it1) }
+                    }
+
+                    return false
+                }
+
+            })
         }
     }
 }

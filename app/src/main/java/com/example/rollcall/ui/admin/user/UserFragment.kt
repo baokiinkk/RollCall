@@ -72,6 +72,9 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
     }
 
     private fun clickView() {
+        baseBinding.btnBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
         baseBinding.btnCreateUser.setOnClickListener {
             val fragment = CreateUserFragment()
             fragment.arguments = Bundle().apply {
