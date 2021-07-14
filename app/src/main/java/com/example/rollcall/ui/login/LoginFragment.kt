@@ -2,7 +2,6 @@ package com.example.rollcall.ui.login
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentLoginBinding
 import com.example.rollcall.ui.admin.home.HomeAdminFragment
@@ -36,7 +35,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             viewmodel = viewModel
         }
 
-        viewModel.user.observe(viewLifecycleOwner, Observer {
+        viewModel.user.observe(viewLifecycleOwner,{
             it?.let {
                 if (it.message == null) {
                     baseBinding.btnLogin.stopAnimation(

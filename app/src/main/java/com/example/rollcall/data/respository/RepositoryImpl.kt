@@ -2,11 +2,7 @@ package com.example.rollcall.data.respository
 
 import android.util.Log
 import com.example.rollcall.data.api.ApiService
-import com.example.rollcall.data.model.Class
-import com.example.rollcall.data.model.DashBoard
-import com.example.rollcall.data.model.LoginUser
-import com.example.rollcall.data.model.User
-import com.example.rollcall.data.model.Users
+import com.example.rollcall.data.model.*
 import retrofit2.HttpException
 import java.lang.Exception
 import javax.inject.Inject
@@ -83,5 +79,12 @@ class RepositoryImpl @Inject constructor(val apiService: ApiService) : Repositor
             Class(message = cause.response()?.errorBody()?.string())
 
         }
+
+    override suspend fun createClass(tokenAdmin: String, classes: DataClass): Class =
+    try {
+        apiService.createClass(tokenAdmin,classes)
+    } catch (cause: HttpException) {
+        Class(message = cause.response()?.errorBody()?.string())
+    }
 }
 

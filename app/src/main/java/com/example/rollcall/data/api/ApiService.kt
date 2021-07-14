@@ -1,10 +1,6 @@
 package com.example.rollcall.data.api
 
-import com.example.rollcall.data.model.Class
-import com.example.rollcall.data.model.DashBoard
-import com.example.rollcall.data.model.LoginUser
-import com.example.rollcall.data.model.User
-import com.example.rollcall.data.model.Users
+import com.example.rollcall.data.model.*
 import retrofit2.http.*
 
 interface ApiService {
@@ -44,5 +40,8 @@ interface ApiService {
     ): Users
 
     @GET("classes/")
-    suspend fun getClass(@Header("Authorization") tokenAdmin: String):Class
+    suspend fun getClass(@Header("Authorization") tokenAdmin: String): Class
+
+    @POST("classes/")
+    suspend fun createClass(@Header("Authorization") tokenAdmin: String,@Body classes: DataClass): Class
 }

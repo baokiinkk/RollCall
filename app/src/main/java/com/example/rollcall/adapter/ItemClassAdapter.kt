@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rollcall.data.model.DataClass
+import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.ItemClassBinding
 
 class ItemClassAdapter(private val onClick: (DataClass) -> Unit) :
@@ -45,6 +46,20 @@ class ItemClassAdapter(private val onClick: (DataClass) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it, onClick) }
+    }
+    fun filter(newText: CharSequence?, list: MutableList<DataClass>) {
+        newText?.let { text ->
+            val words = text.split(" ").toMutableList()
+            var output = ""
+            for (word in words) {
+                output += word.lowercase() + " "
+            }
+            submitList(list.filter {
+                it.name.lowercase().contains(output.trim()) ||
+                        it.id.lowercase().contains(output.trim())
+            })
+            notifyDataSetChanged()
+        }
     }
 }
 

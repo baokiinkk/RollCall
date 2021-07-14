@@ -103,6 +103,9 @@ class EditUserFragment : BaseFragment<FragmentEditUserBinding>() {
                 }
             }
         }
+        baseBinding.btnBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
 
         baseBinding.btnDelete.apply {
             setOnClickListener {

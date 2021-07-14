@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rollcall.adapter.ItemClassAdapter
 import com.example.rollcall.adapter.ItemUserAdapter
+import com.example.rollcall.data.model.Class
+import com.example.rollcall.data.model.DataClass
 import com.example.rollcall.data.model.User
 import com.example.rollcall.data.model.Users
 
@@ -47,6 +49,28 @@ class RecycleViewBinding {
                         it.data?.let { it1 -> adapter.filter(newText, it1) }
                     }
 
+                    return false
+                }
+
+            })
+        }
+
+        @BindingAdapter("android:adapter", "android:list")
+        @JvmStatic
+        fun editChangeClass(
+            view: SearchView,
+            adapter: ItemClassAdapter,
+            list: MutableLiveData<Class?>
+        ) {
+            view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    list.value?.let {
+                        it.data?.let { it1 -> adapter.filter(newText, it1) }
+                    }
                     return false
                 }
 

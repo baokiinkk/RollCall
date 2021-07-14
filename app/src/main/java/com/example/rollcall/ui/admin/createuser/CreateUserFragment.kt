@@ -76,6 +76,9 @@ class CreateUserFragment : BaseFragment<FragmentCreateUserBinding>() {
                 }
             }
         }
+        baseBinding.btnBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
     }
 
     private fun checkValidate(): Boolean {

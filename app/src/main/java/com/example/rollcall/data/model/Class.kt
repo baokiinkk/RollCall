@@ -6,15 +6,15 @@ data class Class(
     val data: MutableList<DataClass>? = null
 )
 data class DataClass(
-    val id:String? = null,
-    val name:String? = null,
+    val id:String,
+    val name:String,
     val teacher:User? = null,
     val room:String? = null,
     val students:MutableList<User>? = null,
     val monitors:MutableList<User>? = null,
-    val credit:String? = null,
+    val credit:Int? = null,
     val dayOfWeek:String? = null,
     val shift:String? = null,
-    val days:String? = null,
-    val dayStart:String? = null
+    val days:Int? = null,
+    val dayStart:String? = null,
 )

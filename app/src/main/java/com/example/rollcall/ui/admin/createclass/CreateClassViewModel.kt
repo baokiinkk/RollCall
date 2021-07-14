@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rollcall.data.model.Class
+import com.example.rollcall.data.model.DataClass
+import com.example.rollcall.data.model.User
 import com.example.rollcall.data.model.Users
 import com.example.rollcall.data.respository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,12 +17,37 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateClassViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
     val classes: MutableLiveData<Class?> = MutableLiveData(null)
-    val student:MutableLiveData<Users?> = MutableLiveData(null)
-    val teacher:MutableLiveData<Users?> = MutableLiveData(null)
-    fun getUsers(token:String){
-        viewModelScope.launch(Dispatchers.IO){
+    val student: MutableLiveData<Users?> = MutableLiveData(null)
+    val teacher: MutableLiveData<Users?> = MutableLiveData(null)
+    var id: String = ""
+    var name: String = ""
+    var room: String = ""
+    var days: String = ""
+    var nameTeacher = ""
+    var dateStart: String = ""
+    var credit: String = ""
+    lateinit var datateacher: User
+    fun getUsers(token: String) {
+        viewModelScope.launch(Dispatchers.IO) {
             teacher.postValue(repo.getTeacher(token))
             student.postValue(repo.getStudent(token))
+        }
+    }
+
+    fun createClass(token: String, buoiHoc: String, ngayHoc: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val data = DataClass(
+                id,
+                name,
+                datateacher,
+                room,
+                dayOfWeek = ngayHoc,
+                shift = buoiHoc,
+                credit = credit.toInt(),
+                days = days.toInt(),
+                dayStart = dateStart
+            )
+            classes.postValue(repo.createClass(token, data))
         }
     }
 

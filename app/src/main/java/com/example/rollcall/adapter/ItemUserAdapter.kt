@@ -55,7 +55,8 @@ class ItemUserAdapter(private val onClick: (User) -> Unit) :
                 output += word.lowercase() + " "
             }
             submitList(list.filter {
-                it.name.lowercase().contains(output.trim())
+                it.name.lowercase().contains(output.trim()) ||
+                        it.id.lowercase().contains(output.trim())
             })
             notifyDataSetChanged()
         }

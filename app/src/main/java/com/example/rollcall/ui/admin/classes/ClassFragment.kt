@@ -49,6 +49,7 @@ class ClassFragment : BaseFragment<FragmentClassBinding>() {
         }
         baseBinding.apply {
             adapter = itemClassAdapter
+            viewmodel = viewModel
         }
         viewModel.apply {
                 token?.let { token ->
@@ -67,6 +68,9 @@ class ClassFragment : BaseFragment<FragmentClassBinding>() {
             val fragment = CreateClassFragment()
             fragment.arguments = Bundle().apply {putString(TOKEN,token)}
             gotoFragment(requireActivity(),fragment)
+        }
+        baseBinding.btnBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 

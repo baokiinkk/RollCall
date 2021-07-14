@@ -58,7 +58,7 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="Sinh Viên"
             android:textColor="@color/black"
             android:textSize="20sp"

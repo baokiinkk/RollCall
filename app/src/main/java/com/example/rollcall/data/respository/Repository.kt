@@ -1,11 +1,7 @@
 package com.example.rollcall.data.respository
 
-import com.example.rollcall.data.model.Class
-import com.example.rollcall.data.model.DashBoard
-import com.example.rollcall.data.model.LoginUser
-import com.example.rollcall.data.model.User
+import com.example.rollcall.data.model.*
 
-import com.example.rollcall.data.model.Users
 import javax.inject.Singleton
 
 
@@ -24,4 +20,5 @@ interface Repository{
 
    //------------------------ Class --------------------------------------
    suspend fun getClass(tokenAdmin:String):Class
+   suspend fun createClass(tokenAdmin:String,classes: DataClass): Class
 }

@@ -20,6 +20,7 @@ class LoginViewModel@Inject constructor(private val repo:Repository):ViewModel()
     var email = ""
     var password = ""
     var user:MutableLiveData<Users?> = MutableLiveData(null)
+
     fun login(){
         val loginUser = LoginUser(email,password)
         viewModelScope.launch(Dispatchers.IO) {
