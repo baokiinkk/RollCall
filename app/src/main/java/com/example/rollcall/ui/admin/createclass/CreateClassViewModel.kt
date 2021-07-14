@@ -34,21 +34,18 @@ class CreateClassViewModel @Inject constructor(private val repo: Repository) : V
         }
     }
 
-    fun createClass(token: String, buoiHoc: String, ngayHoc: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val data = DataClass(
-                id,
-                name,
-                datateacher,
-                room,
-                dayOfWeek = ngayHoc,
-                shift = buoiHoc,
-                credit = credit.toInt(),
-                days = days.toInt(),
-                dayStart = dateStart
-            )
-            classes.postValue(repo.createClass(token, data))
-        }
+    fun createClass(buoiHoc: String, ngayHoc: String): DataClass {
+        return DataClass(
+            id,
+            name,
+            datateacher,
+            room,
+            dayOfWeek = ngayHoc,
+            shift = buoiHoc,
+            credit = credit.toInt(),
+            days = days.toInt(),
+            dayStart = dateStart
+        )
     }
 
     fun dataBuoi(): List<String> {

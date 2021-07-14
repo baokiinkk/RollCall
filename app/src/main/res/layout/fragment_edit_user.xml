@@ -88,7 +88,6 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="30dp"
-            android:enabled="false"
             android:hint="Nhập Mã số sinh viên"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintEnd_toEndOf="parent"
@@ -99,6 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={viewmodel.id}"
+                android:focusable="false"
                 app:endIconMode="clear_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -122,41 +122,35 @@
 
         <com.royrodriguez.transitionbutton.TransitionButton
             android:id="@+id/btnOk"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/br_btn_edit_user"
             android:paddingVertical="20dp"
+            android:paddingHorizontal="40dp"
             android:text="EDIT"
             android:textAllCaps="false"
             android:textColor="#fff"
-            android:textSize="20sp"
             app:defaultColor="#2196F3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnDelete"
             app:layout_constraintTop_toBottomOf="@+id/edtPassword"
             app:loaderColor="#fff" />
 
         <com.royrodriguez.transitionbutton.TransitionButton
             android:id="@+id/btnDelete"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/br_btn_login"
             android:paddingVertical="20dp"
+            android:paddingHorizontal="40dp"
             android:text="DELETE"
             android:textAllCaps="false"
             android:textColor="#fff"
-            android:textSize="20sp"
             app:defaultColor="#FA3E7E"
             app:layout_constraintEnd_toStartOf="@+id/btnOk"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edtPassword"
             app:loaderColor="#fff" />
 

@@ -2,16 +2,21 @@ package com.example.rollcall.ui.admin.createclass
 
 
 import android.app.DatePickerDialog
+import android.os.Bundle
 
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.adapter.ItemUserAdapter
 import com.example.rollcall.databinding.FragmentCreateClassBinding
+import com.example.rollcall.ui.admin.choosestudent.ChooseStudentFragment
+import com.example.rollcall.ui.admin.choosestudent.ChooseStudentViewModel
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
+import com.example.rollcall.utils.Utils.CLASS
 import com.example.rollcall.utils.Utils.TOKEN
 import com.example.rollcall.utils.Utils.diaLogBottom
+import com.example.rollcall.utils.Utils.gotoFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,25 +63,6 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
             viewModel.datateacher = it
             dialog.dismiss()
         }
-        viewModel.classes.observe(viewLifecycleOwner, {
-            it?.let {
-                if (it.message == null) {
-                    baseBinding.btnCreate.stopAnimation(
-                        TransitionButton.StopAnimationStyle.EXPAND
-                    ) {
-                        requireActivity().supportFragmentManager.popBackStack()
-                    }
-                    Toast.makeText(context, "Thành Công", Toast.LENGTH_SHORT).show()
-                } else {
-                    baseBinding.btnCreate.stopAnimation(
-                        TransitionButton.StopAnimationStyle.SHAKE,
-                        null
-                    )
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-
     }
 
     private fun clickView() {
@@ -122,15 +108,21 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
         baseBinding.btnCreate.apply {
             setOnClickListener {
                 if (checkValidate()) {
-                    startAnimation()
-                    token?.let { it1 ->
+                    token?.let { token ->
                         val buoiHoc = baseBinding.spBuoiHoc.editText?.text.toString()
                         val ngayHoc = baseBinding.spNgayHoc.editText?.text.toString()
-                        viewModel.createClass(
-                            it1,
-                            if (buoiHoc == "chiều") "1" else "0",
-                            ngayHoc.substring(4)
-                        )
+
+                        val fragment = ChooseStudentFragment()
+                        fragment.arguments = Bundle().apply {
+                            putString(TOKEN, token)
+                            putSerializable(
+                                CLASS, viewModel.createClass(
+                                    if (buoiHoc == "chiều") "1" else "0",
+                                    ngayHoc.substring(4)
+                                )
+                            )
+                        }
+                        gotoFragment(requireActivity(), fragment)
                     }
                 } else {
                     Toast.makeText(context, "Không được để trống dữ liệu", Toast.LENGTH_SHORT)
