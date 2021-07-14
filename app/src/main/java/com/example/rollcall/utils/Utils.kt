@@ -42,14 +42,13 @@ object Utils {
             .commit()
     }
 
-    fun checkNull(text: String, hint: String, editText: TextInputLayout): Boolean {
-        if (text == "") {
-            editText.error = hint.substring(5) + " không được phép rỗng"
+    fun checkNull(editText: TextInputLayout): Boolean {
+        if (editText.editText?.text.toString() == "") {
+            editText.error = " không được phép rỗng!"
             return false
         } else
             return true
     }
-
     fun diaLogBottom(
         context: Context,
         layoutInflater: LayoutInflater,

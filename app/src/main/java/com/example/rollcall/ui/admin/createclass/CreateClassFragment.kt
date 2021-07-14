@@ -146,60 +146,15 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
 
     private fun checkValidate(): Boolean {
         clearError()
-        val checkTeacher =
-            Utils.checkNull(
-                viewModel.nameTeacher,
-                baseBinding.txtPickTeacher.hint.toString(),
-                baseBinding.txtPickTeacher
-            )
-        val checkBuoiHoc =
-            Utils.checkNull(
-                baseBinding.spBuoiHoc.editText?.text.toString(),
-                baseBinding.spBuoiHoc.hint.toString(),
-                baseBinding.spBuoiHoc
-            )
-        val checkChonNgay =
-            Utils.checkNull(
-                baseBinding.spNgayHoc.editText?.text.toString(),
-                baseBinding.spNgayHoc.hint.toString(),
-                baseBinding.spNgayHoc
-            )
-        val checkDateStart =
-            Utils.checkNull(
-                viewModel.dateStart,
-                baseBinding.txtPickDate.hint.toString(),
-                baseBinding.txtPickDate
-            )
-        val checkId =
-            Utils.checkNull(
-                viewModel.id,
-                baseBinding.textView14.hint.toString(),
-                baseBinding.textView14
-            )
-        val checkName =
-            Utils.checkNull(
-                viewModel.name,
-                baseBinding.textView12.hint.toString(),
-                baseBinding.textView12
-            )
-        val checkPhong =
-            Utils.checkNull(
-                viewModel.room,
-                baseBinding.textView15.hint.toString(),
-                baseBinding.textView15
-            )
-        val checkDays =
-            Utils.checkNull(
-                viewModel.days,
-                baseBinding.textView17.hint.toString(),
-                baseBinding.textView17
-            )
-        val checkCredit =
-            Utils.checkNull(
-                viewModel.credit,
-                baseBinding.textView19.hint.toString(),
-                baseBinding.textView19
-            )
+        val checkTeacher = Utils.checkNull(baseBinding.txtPickTeacher)
+        val checkBuoiHoc = Utils.checkNull(baseBinding.spBuoiHoc)
+        val checkChonNgay = Utils.checkNull(baseBinding.spNgayHoc)
+        val checkDateStart = Utils.checkNull(baseBinding.txtPickDate)
+        val checkId = Utils.checkNull(baseBinding.textView14)
+        val checkName = Utils.checkNull(baseBinding.textView12)
+        val checkPhong = Utils.checkNull(baseBinding.textView15)
+        val checkDays = Utils.checkNull(baseBinding.textView17)
+        val checkCredit = Utils.checkNull(baseBinding.textView19)
         return checkChonNgay && checkBuoiHoc && checkDateStart && checkTeacher && checkId && checkName && checkCredit && checkPhong && checkDays
     }
 

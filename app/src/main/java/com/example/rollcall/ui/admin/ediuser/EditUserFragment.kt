@@ -119,19 +119,9 @@ class EditUserFragment : BaseFragment<FragmentEditUserBinding>() {
 
     private fun checkValidate(): Boolean {
         val checkId =
-            Utils.checkNull(viewModel.id, baseBinding.edtId.hint.toString(), baseBinding.edtId)
-        val checkEmail =
-            Utils.checkNull(
-                viewModel.email,
-                baseBinding.edtEmail.hint.toString(),
-                baseBinding.edtEmail
-            )
-        val checkName =
-            Utils.checkNull(
-                viewModel.name,
-                baseBinding.edtname.hint.toString(),
-                baseBinding.edtname
-            )
+            Utils.checkNull(baseBinding.edtId)
+        val checkEmail = Utils.checkNull(baseBinding.edtEmail)
+        val checkName = Utils.checkNull(baseBinding.edtname)
         return checkEmail && checkId && checkName
     }
 

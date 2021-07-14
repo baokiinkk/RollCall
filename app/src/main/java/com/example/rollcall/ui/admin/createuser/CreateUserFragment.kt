@@ -82,16 +82,10 @@ class CreateUserFragment : BaseFragment<FragmentCreateUserBinding>() {
     }
 
     private fun checkValidate(): Boolean {
-        val checkId = checkNull(viewModel.id, baseBinding.edtId.hint.toString(), baseBinding.edtId)
-        val checkPassword = checkNull(
-            viewModel.password,
-            baseBinding.edtPassword.hint.toString(),
-            baseBinding.edtPassword
-        )
-        val checkEmail =
-            checkNull(viewModel.email, baseBinding.edtEmail.hint.toString(), baseBinding.edtEmail)
-        val checkName =
-            checkNull(viewModel.name, baseBinding.edtname.hint.toString(), baseBinding.edtname)
+        val checkId = checkNull(baseBinding.edtId)
+        val checkPassword = checkNull(baseBinding.edtPassword)
+        val checkEmail = checkNull(baseBinding.edtEmail)
+        val checkName = checkNull(baseBinding.edtname)
         return checkEmail && checkPassword && checkId && checkName
     }
 
