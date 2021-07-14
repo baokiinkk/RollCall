@@ -18,7 +18,8 @@ data class User(
     val password: String? = null,
     val avtUrl: String? = null,
     val classes: MutableList<String>? = null,
-    val token: String? = null
+    val token: String? = null,
+    var selected:Boolean = false
 
 ):Serializable
 

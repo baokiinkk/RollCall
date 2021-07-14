@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rollcall.adapter.ItemClassAdapter
 import com.example.rollcall.adapter.ItemUserAdapter
+import com.example.rollcall.adapter.SelectItemUserAdapter
 import com.example.rollcall.data.model.Class
 import com.example.rollcall.data.model.DataClass
 import com.example.rollcall.data.model.User
@@ -18,6 +19,14 @@ class RecycleViewBinding {
         @BindingAdapter("android:adapter")
         @JvmStatic
         fun loadRecycle(view: RecyclerView,itemUserAdapter: ItemUserAdapter) {
+            view.apply {
+                layoutManager = GridLayoutManager(view.context,1)
+                adapter = itemUserAdapter
+            }
+        }
+        @BindingAdapter("android:adapter")
+        @JvmStatic
+        fun loadRecycleV(view: RecyclerView,itemUserAdapter: SelectItemUserAdapter) {
             view.apply {
                 layoutManager = GridLayoutManager(view.context,1)
                 adapter = itemUserAdapter
@@ -37,6 +46,29 @@ class RecycleViewBinding {
         fun editChange(
             view: SearchView,
             adapter: ItemUserAdapter,
+            list: MutableLiveData<Users?>
+        ) {
+            view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    list.value?.let {
+                        it.data?.let { it1 -> adapter.filter(newText, it1) }
+                    }
+
+                    return false
+                }
+
+            })
+        }
+
+        @BindingAdapter("android:adapter", "android:list")
+        @JvmStatic
+        fun editChanges(
+            view: SearchView,
+            adapter: SelectItemUserAdapter,
             list: MutableLiveData<Users?>
         ) {
             view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

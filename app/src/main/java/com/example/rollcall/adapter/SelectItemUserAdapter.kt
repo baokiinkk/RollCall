@@ -1,5 +1,6 @@
 package com.example.rollcall.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.ItemUserBinding
 
-class SelectItemUserAdapter(private val onClick: (User) -> Unit) :
+class SelectItemUserAdapter() :
     ListAdapter<User, SelectItemUserAdapter.ViewHolder>(
         ItemUserDiffUtil()
     ) {
@@ -24,16 +25,17 @@ class SelectItemUserAdapter(private val onClick: (User) -> Unit) :
             }
         }
 
-        fun bind(item: User, onClick: ((User) -> Unit)? = null) {
+        fun bind(item: User) {
             binding.data = item
+            itemView.setBackgroundColor(if (item.selected) Color.GREEN else Color.WHITE)
             itemView.setOnClickListener {
-                if (onClick != null) {
-                    onClick(item)
-                }
+                itemView.setBackgroundColor(if (!item.selected) Color.GREEN else Color.WHITE)
+                item.selected = !item.selected
             }
             binding.executePendingBindings()
 
         }
+
 
     }
 
@@ -44,6 +46,21 @@ class SelectItemUserAdapter(private val onClick: (User) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it, onClick) }
+        getItem(position)?.let { holder.bind(it) }
+    }
+
+    fun filter(newText: CharSequence?, list: MutableList<User>) {
+        newText?.let { text ->
+            val words = text.split(" ").toMutableList()
+            var output = ""
+            for (word in words) {
+                output += word.lowercase() + " "
+            }
+            submitList(list.filter {
+                it.name.lowercase().contains(output.trim()) ||
+                        it.id.lowercase().contains(output.trim())
+            })
+            notifyDataSetChanged()
+        }
     }
 }
