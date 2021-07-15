@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentHomeAdminBinding
+import com.example.rollcall.ui.admin.classes.ClassFragment
 import com.example.rollcall.ui.admin.user.UserFragment
 import com.example.rollcall.utils.BaseFragment
+import com.example.rollcall.utils.Utils.CLASS
 import com.example.rollcall.utils.Utils.STUDENT
 import com.example.rollcall.utils.Utils.TEACHER
 import com.example.rollcall.utils.Utils.TOKEN
@@ -64,6 +66,15 @@ class HomeAdminFragment : BaseFragment<FragmentHomeAdminBinding>() {
                 fragment.arguments = Bundle().apply {
                     putString(TOKEN, token)
                     putString(USER, TEACHER)
+                }
+                gotoFragment(requireActivity(), fragment)
+
+            }
+            cardViewClass.setOnClickListener {
+                val fragment = ClassFragment()
+                fragment.arguments = Bundle().apply {
+                    putString(TOKEN, token)
+                    putString(USER, CLASS)
                 }
                 gotoFragment(requireActivity(), fragment)
 

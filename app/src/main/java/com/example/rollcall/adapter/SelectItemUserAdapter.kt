@@ -1,15 +1,16 @@
 package com.example.rollcall.adapter
 
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.ItemUserBinding
 
-class ItemUserAdapter(private val onClick: (User) -> Unit) :
-    ListAdapter<User, ItemUserAdapter.ViewHolder>(
+class SelectItemUserAdapter:
+    ListAdapter<User, SelectItemUserAdapter.ViewHolder>(
         ItemUserDiffUtil()
     ) {
     class ViewHolder(private val binding: ItemUserBinding) :
@@ -24,16 +25,17 @@ class ItemUserAdapter(private val onClick: (User) -> Unit) :
             }
         }
 
-        fun bind(item: User, onClick: ((User) -> Unit)? = null) {
+        fun bind(item: User) {
             binding.data = item
+            itemView.setBackgroundColor(if (item.selected) Color.GREEN else Color.WHITE)
             itemView.setOnClickListener {
-                if (onClick != null) {
-                    onClick(item)
-                }
+                itemView.setBackgroundColor(if (!item.selected) Color.GREEN else Color.WHITE)
+                item.selected = !item.selected
             }
             binding.executePendingBindings()
 
         }
+
 
     }
 
@@ -44,7 +46,7 @@ class ItemUserAdapter(private val onClick: (User) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it, onClick) }
+        getItem(position)?.let { holder.bind(it) }
     }
 
     fun filter(newText: CharSequence?, list: MutableList<User>) {
@@ -55,9 +57,10 @@ class ItemUserAdapter(private val onClick: (User) -> Unit) :
                 output += word.lowercase() + " "
             }
             submitList(list.filter {
+                Log.d("quocbao",it.id.lowercase()+"-"+it.name.lowercase()+"-"+output.trim()+"\n-"+it.classes.toString())
                 it.name.lowercase().contains(output.trim()) ||
                         it.id.lowercase().contains(output.trim()) ||
-                        checkClasses(it.classes, output)
+                        checkClasses(it.classes,output)
             })
             notifyDataSetChanged()
         }
@@ -67,28 +70,10 @@ class ItemUserAdapter(private val onClick: (User) -> Unit) :
         if (data == null) return false
         else {
             data.forEach {
-                if (it.lowercase().contains(output.trim()))
+                if (it.lowercase() == (output.trim()))
                     return true
             }
         }
         return false
     }
-}
-
-class ItemUserDiffUtil : DiffUtil.ItemCallback<User>() {
-    // cung cấp thông tin về cách xác định phần
-    override fun areItemsTheSame(
-        oldItem: User,
-        newItem: User
-    ): Boolean { // cho máy biết 2 item_detail khi nào giống
-        return oldItem.id == newItem.id // dung
-    }
-
-    override fun areContentsTheSame(
-        oldItem: User,
-        newItem: User
-    ): Boolean { // cho biết item_detail khi nào cùng nội dung
-        return oldItem == newItem
-    }
-
 }
