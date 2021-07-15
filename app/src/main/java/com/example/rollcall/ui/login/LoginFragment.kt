@@ -1,6 +1,8 @@
 package com.example.rollcall.ui.login
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentLoginBinding
@@ -8,6 +10,7 @@ import com.example.rollcall.ui.admin.home.HomeAdminFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.TOKEN
+import com.example.rollcall.utils.Utils.fingerPrint
 import com.example.rollcall.utils.Utils.gotoFragment
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,9 +64,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private fun clickView() {
         baseBinding.btnLogin.apply {
             setOnClickListener {
-                if (checkValidate()) {
-                    startAnimation()
-                    viewModel.login()
+//                if (checkValidate()) {
+//                    startAnimation()
+//                    viewModel.login()
+//                }
+                fingerPrint(requireActivity(),{
+                    Toast.makeText(context,it,Toast.LENGTH_SHORT).show()
+                }){
+                    if (checkValidate()) {
+                        startAnimation()
+                        viewModel.login()
+                    }
                 }
             }
         }
