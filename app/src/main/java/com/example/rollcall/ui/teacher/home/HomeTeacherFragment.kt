@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
+import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.FragmentClassInfoBinding
 import com.example.rollcall.databinding.FragmentHomeTeacherBinding
 import com.example.rollcall.ui.admin.home.HomeAdminFragment
@@ -30,6 +31,7 @@ class HomeTeacherFragment : BaseFragment<FragmentHomeTeacherBinding>() {
     //-------------------------------- Variable ----------------------------------------
     val viewModel by viewModels<HomeTeacherViewModel>()
     private var token: String? = null
+    private var user: User? = null
     private val fragListClass = ListClassesOfTeacherFragment()
     private val fragDashBoard = DashBoardClassFragment()
     private val fragQRScan = CheckinQRCodeFragment()
@@ -51,11 +53,12 @@ class HomeTeacherFragment : BaseFragment<FragmentHomeTeacherBinding>() {
     }
 
     private fun getData() {
-        token?.let { viewModel.getData(it) }
+//        token?.let { viewModel.getData(it) }
     }
 
     private fun getArgument() {
         token = arguments?.getString(Utils.TOKEN)
+        user = arguments?.getSerializable(Utils.USER) as User?
     }
 
     private fun setEvent() {
@@ -88,6 +91,11 @@ class HomeTeacherFragment : BaseFragment<FragmentHomeTeacherBinding>() {
     }
 
     private fun setCurrentFragment(activity: FragmentActivity, fragment: Fragment) {
+        fragment.arguments =
+            Bundle().apply {
+                putString(Utils.TOKEN, token)
+                putSerializable(Utils.USER, user)}
+
         activity.supportFragmentManager.beginTransaction()
             .replace(R.id.fragContainer, fragment)
             .commit()

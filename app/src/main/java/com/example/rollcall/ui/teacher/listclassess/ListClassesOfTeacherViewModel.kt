@@ -1,10 +1,26 @@
 package com.example.rollcall.ui.teacher.listclassess
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.rollcall.data.model.Class
 import com.example.rollcall.data.respository.admin.AdminRepository
+import com.example.rollcall.data.respository.user.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 import javax.inject.Inject
 
-class ListClassesOfTeacherViewModel @Inject constructor(private val repo: AdminRepository): ViewModel(){
-
+@HiltViewModel
+class ListClassesOfTeacherViewModel @Inject constructor(private val repo: UserRepository): ViewModel(){
+    val classes: MutableLiveData<Class?> = MutableLiveData(null)
+    fun getListClassTeacher(token:String, id: String){
+        Log.d("cc", "ok")
+        viewModelScope.launch(Dispatchers.IO){
+            Log.d("result", repo.getClassOfTeacher(token, id).toString())
+            classes.postValue(repo.getClassOfTeacher(token, id))
+        }
+    }
 }

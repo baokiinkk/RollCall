@@ -1,11 +1,19 @@
 package com.example.rollcall.ui.teacher.listclassess.ClassInfo
 
+import android.os.Bundle
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
+import com.example.rollcall.adapter.ItemClassAdapter
+import com.example.rollcall.adapter.ItemUserAdapter
+import com.example.rollcall.data.model.DataClass
 import com.example.rollcall.databinding.FragmentClassInfoBinding
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Singleton
 
+@AndroidEntryPoint
 class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>() {
 
     override fun getLayoutRes(): Int {
@@ -13,29 +21,35 @@ class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>() {
     }
 
     //-------------------------------- Variable ----------------------------------------
-    val viewModel: ClassInfoViewModel by viewModels()
     private var token: String? = null
-    private var user: String? = null
+    private var classInfo: DataClass? = null
 
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
-        setup()
         getArgument()
+        setup()
         clickView()
     }
     //-------------------------------- Func ----------------------------------------
     private fun setup() {
+        val itemUserAdapter = ItemUserAdapter {
+        }
+        itemUserAdapter.submitList(classInfo?.students)
         baseBinding.apply {
-//            viewmodel = viewModel
-//            adapter = itemClassAdapter
+            adapter = itemUserAdapter
         }
 
-        // observe list class
+        baseBinding.layoutClassInfo.findViewById<TextView>(R.id.tv_classID_content).text =
+            classInfo?.id ?: ""
+        baseBinding.layoutClassInfo.findViewById<TextView>(R.id.tv_className_content).text =
+            classInfo?.name ?: ""
+        baseBinding.layoutClassInfo.findViewById<TextView>(R.id.tv_classSize_content).text =
+            classInfo?.students?.size.toString()
     }
 
     private fun getArgument() {
         token = arguments?.getString(Utils.TOKEN)
-        user = arguments?.getString(Utils.USER)
+        classInfo = arguments?.getSerializable(Utils.CLASS) as DataClass?
     }
 
     private fun clickView() {

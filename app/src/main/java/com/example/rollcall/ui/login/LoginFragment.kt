@@ -10,6 +10,7 @@ import com.example.rollcall.ui.teacher.home.HomeTeacherFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.TOKEN
+import com.example.rollcall.utils.Utils.USER
 import com.example.rollcall.utils.Utils.gotoFragment
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,7 +56,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                             "teacher" -> {
                                 val fragment = HomeTeacherFragment()
                                 fragment.arguments =
-                                    Bundle().apply { putString(TOKEN, it.data[0].token) }
+                                    Bundle().apply {
+                                        putString(TOKEN, it.data[0].token)
+                                    putSerializable(USER, it.data[0])}
                                 gotoFragment(requireActivity(), fragment,false)
                             }
                         }

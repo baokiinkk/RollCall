@@ -20,10 +20,12 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener.Builder.withContext
 import com.karumi.dexter.listener.single.PermissionListener
+import dagger.hilt.android.AndroidEntryPoint
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
-
+@AndroidEntryPoint
 class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXingScannerView.ResultHandler {
 
     override fun getLayoutRes(): Int {
@@ -46,7 +48,7 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
     }
 
     private fun checkPermission() {
-        Dexter.withContext(this.requireContext()).withPermission(Manifest.permission.CAMERA)
+        Dexter.withActivity(requireActivity()).withPermission(Manifest.permission.CAMERA)
             .withListener(object : PermissionListener {
                 override fun onPermissionGranted(response: PermissionGrantedResponse) {
                     baseBinding.scanQr.resumeCameraPreview(this@CheckinQRCodeFragment)

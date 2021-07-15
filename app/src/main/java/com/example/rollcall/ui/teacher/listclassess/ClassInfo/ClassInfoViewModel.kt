@@ -1,8 +1,10 @@
 package com.example.rollcall.ui.teacher.listclassess.ClassInfo
 
 import androidx.lifecycle.ViewModel
-import com.example.rollcall.data.respository.admin.AdminRepository
+import com.example.rollcall.data.respository.user.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-class ClassInfoViewModel @Inject constructor(private val repo: AdminRepository): ViewModel(){
+@HiltViewModel
+class ClassInfoViewModel @Inject constructor(private val repo: UserRepository): ViewModel(){
 }
