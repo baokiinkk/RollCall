@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rollcall.data.model.User
 import com.example.rollcall.data.model.Users
-import com.example.rollcall.data.respository.Repository
+import com.example.rollcall.data.respository.admin.AdminRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class EditUserViewModel@Inject constructor(private val repo: Repository) :ViewModel(){
+class EditUserViewModel@Inject constructor(private val repo: AdminRepository) :ViewModel(){
     var id:String = ""
     var name:String = ""
     var email:String = ""

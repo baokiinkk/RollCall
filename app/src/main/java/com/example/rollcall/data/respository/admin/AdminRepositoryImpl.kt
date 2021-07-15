@@ -1,13 +1,12 @@
-package com.example.rollcall.data.respository
+package com.example.rollcall.data.respository.admin
 
 import android.util.Log
 import com.example.rollcall.data.api.ApiService
 import com.example.rollcall.data.model.*
 import retrofit2.HttpException
-import java.lang.Exception
 import javax.inject.Inject
 
-class RepositoryImpl @Inject constructor(val apiService: ApiService) : Repository {
+class AdminRepositoryImpl @Inject constructor(val apiService: ApiService) : AdminRepository {
 
     //------------------------ Users --------------------------------------
     override suspend fun login(login: LoginUser): Users =

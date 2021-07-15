@@ -1,4 +1,4 @@
-package com.example.rollcall.data.respository
+package com.example.rollcall.data.respository.admin
 
 import com.example.rollcall.data.model.*
 
@@ -6,7 +6,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-interface Repository{
+interface AdminRepository{
 
    //------------------------ Users --------------------------------------
    suspend fun login(login:LoginUser): Users
