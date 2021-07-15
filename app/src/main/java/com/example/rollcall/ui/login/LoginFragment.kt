@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentLoginBinding
 import com.example.rollcall.ui.admin.home.HomeAdminFragment
+import com.example.rollcall.ui.teacher.home.HomeTeacherFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.TOKEN
@@ -44,10 +45,21 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     baseBinding.btnLogin.stopAnimation(
                         TransitionButton.StopAnimationStyle.EXPAND
                     ) {
-                        val fragment = HomeAdminFragment()
-                        fragment.arguments =
-                            Bundle().apply { putString(TOKEN, it.data?.get(0)?.token) }
-                        gotoFragment(requireActivity(), fragment)
+                        // admin
+                        when(it.data?.get(0)?.role) {
+                            "admin" -> {
+                                val fragment = HomeAdminFragment()
+                                fragment.arguments =
+                                    Bundle().apply { putString(TOKEN, it.data[0].token) }
+                                gotoFragment(requireActivity(), fragment)
+                            }
+                            "teacher" -> {
+                                val fragment = HomeTeacherFragment()
+                                fragment.arguments =
+                                    Bundle().apply { putString(TOKEN, it.data[0].token) }
+                                gotoFragment(requireActivity(), fragment)
+                            }
+                        }
                     }
                 } else {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()

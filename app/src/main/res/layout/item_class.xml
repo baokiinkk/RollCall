@@ -5,9 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="data"
-            type="com.example.rollcall.data.model.DataClass" />
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -21,11 +19,10 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_classId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@{data.id}"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"

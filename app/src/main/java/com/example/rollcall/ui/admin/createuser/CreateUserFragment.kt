@@ -30,7 +30,6 @@ class CreateUserFragment : BaseFragment<FragmentCreateUserBinding>() {
         clickView()
     }
 
-
     //-------------------------------- Func ----------------------------------------
     private fun setup() {
         baseBinding.apply {

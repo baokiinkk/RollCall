@@ -12,11 +12,10 @@ data class DataClass(
     val name:String,
     val teacher:User? = null,
     val room:String? = null,
-    var students:MutableList<User>? = null,
     val monitors:MutableList<User>? = null,
     val credit:Int? = null,
     val dayOfWeek:String? = null,
     val shift:String? = null,
     val days:Int? = null,
-    val dateStart:String? = null,
+    val dayStart:String? = null,
 ):Serializable
