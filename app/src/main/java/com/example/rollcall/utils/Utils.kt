@@ -1,12 +1,8 @@
 package com.example.rollcall.utils
 
-import android.app.Activity
-import android.content.AbstractThreadedSyncAdapter
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -19,25 +15,18 @@ import com.example.rollcall.data.model.User
 import com.example.rollcall.ui.admin.home.HomeAdminFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 
 object Utils {
     const val TAG = "quocbao"
-
-
-    const val SNS_RESULT_DATA = "SNS_RESULT_DATA"
-
-    const val SNS_LOGIN_TYPE = "SNS_LOGIN_TYPE"
     const val USER = "user"
     var TOKEN = "token"
     const val STUDENT = "student"
     const val TEACHER = "teacher"
     const val CLASS = "class"
-    const val SNS_REQUEST_CODE_GOOGLE = 887
-
-    const val SNS_REQUEST_CODE_PHONE = 886
+    const val CREATESUCCESS = "Tạo thành công"
+    const val ERROREMPTY = "không được phép rỗng!"
 
     fun gotoFragment(activity: FragmentActivity, fragment: Fragment) {
         activity.supportFragmentManager.beginTransaction()
@@ -47,11 +36,11 @@ object Utils {
     }
 
     fun checkNull(editText: TextInputLayout): Boolean {
-        if (editText.editText?.text.toString() == "") {
-            editText.error = " không được phép rỗng!"
-            return false
+        return if (editText.editText?.text.toString() == "") {
+            editText.error = ERROREMPTY
+            false
         } else
-            return true
+            true
     }
 
     fun diaLogBottom(
@@ -63,7 +52,7 @@ object Utils {
         idClass: String? = null
     ): BottomSheetDialog {
         val sheetDialog = BottomSheetDialog(context, R.style.SheetDialog)
-        val viewDialog: View = layoutInflater.inflate(R.layout.user_dialog, null)
+        val viewDialog: View = layoutInflater.inflate(R.layout.user_dialog,null)
         val textLayout = viewDialog.findViewById<TextInputLayout>(R.id.edtSearch)
         viewDialog.findViewById<RecyclerView>(R.id.recyclerViewUserDialog).apply {
             adapter = adapterStudent ?: adapterTeacher
@@ -85,13 +74,13 @@ object Utils {
     }
 
     fun showAlertDialog(context: Context,title:String,messagge:String,action:()->Unit){
-        val dialog = MaterialAlertDialogBuilder(context)
+        MaterialAlertDialogBuilder(context)
             .setTitle(title)
             .setMessage(messagge)
-            .setNegativeButton("Hủy bỏ") { dialog, which ->
+            .setNegativeButton("Hủy bỏ") { dialog, _ ->
                 dialog.dismiss()
             }
-            .setPositiveButton("Đồng ý") { dialog, which ->
+            .setPositiveButton("Đồng ý") { dialog, _ ->
                 action()
                 dialog.dismiss()
             }

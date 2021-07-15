@@ -1,15 +1,10 @@
 package com.example.rollcall.ui.admin.ediuser
 
-import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.rollcall.R
 import com.example.rollcall.data.model.User
-import com.example.rollcall.databinding.FragmentCreateUserBinding
 import com.example.rollcall.databinding.FragmentEditUserBinding
-import com.example.rollcall.ui.admin.home.HomeAdminFragment
-import com.example.rollcall.ui.admin.user.UserFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.showAlertDialog
@@ -121,11 +116,18 @@ class EditUserFragment : BaseFragment<FragmentEditUserBinding>() {
     }
 
     private fun checkValidate(): Boolean {
-        val checkId =
-            Utils.checkNull(baseBinding.edtId)
+        clearError()
+        val checkId = Utils.checkNull(baseBinding.edtId)
         val checkEmail = Utils.checkNull(baseBinding.edtEmail)
         val checkName = Utils.checkNull(baseBinding.edtname)
         return checkEmail && checkId && checkName
+    }
+    private fun clearError() {
+        baseBinding.apply {
+            edtId.error = null
+            edtEmail.error = null
+            edtname.error = null
+        }
     }
 
 }

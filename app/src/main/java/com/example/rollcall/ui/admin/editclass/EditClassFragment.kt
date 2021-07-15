@@ -1,26 +1,21 @@
 package com.example.rollcall.ui.admin.editclass
 
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.os.Bundle
-import android.util.Log
-
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.adapter.ItemUserAdapter
 import com.example.rollcall.adapter.SelectItemUserAdapter
 import com.example.rollcall.data.model.DataClass
-import com.example.rollcall.databinding.FragmentCreateClassBinding
 import com.example.rollcall.databinding.FragmentEditClassBinding
-import com.example.rollcall.ui.admin.choosestudent.ChooseStudentFragment
-import com.example.rollcall.ui.admin.choosestudent.ChooseStudentViewModel
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.CLASS
+import com.example.rollcall.utils.Utils.ERROREMPTY
 import com.example.rollcall.utils.Utils.TOKEN
 import com.example.rollcall.utils.Utils.diaLogBottom
-import com.example.rollcall.utils.Utils.gotoFragment
 import com.example.rollcall.utils.Utils.showAlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.royrodriguez.transitionbutton.TransitionButton
@@ -62,16 +57,13 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
         viewModel.apply {
             getData(dataClass, token)
 
-
             classes.observe(viewLifecycleOwner, {
                 it?.let {
                     if (it.message == null) {
-                        baseBinding.btnOk.stopAnimation(
-                            TransitionButton.StopAnimationStyle.EXPAND
-                        ) {
+                        baseBinding.btnOk.stopAnimation(TransitionButton.StopAnimationStyle.EXPAND) {
                             requireActivity().supportFragmentManager.popBackStack()
+                            Toast.makeText(context, "thành công", Toast.LENGTH_SHORT).show()
                         }
-                        Toast.makeText(context, "thành công", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                         baseBinding.btnOk.stopAnimation(
@@ -82,7 +74,7 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
                 }
             })
 
-            viewModel.isDelete.observe(viewLifecycleOwner, {
+            isDelete.observe(viewLifecycleOwner, {
                 it?.let {
                     if (it.message != "0") {
                         baseBinding.btnDelete.stopAnimation(
@@ -110,39 +102,17 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
     }
 
     private fun clickView() {
-        val date = Calendar.getInstance()
-        date.timeZone = TimeZone.getTimeZone("UTC")
-        val selectedYear = date.get(Calendar.YEAR)
-        val selectedMonth = date.get(Calendar.MONTH)
-        val selectedDayOfMonth = date.get(Calendar.DAY_OF_MONTH)
-        val dateSetListener =
-            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                baseBinding.txtPickDate.editText?.setText(
-                    "$dayOfMonth-$monthOfYear-$year"
-                )
-
-            }
+        pickDate()
         baseBinding.apply {
-            txtPickDate.editText?.apply {
-                setOnClickListener {
-                    val datePickerDialog = DatePickerDialog(
-                        context,
-                        android.R.style.Theme_Material_Dialog,
-                        dateSetListener, selectedYear, selectedMonth, selectedDayOfMonth
-                    )
-                    datePickerDialog.show()
-                }
-            }
             btnOk.apply {
                 setOnClickListener {
                     startAnimation()
                     if (checkValidate()) {
                         token?.let { token ->
-
                             viewModel.editClass(token)
                         }
                     } else {
-                        Toast.makeText(context, "Không được để trống dữ liệu", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, ERROREMPTY, Toast.LENGTH_SHORT)
                             .show()
                     }
                 }
@@ -189,14 +159,39 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
                         dialog.show()
                         dialog.setOnDismissListener {
                             viewModel.student =
-                                adapterSelect.currentList.filter { it.selected }.toMutableList()
+                                user.filter { it.selected }.toMutableList()
                         }
                     }
 
                 }
             })
         }
+    }
 
+    @SuppressLint("SetTextI18n")
+    private fun pickDate() {
+        val date = Calendar.getInstance()
+        date.timeZone = TimeZone.getTimeZone("UTC")
+        val selectedYear = date.get(Calendar.YEAR)
+        val selectedMonth = date.get(Calendar.MONTH)
+        val selectedDayOfMonth = date.get(Calendar.DAY_OF_MONTH)
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                baseBinding.txtPickDate.editText?.setText(
+                    "$dayOfMonth-$monthOfYear-$year"
+                )
+
+            }
+        baseBinding.txtPickDate.editText?.apply {
+            setOnClickListener {
+                val datePickerDialog = DatePickerDialog(
+                    context,
+                    android.R.style.Theme_Material_Dialog,
+                    dateSetListener, selectedYear, selectedMonth, selectedDayOfMonth
+                )
+                datePickerDialog.show()
+            }
+        }
     }
 
     private fun checkValidate(): Boolean {

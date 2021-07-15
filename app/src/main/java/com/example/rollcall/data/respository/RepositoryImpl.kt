@@ -5,7 +5,6 @@ import com.example.rollcall.data.api.ApiService
 import com.example.rollcall.data.model.*
 import com.google.gson.Gson
 import retrofit2.HttpException
-import java.lang.Exception
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(val apiService: ApiService) : Repository {

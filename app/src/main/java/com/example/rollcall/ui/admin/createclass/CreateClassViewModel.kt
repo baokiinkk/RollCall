@@ -27,6 +27,7 @@ class CreateClassViewModel @Inject constructor(private val repo: Repository) : V
     var dateStart: String = ""
     var credit: String = ""
     lateinit var datateacher: User
+
     fun getUsers(token: String) {
         viewModelScope.launch(Dispatchers.IO) {
             teacher.postValue(repo.getTeacher(token))

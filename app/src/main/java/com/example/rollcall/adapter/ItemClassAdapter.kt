@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rollcall.data.model.DataClass
-import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.ItemClassBinding
 
 class ItemClassAdapter(private val onClick: (DataClass) -> Unit) :
