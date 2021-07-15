@@ -4,13 +4,12 @@ import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.ItemUserBinding
 
-class SelectItemUserAdapter() :
+class SelectItemUserAdapter:
     ListAdapter<User, SelectItemUserAdapter.ViewHolder>(
         ItemUserDiffUtil()
     ) {

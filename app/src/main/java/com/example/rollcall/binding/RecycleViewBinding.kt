@@ -9,8 +9,6 @@ import com.example.rollcall.adapter.ItemClassAdapter
 import com.example.rollcall.adapter.ItemUserAdapter
 import com.example.rollcall.adapter.SelectItemUserAdapter
 import com.example.rollcall.data.model.Class
-import com.example.rollcall.data.model.DataClass
-import com.example.rollcall.data.model.User
 import com.example.rollcall.data.model.Users
 
 class RecycleViewBinding {

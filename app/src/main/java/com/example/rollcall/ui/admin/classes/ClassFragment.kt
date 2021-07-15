@@ -41,7 +41,7 @@ class ClassFragment : BaseFragment<FragmentClassBinding>() {
             val fragment = EditClassFragment()
             fragment.arguments = Bundle().apply {
                 putString(TOKEN, token)
-                putSerializable(CLASS,it)
+                putSerializable(CLASS, it)
             }
             gotoFragment(requireActivity(), fragment)
         }
@@ -50,8 +50,8 @@ class ClassFragment : BaseFragment<FragmentClassBinding>() {
             viewmodel = viewModel
         }
         viewModel.apply {
-                token?.let { token ->
-                    getUsers(token)
+            token?.let { token ->
+                getUsers(token)
             }
             classes.observe(viewLifecycleOwner, {
                 it?.let {
@@ -64,8 +64,8 @@ class ClassFragment : BaseFragment<FragmentClassBinding>() {
     private fun clickView() {
         baseBinding.btnCreateUser.setOnClickListener {
             val fragment = CreateClassFragment()
-            fragment.arguments = Bundle().apply {putString(TOKEN,token)}
-            gotoFragment(requireActivity(),fragment)
+            fragment.arguments = Bundle().apply { putString(TOKEN, token) }
+            gotoFragment(requireActivity(), fragment)
         }
         baseBinding.btnBack.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()

@@ -16,6 +16,7 @@ class HomeAdminViewModel@Inject constructor(private val repo: AdminRepository):V
     fun getData(token:String){
        viewModelScope.launch(Dispatchers.IO){
            dashBoard.postValue(repo.getDashBoard(token))
+           
        }
     }
 }

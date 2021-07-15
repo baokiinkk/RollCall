@@ -1,17 +1,12 @@
 package com.example.rollcall.ui.admin.createuser
 
-import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentCreateUserBinding
-import com.example.rollcall.ui.admin.home.HomeAdminFragment
-import com.example.rollcall.ui.admin.user.UserFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.checkNull
-import com.google.android.material.textfield.TextInputEditText
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -82,12 +77,20 @@ class CreateUserFragment : BaseFragment<FragmentCreateUserBinding>() {
     }
 
     private fun checkValidate(): Boolean {
+        clearValidate()
         val checkId = checkNull(baseBinding.edtId)
         val checkPassword = checkNull(baseBinding.edtPassword)
         val checkEmail = checkNull(baseBinding.edtEmail)
         val checkName = checkNull(baseBinding.edtname)
         return checkEmail && checkPassword && checkId && checkName
     }
-
+    private fun clearValidate(){
+        baseBinding.apply {
+            edtEmail.error = null
+            edtId.error = null
+            edtPassword.error = null
+            edtname.error = null
+        }
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.rollcall.ui.admin.createclass
 
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 
@@ -10,7 +11,6 @@ import com.example.rollcall.R
 import com.example.rollcall.adapter.ItemUserAdapter
 import com.example.rollcall.databinding.FragmentCreateClassBinding
 import com.example.rollcall.ui.admin.choosestudent.ChooseStudentFragment
-import com.example.rollcall.ui.admin.choosestudent.ChooseStudentViewModel
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.CLASS
@@ -18,7 +18,6 @@ import com.example.rollcall.utils.Utils.TOKEN
 import com.example.rollcall.utils.Utils.diaLogBottom
 import com.example.rollcall.utils.Utils.gotoFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -66,6 +65,50 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
     }
 
     private fun clickView() {
+        pickDate()
+        viewModel.teacher.observe(viewLifecycleOwner, {
+            it?.data?.let { users ->
+                baseBinding.txtPickTeacher.editText?.setOnClickListener {
+                    dialog = diaLogBottom(
+                        requireContext(), layoutInflater,
+                        users,
+                        adapterTeacher = adapterUser
+                    )
+                    dialog.show()
+                }
+            }
+        })
+
+        baseBinding.btnCreate.setOnClickListener {
+            if (checkValidate()) {
+                token?.let { token ->
+                    val buoiHoc = baseBinding.spBuoiHoc.editText?.text.toString()
+                    val ngayHoc = baseBinding.spNgayHoc.editText?.text.toString()
+
+                    val fragment = ChooseStudentFragment()
+                    fragment.arguments = Bundle().apply {
+                        putString(TOKEN, token)
+                        putSerializable(
+                            CLASS, viewModel.createClass(
+                                if (buoiHoc == "chiều") "1" else "0",
+                                ngayHoc.substring(4)
+                            )
+                        )
+                    }
+                    gotoFragment(requireActivity(), fragment)
+                }
+            }
+            else
+                Toast.makeText(context, "Không được để trống dữ liệu", Toast.LENGTH_SHORT).show()
+        }
+
+        baseBinding.btnBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun pickDate() {
         val date = Calendar.getInstance()
         date.timeZone = TimeZone.getTimeZone("UTC")
         val selectedYear = date.get(Calendar.YEAR)
@@ -87,52 +130,6 @@ class CreateClassFragment : BaseFragment<FragmentCreateClassBinding>() {
                 )
                 datePickerDialog.show()
             }
-        }
-
-        viewModel.teacher.observe(viewLifecycleOwner, {
-            it?.let { users ->
-                baseBinding.txtPickTeacher.editText?.apply {
-                    setOnClickListener {
-                        users.data?.let { users ->
-                            dialog = diaLogBottom(
-                                context, layoutInflater,
-                                users, adapterTeacher = adapterUser
-                            )
-                            dialog.show()
-                        }
-                    }
-                }
-            }
-        })
-
-        baseBinding.btnCreate.apply {
-            setOnClickListener {
-                if (checkValidate()) {
-                    token?.let { token ->
-                        val buoiHoc = baseBinding.spBuoiHoc.editText?.text.toString()
-                        val ngayHoc = baseBinding.spNgayHoc.editText?.text.toString()
-
-                        val fragment = ChooseStudentFragment()
-                        fragment.arguments = Bundle().apply {
-                            putString(TOKEN, token)
-                            putSerializable(
-                                CLASS, viewModel.createClass(
-                                    if (buoiHoc == "chiều") "1" else "0",
-                                    ngayHoc.substring(4)
-                                )
-                            )
-                        }
-                        gotoFragment(requireActivity(), fragment)
-                    }
-                } else {
-                    Toast.makeText(context, "Không được để trống dữ liệu", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-        }
-
-        baseBinding.btnBack.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 

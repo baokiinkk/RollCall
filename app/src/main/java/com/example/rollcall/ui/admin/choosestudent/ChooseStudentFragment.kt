@@ -1,19 +1,15 @@
 package com.example.rollcall.ui.admin.choosestudent
 
 
-import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.rollcall.R
 import com.example.rollcall.adapter.SelectItemUserAdapter
 import com.example.rollcall.data.model.DataClass
 import com.example.rollcall.databinding.FragmentChooseStudentBinding
-import com.example.rollcall.ui.admin.home.HomeAdminFragment
 import com.example.rollcall.utils.BaseFragment
-import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.CLASS
+import com.example.rollcall.utils.Utils.CREATESUCCESS
 import com.example.rollcall.utils.Utils.TOKEN
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +24,7 @@ class ChooseStudentFragment : BaseFragment<FragmentChooseStudentBinding>() {
     val viewModel by viewModels<ChooseStudentViewModel>()
     private var token: String? = null
     private var dataClass: DataClass? = null
-    val selectItemUserAdapter: SelectItemUserAdapter by lazy {
+    private val selectItemUserAdapter: SelectItemUserAdapter by lazy {
         SelectItemUserAdapter()
     }
 
@@ -59,7 +55,7 @@ class ChooseStudentFragment : BaseFragment<FragmentChooseStudentBinding>() {
                     selectItemUserAdapter.submitList(it.data)
                 }
             })
-            classes.observe(viewLifecycleOwner, Observer {
+            classes.observe(viewLifecycleOwner,{
                 it?.let {
                     if (it.message == null) {
                         baseBinding.btnCreate.stopAnimation(
@@ -68,7 +64,7 @@ class ChooseStudentFragment : BaseFragment<FragmentChooseStudentBinding>() {
                             requireActivity().supportFragmentManager.popBackStack()
                             requireActivity().supportFragmentManager.popBackStack()
                         }
-                        Toast.makeText(context,"Tạo thành công",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,CREATESUCCESS,Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
                         baseBinding.btnCreate.stopAnimation(

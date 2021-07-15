@@ -3,12 +3,8 @@ package com.example.rollcall.binding
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
-import android.widget.Spinner
-
 import androidx.databinding.BindingAdapter
-
 import coil.load
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 class UtilsBinding{
