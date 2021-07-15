@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="BottomNavigationMenu" parent="@style/Widget.Design.BottomNavigationView">
+        <item name="android:textSize" tools:override="true">10sp</item>
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="itemTextAppearanceInactive">@color/color666666</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="ButtonDefaultNormal" parent="Theme.RollCall">
+        <item name="colorPrimary">@color/purple_500</item>
+    </style>
+</resources>

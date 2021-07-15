@@ -1,19 +1,49 @@
 package com.example.rollcall.data.respository
 
-import android.util.Log
 import com.example.rollcall.data.api.ApiService
-import com.example.rollcall.data.model.Fruit
+import com.example.rollcall.data.model.DashBoard
+import com.example.rollcall.data.model.LoginUser
+import com.example.rollcall.data.model.User
+import com.example.rollcall.data.model.Users
+import retrofit2.HttpException
+import java.lang.Exception
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(val apiService: ApiService) : Repository {
-    override suspend fun getData(get: (Fruit) -> Unit) {
+    override suspend fun login(login: LoginUser): Users =
         try {
-            Log.d("quocbao",apiService.getBooks().toString())
-            get(apiService.getBooks())
+            apiService.login(login)
+        } catch (cause: HttpException) {
+            Users(message = cause.response()?.errorBody()?.string())
         }
-        catch (e:Exception){
-            Log.d("quocbao","error")
 
+    override suspend fun getStudent(tokenAdmin: String): Users =
+        try {
+            apiService.getStudents(tokenAdmin)
+        } catch (cause: HttpException) {
+            Users(message = cause.response()?.errorBody()?.string())
         }
-    }
+
+    override suspend fun getTeacher(tokenAdmin: String): Users =
+        try {
+            apiService.getTeachers(tokenAdmin)
+        } catch (cause: HttpException) {
+            Users(message = cause.response()?.errorBody()?.string())
+        }
+
+    override suspend fun getDashBoard(tokenAdmin: String): DashBoard =
+        try {
+            apiService.getDashBoard(tokenAdmin)
+        } catch (cause: HttpException) {
+            DashBoard(message = cause.response()?.errorBody()?.string())
+        }
+
+    override suspend fun createUser(tokenAdmin: String,users: User): Users =
+        try {
+            apiService.createUser(tokenAdmin,users)
+        } catch (cause: HttpException) {
+            Users(message = cause.response()?.errorBody()?.string())
+        }
+
 }
+

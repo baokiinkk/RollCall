@@ -1,10 +1,27 @@
 package com.example.rollcall.data.api
 
-import com.example.rollcall.data.model.Fruit
+import com.example.rollcall.data.model.DashBoard
+import com.example.rollcall.data.model.LoginUser
+import com.example.rollcall.data.model.User
+import com.example.rollcall.data.model.Users
+import retrofit2.http.Body
 import retrofit2.http.GET
-import javax.inject.Singleton
+import retrofit2.http.Header
+import retrofit2.http.POST
 
 interface ApiService {
-    @GET("v1/public/comics?ts=1&apikey=cf0551d555919dd8e11108ea1c17adf8&hash=c0220da4f22563f9d9b6c99fb704fa8a")
-    suspend fun getBooks(): Fruit
+    @POST("users/login")
+    suspend fun login(@Body loginUser: LoginUser): Users
+
+    @GET("students")
+    suspend fun getStudents(@Header("Authorization") tokenAdmin:String):Users
+
+    @GET("teachers")
+    suspend fun getTeachers(@Header("Authorization") tokenAdmin:String):Users
+
+    @GET("dashboard")
+    suspend fun getDashBoard(@Header("Authorization") tokenAdmin:String):DashBoard
+
+    @POST("users")
+    suspend fun createUser(@Header("Authorization") tokenAdmin:String, @Body user: User):Users
 }
