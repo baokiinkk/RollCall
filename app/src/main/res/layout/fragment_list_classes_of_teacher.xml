@@ -51,6 +51,7 @@
             android:id="@+id/rv_classes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            tools:listitem="@layout/item_class_teacher"
             android:layout_margin="16dp" />
     </LinearLayout>
 </layout>

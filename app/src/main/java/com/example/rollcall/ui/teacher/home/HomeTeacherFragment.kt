@@ -32,7 +32,6 @@ class HomeTeacherFragment : BaseFragment<FragmentHomeTeacherBinding>() {
     private var token: String? = null
     private val fragListClass = ListClassesOfTeacherFragment()
     private val fragDashBoard = DashBoardClassFragment()
-
     private val fragQRScan = CheckinQRCodeFragment()
 
     //-------------------------------- createView ----------------------------------------
@@ -88,7 +87,7 @@ class HomeTeacherFragment : BaseFragment<FragmentHomeTeacherBinding>() {
         }
     }
 
-    fun setCurrentFragment(activity: FragmentActivity, fragment: Fragment) {
+    private fun setCurrentFragment(activity: FragmentActivity, fragment: Fragment) {
         activity.supportFragmentManager.beginTransaction()
             .replace(R.id.fragContainer, fragment)
             .commit()
