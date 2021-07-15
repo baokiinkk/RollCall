@@ -2,4 +2,11 @@
     <string name="app_name">RollCall</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ClassID">Mã Lớp</string>
+    <string name="ClassName">Tên Lớp</string>
+    <string name="classSize">Sĩ Số</string>
+    <string name="confirm">Đồng ý</string>
+    <string name="label_list_classes">Danh sách lớp</string>
+    <string name="label_dash_board">Thống kê</string>
+    <string name="label_qr_checkin">QR Code Scan</string>
 </resources>
