@@ -13,6 +13,7 @@
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
+       android:id="@+id/loginContainer"
        >
 
        <ImageView
@@ -36,52 +37,73 @@
            app:layout_constraintTop_toTopOf="parent"
             />
 
-       <EditText
+       <com.google.android.material.textfield.TextInputLayout
            android:id="@+id/edtEmail"
            android:layout_width="0dp"
            android:layout_height="wrap_content"
            android:layout_marginStart="30dp"
            android:layout_marginEnd="30dp"
            android:layout_marginBottom="20dp"
-           android:drawableStart="@drawable/ic_user"
-           android:drawablePadding="20dp"
+           app:startIconDrawable="@drawable/ic_user"
+           app:startIconTint="#D3D1D1"
+           app:endIconTint="#D3D1D1"
+           app:endIconMode="clear_text"
+           style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
            android:hint="UserName"
-           android:paddingVertical="20dp"
-           android:text="@={viewmodel.email}"
-           android:textColor="#fff"
            android:textColorHint="#D3D1D1"
+           app:hintTextColor="#D3D1D1"
+           app:boxStrokeColor="@color/teal_200"
+           app:boxBackgroundColor="#00000000"
+           app:boxStrokeWidthFocused="1dp"
            app:layout_constraintBottom_toTopOf="@+id/edtPassword"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="@+id/view" />
+           app:layout_constraintStart_toStartOf="@+id/view" >
+           <com.google.android.material.textfield.TextInputEditText
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="@={viewmodel.email}"
+               android:background="#00000000"
+               android:textColor="#fff"
+               />
+       </com.google.android.material.textfield.TextInputLayout>
 
-       <EditText
+       <com.google.android.material.textfield.TextInputLayout
            android:id="@+id/edtPassword"
            android:layout_width="0dp"
            android:layout_height="wrap_content"
            android:layout_marginStart="30dp"
            android:layout_marginEnd="30dp"
-           android:layout_marginBottom="30dp"
-           android:drawableStart="@drawable/ic_pass"
-           android:drawablePadding="20dp"
+           android:layout_marginBottom="20dp"
+           app:startIconDrawable="@drawable/ic_pass"
            android:hint="Password"
-           android:inputType="textPassword"
-           android:paddingVertical="20dp"
-           android:text="@={viewmodel.password}"
-           android:textColor="#fff"
+           app:startIconTint="#D3D1D1"
+           app:endIconTint="#D3D1D1"
+           app:endIconMode="password_toggle"
+           style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
            android:textColorHint="#D3D1D1"
+           app:hintTextColor="#D3D1D1"
+           app:boxStrokeColor="@color/teal_200"
+           app:boxBackgroundColor="#00000000"
+           app:boxStrokeWidthFocused="1dp"
            app:layout_constraintBottom_toTopOf="@+id/btnLogin"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="@+id/view" />
+           app:layout_constraintStart_toStartOf="@+id/view" >
+           <com.google.android.material.textfield.TextInputEditText
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textColor="#fff"
+               android:inputType="textPassword"
+               android:background="#00000000"
+               android:text="@={viewmodel.password}"
+               />
+       </com.google.android.material.textfield.TextInputLayout>
 
        <com.royrodriguez.transitionbutton.TransitionButton
            android:id="@+id/btnLogin"
            android:layout_width="0dp"
            android:layout_height="wrap_content"
-           android:layout_marginStart="30dp"
-           android:layout_marginEnd="30dp"
            android:layout_marginBottom="50dp"
-           android:background="@drawable/br_btn_login"
-           android:paddingVertical="20dp"
+           android:paddingVertical="10dp"
            android:text="Sign in"
            android:textAllCaps="false"
            android:textColor="#fff"

@@ -7,10 +7,10 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.rollcall.ui.admin.user.UserViewModel" />
+            type="com.example.rollcall.ui.admin.choosestudent.ChooseStudentViewModel" />
         <variable
             name="adapter"
-            type="com.example.rollcall.adapter.ItemUserAdapter" />
+            type="com.example.rollcall.adapter.SelectItemUserAdapter" />
 
     </data>
 
@@ -28,21 +28,11 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:adapter="@{adapter}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnCreate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnCreateUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            app:srcCompat="@drawable/ic_plus"
-            android:contentDescription="@string/fab_content_desc"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
         <TextView
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
@@ -78,5 +68,24 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView11"
             app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+        <com.royrodriguez.transitionbutton.TransitionButton
+            android:id="@+id/btnCreate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/br_btn_login"
+            android:paddingVertical="20dp"
+            android:text="Tạo Lớp"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:defaultColor="#FA3E7E"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:loaderColor="#fff" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

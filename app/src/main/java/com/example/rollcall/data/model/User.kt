@@ -2,7 +2,6 @@ package com.example.rollcall.data.model
 
 import java.io.Serializable
 
-
 data class LoginUser(val id: String, val password: String)
 data class Users(
     val count: String? = null,

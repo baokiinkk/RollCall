@@ -1,34 +1,28 @@
-package com.example.rollcall.ui.admin.user
+package com.example.rollcall.ui.admin.classes
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.adapter.ItemClassAdapter
-import com.example.rollcall.adapter.ItemUserAdapter
-import com.example.rollcall.databinding.FragmentUserBinding
-import com.example.rollcall.ui.admin.createuser.CreateUserFragment
-import com.example.rollcall.ui.admin.ediuser.EditUserFragment
+import com.example.rollcall.databinding.FragmentClassBinding
+import com.example.rollcall.ui.admin.createclass.CreateClassFragment
+import com.example.rollcall.ui.admin.editclass.EditClassFragment
 import com.example.rollcall.utils.BaseFragment
-import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.CLASS
-import com.example.rollcall.utils.Utils.TEACHER
 import com.example.rollcall.utils.Utils.TOKEN
-import com.example.rollcall.utils.Utils.USER
 import com.example.rollcall.utils.Utils.gotoFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserFragment : BaseFragment<FragmentUserBinding>() {
+class ClassFragment : BaseFragment<FragmentClassBinding>() {
     override fun getLayoutRes(): Int {
-        return R.layout.fragment_user
+        return R.layout.fragment_class
     }
 
     //-------------------------------- Variable ----------------------------------------
-    val viewModel by viewModels<UserViewModel>()
+    val viewModel by viewModels<ClassViewModel>()
     private var token: String? = null
-    private var user: String? = null
 
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
@@ -40,48 +34,41 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
     //-------------------------------- Func ----------------------------------------
     private fun getArgument() {
         token = arguments?.getString(TOKEN)
-        user = arguments?.getString(USER)
     }
 
     private fun setup() {
-        val itemUserAdapter = ItemUserAdapter {
-            val fragment = EditUserFragment()
+        val itemClassAdapter = ItemClassAdapter {
+            val fragment = EditClassFragment()
             fragment.arguments = Bundle().apply {
                 putString(TOKEN, token)
-                putSerializable(USER, it)
+                putSerializable(CLASS, it)
             }
             gotoFragment(requireActivity(), fragment)
         }
         baseBinding.apply {
+            adapter = itemClassAdapter
             viewmodel = viewModel
-            adapter = itemUserAdapter
         }
         viewModel.apply {
-            user?.let { user ->
-                token?.let { token ->
-                    getUsers(token, user)
-                }
-
+            token?.let { token ->
+                getUsers(token)
             }
-            users.observe(viewLifecycleOwner, {
+            classes.observe(viewLifecycleOwner, {
                 it?.let {
-                    itemUserAdapter.submitList(it.data)
+                    itemClassAdapter.submitList(it.data)
                 }
             })
         }
     }
 
     private fun clickView() {
+        baseBinding.btnCreateUser.setOnClickListener {
+            val fragment = CreateClassFragment()
+            fragment.arguments = Bundle().apply { putString(TOKEN, token) }
+            gotoFragment(requireActivity(), fragment)
+        }
         baseBinding.btnBack.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
-        }
-        baseBinding.btnCreateUser.setOnClickListener {
-            val fragment = CreateUserFragment()
-            fragment.arguments = Bundle().apply {
-                putString(TOKEN, token)
-                putString(USER, user)
-            }
-            gotoFragment(requireActivity(), fragment)
         }
     }
 

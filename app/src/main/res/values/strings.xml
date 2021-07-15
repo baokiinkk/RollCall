@@ -9,4 +9,5 @@
     <string name="label_list_classes">Danh sách lớp</string>
     <string name="label_dash_board">Thống kê</string>
     <string name="label_qr_checkin">QR Code Scan</string>
+    <string name="fab_content_desc">Thêm</string>
 </resources>
