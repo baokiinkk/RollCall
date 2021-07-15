@@ -19,6 +19,7 @@ import javax.inject.Inject
 class EditClassViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
     val classes: MutableLiveData<Class?> = MutableLiveData(null)
     val teacher: MutableLiveData<Users?> = MutableLiveData(null)
+    val datastudent: MutableLiveData<Users?> = MutableLiveData(null)
     val isDelete: MutableLiveData<Class?> = MutableLiveData(null)
     var id: String = ""
     var name: String = ""
@@ -52,6 +53,7 @@ class EditClassViewModel @Inject constructor(private val repo: Repository) : Vie
         }
         viewModelScope.launch(Dispatchers.IO) {
             teacher.postValue(token?.let { repo.getTeacher(it) })
+            datastudent.postValue(token?.let { repo.getStudent(it) })
         }
     }
 

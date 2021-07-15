@@ -3,8 +3,10 @@ package com.example.rollcall.utils
 import android.app.Activity
 import android.content.AbstractThreadedSyncAdapter
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -50,26 +52,33 @@ object Utils {
         } else
             return true
     }
+
     fun diaLogBottom(
         context: Context,
         layoutInflater: LayoutInflater,
         data: MutableList<User>,
         adapterTeacher: ItemUserAdapter? = null,
-        adapterStudent: SelectItemUserAdapter? = null
-    ) :BottomSheetDialog{
+        adapterStudent: SelectItemUserAdapter? = null,
+        idClass: String? = null
+    ): BottomSheetDialog {
         val sheetDialog = BottomSheetDialog(context, R.style.SheetDialog)
         val viewDialog: View = layoutInflater.inflate(R.layout.user_dialog, null)
-
+        val textLayout = viewDialog.findViewById<TextInputLayout>(R.id.edtSearch)
         viewDialog.findViewById<RecyclerView>(R.id.recyclerViewUserDialog).apply {
             adapter = adapterStudent ?: adapterTeacher
             layoutManager = GridLayoutManager(context, 1)
         }
-        viewDialog.findViewById<TextInputLayout>(R.id.edtSearch).apply {
+        textLayout.apply {
             editText?.doOnTextChanged { inputText, _, _, _ ->
-
+                adapterStudent?.filter(inputText, data)
+                adapterTeacher?.filter(inputText, data)
+            }
+            idClass?.let {
+                editText?.setText(it)
             }
         }
-        (adapterStudent ?: adapterTeacher)?.submitList(data)
+        adapterTeacher?.submitList(data)
+
         sheetDialog.setContentView(viewDialog)
         return sheetDialog
     }

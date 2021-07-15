@@ -38,7 +38,7 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
     private var token: String? = null
     private lateinit var adapterUser: ItemUserAdapter
     private lateinit var adapterSelect: SelectItemUserAdapter
-    private lateinit var dialog: BottomSheetDialog
+    private var dialog: BottomSheetDialog? = null
     private var dataClass: DataClass? = null
 
     //-------------------------------- createView ----------------------------------------
@@ -70,7 +70,7 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
                         ) {
                             requireActivity().supportFragmentManager.popBackStack()
                         }
-                        Toast.makeText(context, "Tạo thành công", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "thành công", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                         baseBinding.btnOk.stopAnimation(
@@ -91,7 +91,7 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
                         }
                         Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                     } else {
-                        baseBinding.btnOk.stopAnimation(
+                        baseBinding.btnDelete.stopAnimation(
                             TransitionButton.StopAnimationStyle.SHAKE,
                             null
                         )
@@ -103,7 +103,7 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
         adapterUser = ItemUserAdapter {
             baseBinding.txtPickTeacher.editText?.setText(it.name)
             viewModel.datateacher = it
-            dialog.dismiss()
+            dialog?.dismiss()
         }
         adapterSelect = SelectItemUserAdapter()
     }
@@ -121,69 +121,78 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
                 )
 
             }
-        baseBinding.txtPickDate.editText?.apply {
-            setOnClickListener {
-                val datePickerDialog = DatePickerDialog(
-                    context,
-                    android.R.style.Theme_Material_Dialog,
-                    dateSetListener, selectedYear, selectedMonth, selectedDayOfMonth
-                )
-                datePickerDialog.show()
+        baseBinding.apply {
+            txtPickDate.editText?.apply {
+                setOnClickListener {
+                    val datePickerDialog = DatePickerDialog(
+                        context,
+                        android.R.style.Theme_Material_Dialog,
+                        dateSetListener, selectedYear, selectedMonth, selectedDayOfMonth
+                    )
+                    datePickerDialog.show()
+                }
             }
-        }
+            btnOk.apply {
+                setOnClickListener {
+                    startAnimation()
+                    if (checkValidate()) {
+                        token?.let { token ->
 
-        viewModel.teacher.observe(viewLifecycleOwner, {
-            it?.let { users ->
-                baseBinding.txtPickTeacher.editText?.apply {
-                    setOnClickListener {
-                        users.data?.let { users ->
+                            viewModel.editClass(token)
+                        }
+                    } else {
+                        Toast.makeText(context, "Không được để trống dữ liệu", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+            btnDelete.apply {
+                setOnClickListener {
+                    startAnimation()
+                    token?.let {
+                        viewModel.deleteClass(it, dataClass)
+                    }
+                }
+            }
+
+            btnBack.setOnClickListener {
+                requireActivity().supportFragmentManager.popBackStack()
+            }
+            viewModel.teacher.observe(viewLifecycleOwner, {
+                it?.data?.let { users ->
+                    txtPickTeacher.editText?.apply {
+                        setOnClickListener {
                             dialog = diaLogBottom(
                                 context, layoutInflater,
                                 users, adapterTeacher = adapterUser
                             )
-                            dialog.show()
+                            dialog?.show()
                         }
                     }
                 }
-            }
-        })
-
-        baseBinding.btnOk.apply {
-            setOnClickListener {
-                startAnimation()
-                if (checkValidate()) {
-                    token?.let { token ->
-                        viewModel.editClass(token)
+            })
+            viewModel.datastudent.observe(viewLifecycleOwner, {
+                it?.data?.let { user ->
+                    btnStudent.setOnClickListener {
+                        user.forEach {
+                            if(dataClass?.students?.contains(it) == true)
+                                it.selected = true
+                        }
+                        val dialog = diaLogBottom(
+                            requireContext(), layoutInflater,
+                            user, adapterStudent = adapterSelect,
+                            idClass = dataClass?.id
+                        )
+                        dialog.show()
+                        dialog.setOnDismissListener {
+                            viewModel.student = adapterSelect.currentList.filter { it.selected }.toMutableList()
+                        }
                     }
-                } else {
-                    Toast.makeText(context, "Không được để trống dữ liệu", Toast.LENGTH_SHORT)
-                        .show()
+
                 }
-            }
+            })
         }
 
-        baseBinding.btnDelete.apply {
-            setOnClickListener {
-                startAnimation()
-                token?.let {
-                    viewModel.deleteClass(it, dataClass)
-                }
-            }
-        }
-
-        baseBinding.btnBack.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
-        }
-        baseBinding.btnStudent.setOnClickListener {
-            dataClass?.students?.let { it1 ->
-                dialog = diaLogBottom(
-                    requireContext(), layoutInflater,
-                    it1, adapterStudent = adapterSelect
-                )
-                dialog.show()
-            }
-
-        }
     }
 
     private fun checkValidate(): Boolean {

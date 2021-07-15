@@ -1,6 +1,7 @@
 package com.example.rollcall.adapter
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -57,10 +58,23 @@ class SelectItemUserAdapter() :
                 output += word.lowercase() + " "
             }
             submitList(list.filter {
+                Log.d("quocbao",it.id.lowercase()+"-"+it.name.lowercase()+"-"+output.trim()+"\n-"+it.classes.toString())
                 it.name.lowercase().contains(output.trim()) ||
-                        it.id.lowercase().contains(output.trim())
+                        it.id.lowercase().contains(output.trim()) ||
+                        checkClasses(it.classes,output)
             })
             notifyDataSetChanged()
         }
+    }
+
+    fun checkClasses(data: MutableList<String>?, output: String): Boolean {
+        if (data == null) return false
+        else {
+            data.forEach {
+                if (it.lowercase() == (output.trim()))
+                    return true
+            }
+        }
+        return false
     }
 }

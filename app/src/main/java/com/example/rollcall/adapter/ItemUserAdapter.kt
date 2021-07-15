@@ -56,10 +56,22 @@ class ItemUserAdapter(private val onClick: (User) -> Unit) :
             }
             submitList(list.filter {
                 it.name.lowercase().contains(output.trim()) ||
-                        it.id.lowercase().contains(output.trim())
+                        it.id.lowercase().contains(output.trim()) ||
+                        checkClasses(it.classes, output)
             })
             notifyDataSetChanged()
         }
+    }
+
+    fun checkClasses(data: MutableList<String>?, output: String): Boolean {
+        if (data == null) return false
+        else {
+            data.forEach {
+                if (it.lowercase().contains(output.trim()))
+                    return true
+            }
+        }
+        return false
     }
 }
 
