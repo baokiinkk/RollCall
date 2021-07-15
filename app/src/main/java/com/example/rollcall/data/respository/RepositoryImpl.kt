@@ -3,6 +3,7 @@ package com.example.rollcall.data.respository
 import android.util.Log
 import com.example.rollcall.data.api.ApiService
 import com.example.rollcall.data.model.*
+import com.google.gson.Gson
 import retrofit2.HttpException
 import java.lang.Exception
 import javax.inject.Inject
@@ -14,42 +15,42 @@ class RepositoryImpl @Inject constructor(val apiService: ApiService) : Repositor
         try {
             apiService.login(login)
         } catch (cause: HttpException) {
-            Users(message = cause.response()?.errorBody()?.string())
+            Gson().fromJson(cause.response()?.errorBody()?.string(),Users::class.java)
         }
 
     override suspend fun getStudent(tokenAdmin: String): Users =
         try {
             apiService.getStudents(tokenAdmin)
         } catch (cause: HttpException) {
-            Users(message = cause.response()?.errorBody()?.string())
+            Gson().fromJson(cause.response()?.errorBody()?.string(),Users::class.java)
         }
 
     override suspend fun getTeacher(tokenAdmin: String): Users =
         try {
             apiService.getTeachers(tokenAdmin)
         } catch (cause: HttpException) {
-            Users(message = cause.response()?.errorBody()?.string())
+            Gson().fromJson(cause.response()?.errorBody()?.string(),Users::class.java)
         }
 
     override suspend fun getDashBoard(tokenAdmin: String): DashBoard =
         try {
             apiService.getDashBoard(tokenAdmin)
         } catch (cause: HttpException) {
-            DashBoard(message = cause.response()?.errorBody()?.string())
+            Gson().fromJson(cause.response()?.errorBody()?.string(),DashBoard::class.java)
         }
 
     override suspend fun createUser(tokenAdmin: String,users: User): Users =
         try {
             apiService.createUser(tokenAdmin,users)
         } catch (cause: HttpException) {
-            Users(message = cause.response()?.errorBody()?.string())
+            Gson().fromJson(cause.response()?.errorBody()?.string(),Users::class.java)
         }
 
     override suspend fun editUser(tokenAdmin: String, user: User): Users =
         try {
             apiService.editUser(tokenAdmin,user.id,user)
         } catch (cause: HttpException) {
-            Users(message = cause.response()?.errorBody()?.string())
+            Gson().fromJson(cause.response()?.errorBody()?.string(),Users::class.java)
         }
 
     override suspend fun editPasswordUser(tokenAdmin: String, user: User): Users =
@@ -57,7 +58,7 @@ class RepositoryImpl @Inject constructor(val apiService: ApiService) : Repositor
             Log.d("quocbao",user.toString())
             apiService.editPasswordUser(tokenAdmin,user.id,user)
         } catch (cause: HttpException) {
-            Users(message = cause.response()?.errorBody()?.string())
+            Gson().fromJson(cause.response()?.errorBody()?.string(),Users::class.java)
         }
 
     override suspend fun deleteUser(tokenAdmin: String, user: User): Users =
@@ -76,7 +77,7 @@ class RepositoryImpl @Inject constructor(val apiService: ApiService) : Repositor
         try {
             apiService.getClass(tokenAdmin)
         } catch (cause: HttpException) {
-            Class(message = cause.response()?.errorBody()?.string())
+            Gson().fromJson(cause.response()?.errorBody()?.string(),Class::class.java)
 
         }
 
@@ -84,14 +85,14 @@ class RepositoryImpl @Inject constructor(val apiService: ApiService) : Repositor
     try {
         apiService.createClass(tokenAdmin,classes)
     } catch (cause: HttpException) {
-        Class(message = cause.response()?.errorBody()?.string())
+        Gson().fromJson(cause.response()?.errorBody()?.string(),Class::class.java)
     }
 
     override suspend fun editClass(tokenAdmin: String, user: DataClass): Class =
         try {
             apiService.editClass(tokenAdmin,user)
         } catch (cause: HttpException) {
-            Class(message = cause.response()?.errorBody()?.string())
+            Gson().fromJson(cause.response()?.errorBody()?.string(),Class::class.java)
         }
 
     override suspend fun deleteClass(tokenAdmin: String, user: DataClass): Class =

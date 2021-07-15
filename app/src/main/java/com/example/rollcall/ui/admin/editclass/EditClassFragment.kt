@@ -21,6 +21,7 @@ import com.example.rollcall.utils.Utils.CLASS
 import com.example.rollcall.utils.Utils.TOKEN
 import com.example.rollcall.utils.Utils.diaLogBottom
 import com.example.rollcall.utils.Utils.gotoFragment
+import com.example.rollcall.utils.Utils.showAlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -148,9 +149,11 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
             }
             btnDelete.apply {
                 setOnClickListener {
-                    startAnimation()
-                    token?.let {
-                        viewModel.deleteClass(it, dataClass)
+                    showAlertDialog(context, "Thông báo", "Bạn có muốn xóa!") {
+                        startAnimation()
+                        token?.let {
+                            viewModel.deleteClass(it, dataClass)
+                        }
                     }
                 }
             }
@@ -175,7 +178,7 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
                 it?.data?.let { user ->
                     btnStudent.setOnClickListener {
                         user.forEach {
-                            if(dataClass?.students?.contains(it) == true)
+                            if (dataClass?.students?.contains(it) == true)
                                 it.selected = true
                         }
                         val dialog = diaLogBottom(
@@ -185,7 +188,8 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
                         )
                         dialog.show()
                         dialog.setOnDismissListener {
-                            viewModel.student = adapterSelect.currentList.filter { it.selected }.toMutableList()
+                            viewModel.student =
+                                adapterSelect.currentList.filter { it.selected }.toMutableList()
                         }
                     }
 
