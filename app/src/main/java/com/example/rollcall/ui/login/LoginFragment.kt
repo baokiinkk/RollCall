@@ -1,6 +1,7 @@
 package com.example.rollcall.ui.login
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentLoginBinding
@@ -9,6 +10,7 @@ import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.TOKEN
 import com.example.rollcall.utils.Utils.gotoFragment
+import com.google.android.material.snackbar.Snackbar
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,6 +50,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                         gotoFragment(requireActivity(), fragment)
                     }
                 } else {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                     baseBinding.btnLogin.stopAnimation(
                         TransitionButton.StopAnimationStyle.SHAKE,
                         null

@@ -18,6 +18,7 @@ import com.example.rollcall.adapter.SelectItemUserAdapter
 import com.example.rollcall.data.model.User
 import com.example.rollcall.ui.admin.home.HomeAdminFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -81,6 +82,20 @@ object Utils {
 
         sheetDialog.setContentView(viewDialog)
         return sheetDialog
+    }
+
+    fun showAlertDialog(context: Context,title:String,messagge:String,action:()->Unit){
+        val dialog = MaterialAlertDialogBuilder(context)
+            .setTitle(title)
+            .setMessage(messagge)
+            .setNegativeButton("Hủy bỏ") { dialog, which ->
+                dialog.dismiss()
+            }
+            .setPositiveButton("Đồng ý") { dialog, which ->
+                action()
+                dialog.dismiss()
+            }
+            .show()
     }
 
 }

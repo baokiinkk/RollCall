@@ -12,6 +12,7 @@ import com.example.rollcall.ui.admin.home.HomeAdminFragment
 import com.example.rollcall.ui.admin.user.UserFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
+import com.example.rollcall.utils.Utils.showAlertDialog
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -109,9 +110,11 @@ class EditUserFragment : BaseFragment<FragmentEditUserBinding>() {
 
         baseBinding.btnDelete.apply {
             setOnClickListener {
-                startAnimation()
-                token?.let {
-                    viewModel.deleteUser(it)
+                showAlertDialog(context, "Thông báo", "Bạn có muốn xóa!") {
+                    startAnimation()
+                    token?.let {
+                        viewModel.deleteUser(it)
+                    }
                 }
             }
         }
