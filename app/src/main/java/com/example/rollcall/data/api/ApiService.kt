@@ -39,9 +39,26 @@ interface ApiService {
         @Path("id") id: String
     ): Users
 
+
+    //----------------------------------- Class ----------------------------------------------------
     @GET("classes/")
     suspend fun getClass(@Header("Authorization") tokenAdmin: String): Class
 
     @POST("classes/")
-    suspend fun createClass(@Header("Authorization") tokenAdmin: String,@Body classes: DataClass): Class
+    suspend fun createClass(
+        @Header("Authorization") tokenAdmin: String,
+        @Body classes: DataClass
+    ): Class
+
+    @PUT("classes/")
+    suspend fun editClass(
+        @Header("Authorization") tokenAdmin: String,
+        @Body dataClass: DataClass
+    ):Class
+
+    @DELETE("classes/{id}")
+    suspend fun deleteClass(
+        @Header("Authorization") tokenAdmin: String,
+        @Path("id") id: String
+    ): Class
 }

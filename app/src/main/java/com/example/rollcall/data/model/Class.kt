@@ -18,5 +18,5 @@ data class DataClass(
     val dayOfWeek:String? = null,
     val shift:String? = null,
     val days:Int? = null,
-    val dayStart:String? = null,
+    val dateStart:String? = null,
 ):Serializable

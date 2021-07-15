@@ -21,4 +21,6 @@ interface Repository{
    //------------------------ Class --------------------------------------
    suspend fun getClass(tokenAdmin:String):Class
    suspend fun createClass(tokenAdmin:String,classes: DataClass): Class
+   suspend fun editClass(tokenAdmin:String,user: DataClass):Class
+   suspend fun deleteClass(tokenAdmin:String,user: DataClass):Class
 }

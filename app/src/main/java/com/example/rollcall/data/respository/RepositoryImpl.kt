@@ -86,5 +86,20 @@ class RepositoryImpl @Inject constructor(val apiService: ApiService) : Repositor
     } catch (cause: HttpException) {
         Class(message = cause.response()?.errorBody()?.string())
     }
+
+    override suspend fun editClass(tokenAdmin: String, user: DataClass): Class =
+        try {
+            apiService.editClass(tokenAdmin,user)
+        } catch (cause: HttpException) {
+            Class(message = cause.response()?.errorBody()?.string())
+        }
+
+    override suspend fun deleteClass(tokenAdmin: String, user: DataClass): Class =
+        try {
+            apiService.deleteClass(tokenAdmin,user.id)
+        } catch (cause: HttpException) {
+            Class(message = "0")
+
+        }
 }
 

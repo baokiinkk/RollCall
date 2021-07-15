@@ -5,6 +5,7 @@ import android.content.AbstractThreadedSyncAdapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -62,6 +63,11 @@ object Utils {
         viewDialog.findViewById<RecyclerView>(R.id.recyclerViewUserDialog).apply {
             adapter = adapterStudent ?: adapterTeacher
             layoutManager = GridLayoutManager(context, 1)
+        }
+        viewDialog.findViewById<TextInputLayout>(R.id.edtSearch).apply {
+            editText?.doOnTextChanged { inputText, _, _, _ ->
+
+            }
         }
         (adapterStudent ?: adapterTeacher)?.submitList(data)
         sheetDialog.setContentView(viewDialog)

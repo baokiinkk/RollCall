@@ -44,7 +44,7 @@ class CreateClassViewModel @Inject constructor(private val repo: Repository) : V
             shift = buoiHoc,
             credit = credit.toInt(),
             days = days.toInt(),
-            dayStart = dateStart
+            dateStart = dateStart
         )
     }
 
