@@ -12,22 +12,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
             android:paddingTop="@dimen/_36dp"
-            android:paddingBottom="@dimen/_16dp">
+            android:paddingBottom="@dimen/_16dp"
+            android:orientation="vertical">
+            <include
+                android:id="@+id/layout_header"
+                layout="@layout/layout_header"/>
             <include
                 android:id="@+id/layout_classInfo"
-                layout="@layout/layout_class_info"/>
+                layout="@layout/layout_class_info" />
             <LinearLayout
                 android:id="@+id/list_student_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/_16dp"
+                android:layout_marginEnd="@dimen/_16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layout_classInfo">
@@ -50,12 +54,14 @@
                 android:id="@+id/rv_classes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/_16dp"
+                android:layout_marginStart="@dimen/_16dp"
+                android:layout_marginEnd="@dimen/_16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/list_student_title"
                 android:adapter="@{adapter}"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

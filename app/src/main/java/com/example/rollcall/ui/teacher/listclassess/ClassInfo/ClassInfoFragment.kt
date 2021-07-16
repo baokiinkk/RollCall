@@ -1,6 +1,7 @@
 package com.example.rollcall.ui.teacher.listclassess.ClassInfo
 
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
@@ -14,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Singleton
 
 @AndroidEntryPoint
-class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>() {
+class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>(), View.OnClickListener {
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_class_info
@@ -27,9 +28,11 @@ class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>() {
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
         getArgument()
+        initToolBar()
         setup()
         clickView()
     }
+
     //-------------------------------- Func ----------------------------------------
     private fun setup() {
         val itemUserAdapter = ItemUserAdapter {
@@ -47,11 +50,24 @@ class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>() {
             classInfo?.students?.size.toString()
     }
 
+    private fun initToolBar() {
+        baseBinding.layoutHeader.findViewById<TextView>(R.id.tv_title_toolbar).text = "Thông tin lớp"
+    }
+
     private fun getArgument() {
         token = arguments?.getString(Utils.TOKEN)
         classInfo = arguments?.getSerializable(Utils.CLASS) as DataClass?
     }
 
     private fun clickView() {
+        baseBinding.layoutHeader.findViewById<TextView>(R.id.btnBack).setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+            R.id.btnBack -> {
+                requireActivity().supportFragmentManager.popBackStack()
+            }
+        }
     }
 }

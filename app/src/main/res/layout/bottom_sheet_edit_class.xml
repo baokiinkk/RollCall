@@ -80,7 +80,7 @@
         app:layout_constraintStart_toEndOf="@id/tv_pickTime"
         app:layout_constraintTop_toBottomOf="@id/tv_monitorName" />
 
-    <Button
+    <com.royrodriguez.transitionbutton.TransitionButton
         android:id="@+id/button_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

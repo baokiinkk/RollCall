@@ -44,7 +44,7 @@
                 android:padding="10dp"
                 android:gravity="center"
                 android:textSize="18sp"
-                android:drawableEnd="@drawable/ic_bottom_sheet_close"/>
+                app:drawableEndCompat="@drawable/ic_bottom_sheet_close" />
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

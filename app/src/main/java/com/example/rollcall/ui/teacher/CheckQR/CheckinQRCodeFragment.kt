@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentCheckinQrcodeBinding
 import com.example.rollcall.utils.BaseFragment
+import com.example.rollcall.utils.Utils
 import com.google.zxing.Result
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -26,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
 @AndroidEntryPoint
-class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXingScannerView.ResultHandler {
+class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXingScannerView.ResultHandler, View.OnClickListener {
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_checkin_qrcode
@@ -38,6 +39,7 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
     override fun onCreateViews() {
         checkPermission()
         setup()
+        setEvent()
     }
 
     //-------------------------------- Func ----------------------------------------
@@ -69,6 +71,10 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
             }).check()
     }
 
+    private fun setEvent() {
+        baseBinding.tvResult.setOnClickListener(this)
+    }
+
     private fun slideUp(view: View) {
         view.visibility = View.VISIBLE
         val translateAnimation = TranslateAnimation(0.0f, 0.0f,
@@ -84,6 +90,7 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
         translateAnimation.duration = 300
         translateAnimation.fillAfter = true
         view.startAnimation(translateAnimation)
+        view.visibility = View.GONE
     }
 
     override fun handleResult(rawResult: Result?) {
@@ -101,5 +108,19 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
     override fun onPause() {
         super.onPause()
         baseBinding.scanQr.stopCamera()
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.tv_result -> {
+                Utils.fingerPrint(requireActivity(), {
+                    Toast.makeText(requireContext(), "fail!", Toast.LENGTH_SHORT).show()
+                }) {
+
+                    Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
+                }
+                slideDown(baseBinding.layoutBottomCheckinResult)
+            }
+        }
     }
 }
