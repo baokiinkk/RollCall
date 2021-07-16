@@ -33,7 +33,8 @@
                 <include
                     android:viewmodel="@{viewmodel}"
                     android:id="@+id/layout_classInfo"
-                    layout="@layout/layout_class_info" />
+                    layout="@layout/layout_class_info"
+                    />
                 <LinearLayout
                     android:id="@+id/list_student_title"
                     android:layout_width="match_parent"

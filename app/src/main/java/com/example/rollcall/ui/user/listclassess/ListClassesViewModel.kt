@@ -13,13 +13,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ListClassesOfTeacherViewModel @Inject constructor(private val repo: UserRepository): ViewModel(){
+class ListClassesViewModel @Inject constructor(private val repo: UserRepository): ViewModel(){
     val classes: MutableLiveData<Class?> = MutableLiveData(null)
-    fun getListClassTeacher(token:String, id: String, user: String){
-        Log.d("cc", "ok")
+    fun getListClass(token:String, id: String, user: String){
         viewModelScope.launch(Dispatchers.IO){
-            Log.d("result", repo.getClassOfTeacher(token, id, user).toString())
-            classes.postValue(repo.getClassOfTeacher(token, id, user))
+            Log.d("result", repo.getClassUser(token, id, user).toString())
+            classes.postValue(repo.getClassUser(token, id, user))
         }
     }
 }

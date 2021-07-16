@@ -27,7 +27,10 @@ class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
         getArgument()
         setup()
         getData()
+        clickView()
     }
+
+
 
     //-------------------------------- Func ----------------------------------------
     private fun setup() {
@@ -48,6 +51,12 @@ class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
     private fun getArgument() {
         token = arguments?.getString(Utils.TOKEN)
         user = arguments?.getSerializable(Utils.USER) as User?
+    }
+
+    private fun clickView() {
+        baseBinding.buttonQrCode.setOnClickListener {
+
+        }
     }
 
 

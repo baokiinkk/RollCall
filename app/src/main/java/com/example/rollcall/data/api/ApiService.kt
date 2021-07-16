@@ -72,7 +72,7 @@ interface ApiService {
 
     //----------------------------------- Teacher --------------------------------------------------
     @GET("{user}/{id}/class")
-    suspend fun getClassOfTeacher(
+    suspend fun getClassUser(
         @Header("Authorization") tokenAdmin: String,
         @Path("id") id: String,
         @Path("user") user: String
@@ -101,4 +101,21 @@ interface ApiService {
         @Header("Authorization") tokenAdmin: String
     ):DataReport
 
+    @POST("reports/{id}/checkin")
+    suspend fun checkin(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): Message
+
+    @POST("reports/{id}/teachercheckin")
+    suspend fun checkinByTeacher(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Body userId: UserId
+    ): Message
+
+    @GET("reports/{class_id}/download-all")
+    suspend fun downLoadReport(
+        @Path("class_id") id: String,
+    ): Message
 }

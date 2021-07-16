@@ -8,21 +8,21 @@ import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.adapter.ItemClassAdapter
 import com.example.rollcall.data.model.User
-import com.example.rollcall.databinding.FragmentListClassesOfTeacherBinding
+import com.example.rollcall.databinding.FragmentListClassesBinding
 import com.example.rollcall.ui.user.listclassess.classInfo.ClassInfoFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ListClassesOfTeacherFragment : BaseFragment<FragmentListClassesOfTeacherBinding>() {
+class ListClassesFragment : BaseFragment<FragmentListClassesBinding>() {
 
     override fun getLayoutRes(): Int {
-        return R.layout.fragment_list_classes_of_teacher
+        return R.layout.fragment_list_classes
     }
 
     //-------------------------------- Variable ----------------------------------------
-    val viewModel: ListClassesOfTeacherViewModel by viewModels()
+    val viewModel: ListClassesViewModel by viewModels()
     private var token: String? = null
     private var user: User? = null
 
@@ -39,6 +39,7 @@ class ListClassesOfTeacherFragment : BaseFragment<FragmentListClassesOfTeacherBi
             fragment.arguments = Bundle().apply {
                 putString(Utils.TOKEN, token)
                 putSerializable(Utils.CLASS, it)
+                putSerializable(Utils.USER, user)
             }
             setCurrentFragment(requireActivity(), fragment)
         }
@@ -51,7 +52,7 @@ class ListClassesOfTeacherFragment : BaseFragment<FragmentListClassesOfTeacherBi
 
         token?.let {
             user?.let { it1 ->
-                viewModel.getListClassTeacher(it, it1.id, if(it1.role == Utils.TEACHER) "teachers" else "students")
+                viewModel.getListClass(it, it1.id, if(it1.role == Utils.TEACHER) "teachers" else "students")
             }
         }
         viewModel.classes.observe(viewLifecycleOwner, {

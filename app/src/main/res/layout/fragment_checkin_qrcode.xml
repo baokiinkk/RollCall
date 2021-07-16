@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <!--<variable
-            name="viewmodel"
-            type="com.example.rollcall.ui.teacher.CheckQR.CheckinQRCodeViewModel" />-->
 
     </data>
 
@@ -14,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.user.CheckQR.CheckinQRCodeFragment">
+
         <me.dm7.barcodescanner.zxing.ZXingScannerView
             android:id="@+id/scan_Qr"
             android:layout_width="match_parent"
@@ -40,7 +38,7 @@
                 android:id="@+id/tv_result"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N17DCCN066 - pass"
+                android:text="@string/request_fail"
                 android:padding="10dp"
                 android:gravity="center"
                 android:textSize="18sp"

@@ -10,7 +10,7 @@ import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.FragmentHomeUserBinding
 import com.example.rollcall.ui.user.CheckQR.CheckinQRCodeFragment
 import com.example.rollcall.ui.user.info.InfoUserFragment
-import com.example.rollcall.ui.user.listclassess.ListClassesOfTeacherFragment
+import com.example.rollcall.ui.user.listclassess.ListClassesFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,14 +25,12 @@ class HomeUserFragment : BaseFragment<FragmentHomeUserBinding>() {
     val viewModel by viewModels<HomeUserViewModel>()
     private var token: String? = null
     private var user: User? = null
-    private val fragListClass = ListClassesOfTeacherFragment()
-    private val fragQRScan = CheckinQRCodeFragment()
+    private val fragListClass = ListClassesFragment()
     private val fragInfo = InfoUserFragment()
 
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
         getArgument()
-        getData()
         setup()
         setEvent()
     }
@@ -42,10 +40,8 @@ class HomeUserFragment : BaseFragment<FragmentHomeUserBinding>() {
         baseBinding.apply {
             viewmodel = viewModel
         }
-    }
-
-    private fun getData() {
-//        token?.let { viewModel.getData(it) }
+        baseBinding.bottomNavMain.selectedItemId = R.id.navInfo
+        setCurrentFragment(requireActivity(),fragInfo)
     }
 
     private fun getArgument() {
@@ -57,6 +53,7 @@ class HomeUserFragment : BaseFragment<FragmentHomeUserBinding>() {
         baseBinding.bottomNavMain.setOnNavigationItemSelectedListener { menuItem ->
             clickNavigateSubScreen(menuItem)
         }
+
 
     }
 
@@ -70,11 +67,6 @@ class HomeUserFragment : BaseFragment<FragmentHomeUserBinding>() {
 
             R.id.navInfo -> {
                 setCurrentFragment(requireActivity(),fragInfo)
-                true
-            }
-
-            R.id.navQR -> {
-                setCurrentFragment(requireActivity(),fragQRScan)
                 true
             }
 

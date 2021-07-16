@@ -23,5 +23,9 @@ data class User(
     var selected:Boolean = false
 ):Serializable
 
+data class UserId(
+    val studentId: String
+)
+
 
 

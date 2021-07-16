@@ -7,12 +7,12 @@ import com.google.gson.Gson
 import retrofit2.HttpException
 import javax.inject.Inject
 
-class UserRepositoryImpl @Inject constructor(private val apiService: ApiService) : UserRepository {
-    override suspend fun getClassOfTeacher(token: String, id: String, user: String): Class =
-        try {
-            apiService.getClassOfTeacher(token, id, user)
-        } catch (cause: HttpException) {
-            Gson().fromJson(cause.response()?.errorBody()?.string(), Class::class.java)
+class UserRepositoryImpl @Inject constructor(private val apiService: ApiService) : UserRepository{
+    override suspend fun getClassUser(token: String, id: String, user: String): Class =
+            try {
+                apiService.getClassUser(token, id, user)
+            } catch (cause: HttpException) {
+                Gson().fromJson(cause.response()?.errorBody()?.string(),Class::class.java)
 
         }
 
@@ -32,7 +32,7 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiService)
 
         }
 
-    override suspend fun createReport(id: String,data: ReportBody, token: String): DataReport =
+    override suspend fun createReport(id: String, data: ReportBody, token: String): DataReport =
         try {
             apiService.postReport(id,data, token)
         } catch (cause: HttpException) {
@@ -54,4 +54,25 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiService)
             Gson().fromJson(cause.response()?.errorBody()?.string(), DataReport::class.java)
 
         }
+
+    override suspend fun checkin(token: String, id: String) : Message =
+        try {
+            apiService.checkin(token, id)
+        } catch (cause: HttpException) {
+            Gson().fromJson(cause.response()?.errorBody()?.string(),Message::class.java)
+        }
+
+    override suspend fun checkinByTeacher(token: String, id: String, userId: UserId): Message =
+        try {
+            apiService.checkinByTeacher(token, id, userId)
+        } catch (cause: HttpException) {
+            Gson().fromJson(cause.response()?.errorBody()?.string(),Message::class.java)
+        }
+
+    override suspend fun downLoadReport(id: String): Message =
+        try {
+        apiService.downLoadReport(id)
+    } catch (cause: HttpException) {
+        Gson().fromJson(cause.response()?.errorBody()?.string(),Message::class.java)
+    }
 }
