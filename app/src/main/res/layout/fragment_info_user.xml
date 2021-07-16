@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.rollcall.ui.teacher.info.InfoUserViewModel" />
+            type="com.example.rollcall.ui.user.info.InfoUserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="Hồ Minh Quốc Bảo"
+            android:text="@{viewmodel.users.data.get(0).name}"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"

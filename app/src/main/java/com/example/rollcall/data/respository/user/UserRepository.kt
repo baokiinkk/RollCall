@@ -11,6 +11,7 @@ interface UserRepository {
     suspend fun getClassOfTeacher(
         tokenAdmin: String,
         id: String,
+        user: String,
     ): Class
 
     suspend fun getInfoUser(

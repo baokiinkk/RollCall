@@ -1,4 +1,4 @@
-package com.example.rollcall.ui.teacher.info
+package com.example.rollcall.ui.user.info
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

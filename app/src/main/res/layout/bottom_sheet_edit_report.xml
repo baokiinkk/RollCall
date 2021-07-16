@@ -21,64 +21,43 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Chỉnh sửa thông tin lớp" />
+            android:textColor="@color/black"
+            android:text="Chỉnh thời gian điểm danh" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_monitor_title"
+    <CheckBox
+        android:id="@+id/tv_allow_late"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Lớp trưởng"
-        android:textStyle="bold"
+        android:layout_marginStart="@dimen/_16dp"
+        android:layout_marginTop="@dimen/_10dp"
+        android:text="cho phép trễ"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutTitle" />
+        app:layout_constraintTop_toBottomOf="@id/picker_pickTime"/>
 
-    <Spinner
-        android:id="@+id/spinner_monitorId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_monitorName"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_monitor_title" />
-
-    <TextView
-        android:id="@+id/tv_monitorName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:text="ABC"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/spinner_monitorId"
-        app:layout_constraintTop_toBottomOf="@id/tv_monitor_title" />
 
     <TextView
         android:id="@+id/tv_pickTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="76dp"
         android:text="Thời gian điểm danh"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner_monitorId" />
+        app:layout_constraintTop_toBottomOf="@id/layoutTitle" />
 
-    <NumberPicker
-        android:id="@+id/NumPicker_pickTime"
+    <TimePicker
+        android:id="@+id/picker_pickTime"
         android:layout_width="210dp"
         android:layout_height="150dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:clickable="false"
         android:focusable="false"
+        android:timePickerMode="spinner"
         app:layout_constraintStart_toEndOf="@id/tv_pickTime"
-        app:layout_constraintTop_toBottomOf="@id/tv_monitorName" />
+        app:layout_constraintTop_toBottomOf="@id/layoutTitle" />
 
     <com.royrodriguez.transitionbutton.TransitionButton
         android:id="@+id/button_confirm"
@@ -94,7 +73,7 @@
         android:theme="@style/ButtonDefaultNormal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/NumPicker_pickTime"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_allow_late"/>
 
     <ImageView
         android:id="@+id/imageViewClose"
