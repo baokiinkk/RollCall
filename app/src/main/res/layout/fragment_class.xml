@@ -18,6 +18,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:loadImage="@{viewmodel.img}"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
@@ -32,7 +41,7 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:text="Lớp học"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -47,7 +56,7 @@
             android:layout_marginEnd="10dp"
             android:adapter="@{adapter}"
             android:list="@{viewmodel.classes}"
-            android:background="#fff"
+            android:queryBackground="@drawable/background_btn_search"
             app:layout_constraintBottom_toBottomOf="@+id/textView11"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -62,6 +71,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:adapter="@{adapter}"
+            android:layoutAnimation="@anim/layout_anim_recycleview"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,11 +82,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            app:srcCompat="@drawable/ic_plus"
+            android:layout_marginBottom="40dp"
             android:contentDescription="@string/fab_content_desc"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_plus" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

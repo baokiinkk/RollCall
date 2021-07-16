@@ -3,6 +3,7 @@ package com.example.rollcall.ui.admin.editclass
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.rollcall.R
 import com.example.rollcall.data.model.Class
 import com.example.rollcall.data.model.DataClass
 import com.example.rollcall.data.model.User
@@ -30,6 +31,7 @@ class EditClassViewModel @Inject constructor(private val repo: AdminRepository) 
     var dayOfWeek: String = ""
     var nameTeacher = ""
     var shift: String = ""
+    val img = R.drawable.edit
     lateinit var student: MutableList<User>
     lateinit var datateacher: User
 

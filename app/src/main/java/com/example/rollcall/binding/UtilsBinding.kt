@@ -3,6 +3,7 @@ package com.example.rollcall.binding
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
+import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import coil.load
 import com.google.android.material.textfield.TextInputLayout
@@ -30,5 +31,6 @@ class UtilsBinding{
             val adapter = ArrayAdapter(view.context,android.R.layout.simple_spinner_item,data)
             (view.editText as? AutoCompleteTextView)?.setAdapter(adapter)
         }
+
     }
 }

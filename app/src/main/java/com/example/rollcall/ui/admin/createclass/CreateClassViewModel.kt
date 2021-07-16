@@ -3,6 +3,7 @@ package com.example.rollcall.ui.admin.createclass
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.rollcall.R
 import com.example.rollcall.data.model.Class
 import com.example.rollcall.data.model.DataClass
 import com.example.rollcall.data.model.User
@@ -27,7 +28,7 @@ class CreateClassViewModel @Inject constructor(private val repo: AdminRepository
     var dateStart: String = ""
     var credit: String = ""
     lateinit var datateacher: User
-
+    val img = R.drawable.edit
     fun getUsers(token: String) {
         viewModelScope.launch(Dispatchers.IO) {
             teacher.postValue(repo.getTeacher(token))
