@@ -1,17 +1,12 @@
 package com.example.rollcall.utils
 
 
-import android.app.Activity
 import android.content.Context
-import android.hardware.biometrics.BiometricManager
 import android.view.LayoutInflater
 import android.view.View
-import androidx.core.widget.doOnTextChanged
-import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
-import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
-import androidx.biometric.BiometricManager.from
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -24,6 +19,7 @@ import com.example.rollcall.ui.admin.home.HomeAdminFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
+import java.util.*
 
 
 object Utils {
@@ -106,7 +102,7 @@ object Utils {
     fun fingerPrint(
         context: FragmentActivity,
         actionFailed: (String) -> Unit,
-        actionSuccess: () -> Unit
+        actionSuccess: () -> Unit,
     ) {
         val executor = ContextCompat.getMainExecutor(context)
         val biometricPrompt =
@@ -134,6 +130,11 @@ object Utils {
             .build()
 
         biometricPrompt.authenticate(promptInfo)
+    }
+
+    fun currentDayOfWeek(): Int {
+        val c: Calendar = Calendar.getInstance()
+        return c.get(Calendar.DAY_OF_WEEK)
     }
 
 }

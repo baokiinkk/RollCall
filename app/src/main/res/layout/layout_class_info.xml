@@ -79,23 +79,6 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_timeCheckIn_title"
             app:layout_constraintStart_toEndOf="@id/tv_timeCheckIn_title" />
 
-        <ImageView
-            android:id="@+id/iv_qrCode"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="@dimen/_10dp"
-            android:layout_marginEnd="@dimen/_46dp"
-            android:src="@drawable/ic_nav_qr_checkin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

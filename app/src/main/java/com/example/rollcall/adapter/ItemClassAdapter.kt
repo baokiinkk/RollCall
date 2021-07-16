@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rollcall.data.model.DataClass
 import com.example.rollcall.databinding.ItemClassBinding
+import com.example.rollcall.utils.Utils
 
 class ItemClassAdapter(private val onClick: (DataClass) -> Unit) :
     ListAdapter<DataClass, ItemClassAdapter.ViewHolder>(
@@ -25,14 +26,13 @@ class ItemClassAdapter(private val onClick: (DataClass) -> Unit) :
         }
 
         fun bind(item: DataClass, onClick: ((DataClass) -> Unit)? = null) {
-            binding.data = item
-            itemView.setOnClickListener {
-                if (onClick != null) {
-                    onClick(item)
+                binding.data = item
+                itemView.setOnClickListener {
+                    if (onClick != null) {
+                        onClick(item)
+                    }
                 }
-            }
-            binding.executePendingBindings()
-
+                binding.executePendingBindings()
         }
 
     }
