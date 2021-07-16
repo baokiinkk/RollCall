@@ -2,6 +2,8 @@ package com.example.rollcall.ui.teacher.listclassess
 
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.adapter.ItemClassAdapter
@@ -38,7 +40,7 @@ class ListClassesOfTeacherFragment : BaseFragment<FragmentListClassesOfTeacherBi
                 putString(Utils.TOKEN, token)
                 putSerializable(Utils.CLASS, it)
             }
-            Utils.gotoFragment(requireActivity(), fragment)
+            setCurrentFragment(requireActivity(), fragment)
         }
         baseBinding.apply {
             viewmodel = viewModel
@@ -56,6 +58,13 @@ class ListClassesOfTeacherFragment : BaseFragment<FragmentListClassesOfTeacherBi
         })
     }
 
+    private fun setCurrentFragment(activity: FragmentActivity, fragment: Fragment) {
+        activity.supportFragmentManager.beginTransaction()
+            .replace(R.id.fragContainer, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     private fun getArgument() {
         token = arguments?.getString(Utils.TOKEN)
         user = arguments?.getSerializable(Utils.USER) as User?
@@ -63,5 +72,10 @@ class ListClassesOfTeacherFragment : BaseFragment<FragmentListClassesOfTeacherBi
     }
 
     private fun clickView() {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setup()
     }
 }
