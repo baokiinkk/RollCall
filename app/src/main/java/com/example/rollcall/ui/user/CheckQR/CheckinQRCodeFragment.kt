@@ -1,11 +1,13 @@
 package com.example.rollcall.ui.user.CheckQR
 
 import android.Manifest
+import android.util.Log
 import android.view.View
 import android.view.animation.TranslateAnimation
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
+import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.FragmentCheckinQrcodeBinding
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
@@ -27,20 +29,18 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
     }
     //-------------------------------- Variable ----------------------------------------
     val viewModel by viewModels<CheckinQRCodeViewModel>()
+    private var token: String? = null
+    private var user: User? = null
+    private var idReport: String? = null
 
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
         checkPermission()
-        setup()
+        getArgument()
         setEvent()
     }
 
     //-------------------------------- Func ----------------------------------------
-    private fun setup() {
-        baseBinding.apply {
-//            viewmodel = viewModel
-        }
-    }
 
     private fun checkPermission() {
         Dexter.withActivity(requireActivity()).withPermission(Manifest.permission.CAMERA)
@@ -52,7 +52,7 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
 
                 override fun onPermissionDenied(response: PermissionDeniedResponse) {
                     Toast.makeText(requireContext(),
-                        "You must enable this permission",
+                        "Bạn cần cấp quyền truy cập Camera",
                         Toast.LENGTH_SHORT).show()
                 }
 
@@ -62,6 +62,10 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
                 ) {
                 }
             }).check()
+    }
+    private fun getArgument() {
+        token = arguments?.getString(Utils.TOKEN)
+        user = arguments?.getSerializable(Utils.USER) as User?
     }
 
     private fun setEvent() {
@@ -84,36 +88,50 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
         translateAnimation.fillAfter = true
         view.startAnimation(translateAnimation)
         view.visibility = View.GONE
+
     }
 
     override fun handleResult(rawResult: Result?) {
         val scanResult = rawResult!!.text
-        baseBinding.tvResult.text = scanResult
-        slideUp(baseBinding.layoutBottomCheckinResult)
-    }
+        token?.let { viewModel.checkin(it,scanResult) }
+        viewModel.result.observe(viewLifecycleOwner,{
+            Log.e("result ", it.toString())
+            if (it?.status != null) {
+                    baseBinding.tvResult.text = it.status
+            } else {
+                baseBinding.tvResult.text = it?.message ?: resources.getString(R.string.request_fail)
+            }
+            slideUp(baseBinding.layoutBottomCheckinResult)
+        })
 
-    override fun onResume() {
-        super.onResume()
-        baseBinding.scanQr.resumeCameraPreview(this@CheckinQRCodeFragment)
-        baseBinding.scanQr.startCamera()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        baseBinding.scanQr.stopCamera()
     }
 
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.tv_result -> {
+
+                slideDown(baseBinding.layoutBottomCheckinResult)
                 Utils.fingerPrint(requireActivity(), {
                     Toast.makeText(requireContext(), "fail!", Toast.LENGTH_SHORT).show()
                 }) {
 
                     Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
                 }
-                slideDown(baseBinding.layoutBottomCheckinResult)
+                // continue
+                baseBinding.scanQr.resumeCameraPreview(this@CheckinQRCodeFragment)
+                baseBinding.scanQr.startCamera()
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        baseBinding.scanQr.stopCamera()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        baseBinding.scanQr.resumeCameraPreview(this@CheckinQRCodeFragment)
+        baseBinding.scanQr.startCamera()
     }
 }

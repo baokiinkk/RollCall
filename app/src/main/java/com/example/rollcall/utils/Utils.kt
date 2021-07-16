@@ -4,6 +4,8 @@ package com.example.rollcall.utils
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
+import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
@@ -19,7 +21,6 @@ import com.example.rollcall.ui.admin.home.HomeAdminFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
-import java.util.*
 
 
 object Utils {
@@ -124,17 +125,35 @@ object Utils {
                 }
             })
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Xác thực vân tay cho ứng dụng của bạn")
-            .setSubtitle("Vui lòng quét dấu vân tay của bạn")
-            .setNegativeButtonText("HỦY BỎ")
+            .setTitle("Xác thực Ứng dụng")
+            .setDeviceCredentialAllowed(true)
             .build()
+        if (isBioMetricSupported(context)) {
+            biometricPrompt.authenticate(promptInfo)
+        } else {
+            Toast.makeText(context, "Thiết bị không được hỗ trợ vân tay", Toast.LENGTH_LONG).show()
+        }
 
-        biometricPrompt.authenticate(promptInfo)
     }
 
-    fun currentDayOfWeek(): Int {
-        val c: Calendar = Calendar.getInstance()
-        return c.get(Calendar.DAY_OF_WEEK)
+    private fun isBioMetricSupported(context: FragmentActivity): Boolean {
+        val biometricManager = BiometricManager.from(context)
+        return when (biometricManager.canAuthenticate()) {
+            // success
+            BiometricManager.BIOMETRIC_SUCCESS -> {
+                true
+            }
+            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
+                false
+            }
+            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
+                false
+            }
+            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
+                false
+            }
+            else -> false
+        }
     }
 
 }
