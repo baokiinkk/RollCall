@@ -1,18 +1,26 @@
 package com.example.rollcall.ui.teacher.listclassess.ClassInfo
 
+import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import androidx.fragment.app.viewModels
+import androidx.core.widget.doOnTextChanged
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.rollcall.R
-import com.example.rollcall.adapter.ItemClassAdapter
 import com.example.rollcall.adapter.ItemUserAdapter
+import com.example.rollcall.adapter.SelectItemUserAdapter
 import com.example.rollcall.data.model.DataClass
+import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.FragmentClassInfoBinding
+import com.example.rollcall.ui.admin.createuser.CreateUserFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Singleton
 
 @AndroidEntryPoint
 class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>(), View.OnClickListener {
@@ -61,13 +69,53 @@ class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>(), View.OnClick
 
     private fun clickView() {
         baseBinding.layoutHeader.findViewById<TextView>(R.id.btnBack).setOnClickListener(this)
+        baseBinding.btnCreateReport.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.btnBack -> {
-                requireActivity().supportFragmentManager.popBackStack()
+                requireActivity().onBackPressed()
+            }
+            R.id.btn_create_report -> {
+                val fragment = CreateUserFragment()
+                fragment.arguments = Bundle().apply {
+                    putString(Utils.TOKEN, token)
+                    putString(Utils.USER, user)
+                }
+                Utils.gotoFragment(requireActivity(), fragment)
+            }
             }
         }
+    }
+
+    private fun openBottomSheet(
+        context: Context,
+        layoutInflater: LayoutInflater,
+        data: MutableList<User>,
+        adapterTeacher: ItemUserAdapter? = null,
+        adapterStudent: SelectItemUserAdapter? = null,
+        idClass: String? = null,
+    ): BottomSheetDialog {
+        val sheetDialog = BottomSheetDialog(context, R.style.SheetDialog)
+        val viewDialog: View = layoutInflater.inflate(R.layout.user_dialog, null)
+        val textLayout = viewDialog.findViewById<TextInputLayout>(R.id.edtSearch)
+        viewDialog.findViewById<RecyclerView>(R.id.recyclerViewUserDialog).apply {
+            adapter = adapterStudent ?: adapterTeacher
+            layoutManager = GridLayoutManager(context, 1)
+        }
+        textLayout.apply {
+            editText?.doOnTextChanged { inputText, _, _, _ ->
+                adapterStudent?.filter(inputText, data)
+                adapterTeacher?.filter(inputText, data)
+            }
+            idClass?.let {
+                editText?.setText(it)
+            }
+        }
+        adapterTeacher?.submitList(data)
+
+        sheetDialog.setContentView(viewDialog)
+        return sheetDialog
     }
 }
