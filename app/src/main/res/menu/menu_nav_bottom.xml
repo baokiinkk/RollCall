@@ -7,7 +7,7 @@
     <item
         android:id="@+id/navInfo"
         android:title="@string/label_info_user"
-        android:icon="@drawable/ic_nav_dash_board"/>
+        android:icon="@drawable/ic_nav_person_24"/>
     <item
         android:id="@+id/navQR"
         android:title="@string/label_qr_checkin"
