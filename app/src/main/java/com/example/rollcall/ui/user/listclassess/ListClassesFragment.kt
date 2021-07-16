@@ -9,7 +9,7 @@ import com.example.rollcall.R
 import com.example.rollcall.adapter.ItemClassAdapter
 import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.FragmentListClassesBinding
-import com.example.rollcall.ui.user.listclassess.ClassInfo.ClassInfoFragment
+import com.example.rollcall.ui.user.listclassess.classInfo.ClassInfoFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +39,7 @@ class ListClassesFragment : BaseFragment<FragmentListClassesBinding>() {
             fragment.arguments = Bundle().apply {
                 putString(Utils.TOKEN, token)
                 putSerializable(Utils.CLASS, it)
+                putSerializable(Utils.USER, user)
             }
             setCurrentFragment(requireActivity(), fragment)
         }

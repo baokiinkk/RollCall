@@ -7,7 +7,9 @@ import android.view.animation.TranslateAnimation
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
+import com.example.rollcall.data.model.Report
 import com.example.rollcall.data.model.User
+import com.example.rollcall.data.model.UserId
 import com.example.rollcall.databinding.FragmentCheckinQrcodeBinding
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
@@ -31,7 +33,7 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
     val viewModel by viewModels<CheckinQRCodeViewModel>()
     private var token: String? = null
     private var user: User? = null
-    private var idReport: String? = null
+    private var report: Report? = null
 
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
@@ -66,6 +68,7 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
     private fun getArgument() {
         token = arguments?.getString(Utils.TOKEN)
         user = arguments?.getSerializable(Utils.USER) as User?
+        report = arguments?.getSerializable(Utils.REPORT) as Report?
     }
 
     private fun setEvent() {
@@ -93,7 +96,13 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
 
     override fun handleResult(rawResult: Result?) {
         val scanResult = rawResult!!.text
-        token?.let { viewModel.checkin(it,scanResult) }
+        val userId = UserId(scanResult)
+        if(user?.role == "teacher") {
+            token?.let { viewModel.checkinByTeacher(it,report?.id, userId) }
+        } else {
+
+            token?.let { viewModel.checkin(it,scanResult) }
+        }
         viewModel.result.observe(viewLifecycleOwner,{
             Log.e("result ", it.toString())
             if (it?.status != null) {

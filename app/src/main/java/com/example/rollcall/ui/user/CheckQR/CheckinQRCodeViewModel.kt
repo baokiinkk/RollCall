@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rollcall.data.model.Message
 import com.example.rollcall.data.model.User
+import com.example.rollcall.data.model.UserId
 import com.example.rollcall.data.model.Users
 import com.example.rollcall.data.respository.user.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,10 +26,10 @@ class CheckinQRCodeViewModel @Inject constructor(private val repo: UserRepositor
         }
     }
 
-    fun checkinByTeacher(token: String, id: String?, user: User) {
+    fun checkinByTeacher(token: String, id: String?, userId: UserId) {
         viewModelScope.launch(Dispatchers.IO) {
             result.postValue(
-                id?.let { repo.checkinByTeacher(token, it, user) })
+                id?.let { repo.checkinByTeacher(token, it, userId) })
         }
     }
 }

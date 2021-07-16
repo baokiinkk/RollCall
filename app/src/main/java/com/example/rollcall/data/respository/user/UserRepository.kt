@@ -1,9 +1,6 @@
 package com.example.rollcall.data.respository.user
 
-import com.example.rollcall.data.model.Class
-import com.example.rollcall.data.model.Message
-import com.example.rollcall.data.model.User
-import com.example.rollcall.data.model.Users
+import com.example.rollcall.data.model.*
 
 import javax.inject.Singleton
 
@@ -22,7 +19,7 @@ interface UserRepository {
     ): Users
 
     suspend fun logOut(token: String): Users
-    suspend fun createReport(id:String,data:ReportBody, token: String): DataReport
+    suspend fun createReport(id:String, data: ReportBody, token: String): DataReport
     suspend fun getReportStatus(id:String,date:String,token: String):DataReport
     suspend fun getReport(id: String,token: String):DataReport
 
@@ -34,6 +31,10 @@ interface UserRepository {
     suspend fun checkinByTeacher(
         token: String,
         id: String,
-        user: User
+        userId: UserId
+    ): Message
+
+    suspend fun downLoadReport(
+        id: String
     ): Message
 }

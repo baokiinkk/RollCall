@@ -26,7 +26,6 @@ class HomeUserFragment : BaseFragment<FragmentHomeUserBinding>() {
     private var token: String? = null
     private var user: User? = null
     private val fragListClass = ListClassesFragment()
-    private val fragQRScan = CheckinQRCodeFragment()
     private val fragInfo = InfoUserFragment()
 
     //-------------------------------- createView ----------------------------------------
@@ -68,11 +67,6 @@ class HomeUserFragment : BaseFragment<FragmentHomeUserBinding>() {
 
             R.id.navInfo -> {
                 setCurrentFragment(requireActivity(),fragInfo)
-                true
-            }
-
-            R.id.navQR -> {
-                setCurrentFragment(requireActivity(),fragQRScan)
                 true
             }
 

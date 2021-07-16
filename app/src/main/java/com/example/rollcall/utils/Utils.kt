@@ -30,8 +30,10 @@ object Utils {
     const val STUDENT = "student"
     const val TEACHER = "teacher"
     const val CLASS = "class"
+    const val REPORT = "report"
     const val CREATESUCCESS = "Tạo thành công"
     const val ERROREMPTY = "không được phép rỗng!"
+    const val BASE_URL = "https://tncnhan.codes/api/reports/"
 
     fun gotoFragment(activity: FragmentActivity, fragment: Fragment, isAnim: Boolean = true) {
         activity.supportFragmentManager.beginTransaction().apply {
@@ -44,7 +46,7 @@ object Utils {
                 )
         }
             .replace(R.id.container, fragment)
-            .addToBackStack(HomeAdminFragment::class.java.simpleName)
+            .addToBackStack(null)
             .commit()
     }
 

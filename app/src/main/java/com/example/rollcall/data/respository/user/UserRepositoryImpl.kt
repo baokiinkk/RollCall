@@ -1,10 +1,7 @@
 package com.example.rollcall.data.respository.user
 
 import com.example.rollcall.data.api.ApiService
-import com.example.rollcall.data.model.Class
-import com.example.rollcall.data.model.Message
-import com.example.rollcall.data.model.User
-import com.example.rollcall.data.model.Users
+import com.example.rollcall.data.model.*
 import com.example.rollcall.data.respository.user.UserRepository
 import com.google.gson.Gson
 import retrofit2.HttpException
@@ -35,7 +32,7 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiService)
 
         }
 
-    override suspend fun createReport(id: String,data: ReportBody, token: String): DataReport =
+    override suspend fun createReport(id: String, data: ReportBody, token: String): DataReport =
         try {
             apiService.postReport(id,data, token)
         } catch (cause: HttpException) {
@@ -65,10 +62,17 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiService)
             Gson().fromJson(cause.response()?.errorBody()?.string(),Message::class.java)
         }
 
-    override suspend fun checkinByTeacher(token: String, id: String, user: User): Message =
+    override suspend fun checkinByTeacher(token: String, id: String, userId: UserId): Message =
         try {
-            apiService.checkinByTeacher(token, id, user)
+            apiService.checkinByTeacher(token, id, userId)
         } catch (cause: HttpException) {
             Gson().fromJson(cause.response()?.errorBody()?.string(),Message::class.java)
         }
+
+    override suspend fun downLoadReport(id: String): Message =
+        try {
+        apiService.downLoadReport(id)
+    } catch (cause: HttpException) {
+        Gson().fromJson(cause.response()?.errorBody()?.string(),Message::class.java)
+    }
 }
