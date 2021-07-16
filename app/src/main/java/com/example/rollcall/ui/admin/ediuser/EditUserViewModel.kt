@@ -3,6 +3,7 @@ package com.example.rollcall.ui.admin.ediuser
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.rollcall.R
 import com.example.rollcall.data.model.User
 import com.example.rollcall.data.model.Users
 import com.example.rollcall.data.respository.admin.AdminRepository
@@ -21,7 +22,7 @@ class EditUserViewModel@Inject constructor(private val repo: AdminRepository) :V
     var password:String = ""
     val users: MutableLiveData<Users?> = MutableLiveData(null)
     val isDelete: MutableLiveData<Users?> = MutableLiveData(null)
-
+    val img = R.drawable.edit
     fun editUser(token: String){
         val user = User(id,name,email,password = password)
         viewModelScope.launch(Dispatchers.IO){
