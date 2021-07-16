@@ -1,8 +1,13 @@
 package com.example.rollcall.ui.teacher.listclassess
 
+import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
+import com.example.rollcall.adapter.ItemClassAdapter
+import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.FragmentListClassesOfTeacherBinding
+import com.example.rollcall.ui.teacher.listclassess.ClassInfo.ClassInfoFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,26 +22,44 @@ class ListClassesOfTeacherFragment : BaseFragment<FragmentListClassesOfTeacherBi
     //-------------------------------- Variable ----------------------------------------
     val viewModel: ListClassesOfTeacherViewModel by viewModels()
     private var token: String? = null
-    private var user: String? = null
+    private var user: User? = null
 
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
-        setup()
         getArgument()
+        setup()
         clickView()
     }
     //-------------------------------- Func ----------------------------------------
     private fun setup() {
+        val itemClassAdapter = ItemClassAdapter {
+            val fragment = ClassInfoFragment()
+            fragment.arguments = Bundle().apply {
+                putString(Utils.TOKEN, token)
+                putSerializable(Utils.CLASS, it)
+            }
+            Utils.gotoFragment(requireActivity(), fragment)
+        }
         baseBinding.apply {
-//            viewmodel = viewModel
+            viewmodel = viewModel
+            adapter = itemClassAdapter
         }
 
         // observe list class
+        token?.let { user?.let { it1 -> viewModel.getListClassTeacher(it, it1.id) } }
+        viewModel.classes.observe(viewLifecycleOwner, {
+            it?.let {
+                Log.i("class", it.data.toString())
+                itemClassAdapter.submitList(it.data)
+
+            }
+        })
     }
 
     private fun getArgument() {
         token = arguments?.getString(Utils.TOKEN)
-        user = arguments?.getString(Utils.USER)
+        user = arguments?.getSerializable(Utils.USER) as User?
+        Log.d("token", token + " " + user.toString())
     }
 
     private fun clickView() {

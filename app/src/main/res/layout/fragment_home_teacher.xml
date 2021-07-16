@@ -18,6 +18,7 @@
             android:layout_height="match_parent"
             tools:context=".ui.teacher.home.HomeTeacherFragment">
 
+
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragContainer"
                 android:layout_width="match_parent"
@@ -31,6 +32,7 @@
                 android:id="@+id/bottomNavMain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_46dp"
                 android:background="@drawable/bg_solid_white_line_top"
                 android:theme="@style/BottomNavigationMenu"
                 app:itemTextAppearanceActive="@style/BottomNavigationMenu"

@@ -128,24 +128,12 @@ object Utils {
                 }
             })
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Biometric login for my app")
-            .setSubtitle("Log in using your biometric credential")
-            .setNegativeButtonText("Use account password")
+            .setTitle("Xác thực vân tay cho ứng dụng của bạn")
+            .setSubtitle("Vui lòng quét dấu vân tay của bạn")
+            .setNegativeButtonText("HỦY BỎ")
             .build()
 
         biometricPrompt.authenticate(promptInfo)
-    }
-
-    private fun verfiyingBioMetricExistence(context: Activity) {
-//        val biometricManager = BiometricManager.from(context)
-//        when (biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)) {
-//            BiometricManager.BIOMETRIC_SUCCESS ->
-//                Log.d("MY_APP_TAG", "App can authenticate using biometrics.")
-//            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE ->
-//                Log.e("MY_APP_TAG", "No biometric features available on this device.")
-//            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE ->
-//                Log.e("MY_APP_TAG", "Biometric features are currently unavailable.")
-//        }
     }
 
 }

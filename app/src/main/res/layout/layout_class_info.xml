@@ -2,15 +2,19 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_16dp"
+    android:layout_marginEnd="@dimen/_16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        android:paddingStart="@dimen/_10dp"
+        android:paddingBottom="@dimen/_10dp">
         <TextView
             android:id="@+id/tv_classID_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10dp"
             android:text="@string/ClassID"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -79,10 +83,19 @@
             android:id="@+id/iv_qrCode"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ic_image_fail"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginEnd="@dimen/_46dp"
+            android:src="@drawable/ic_nav_qr_checkin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

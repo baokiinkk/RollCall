@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.teacher.CheckQR.CheckinQRCodeFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <!--<variable
+            name="viewmodel"
+            type="com.example.rollcall.ui.teacher.CheckQR.CheckinQRCodeViewModel" />-->
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="coming soon" />
+        tools:context=".ui.teacher.CheckQR.CheckinQRCodeFragment">
+        <me.dm7.barcodescanner.zxing.ZXingScannerView
+            android:id="@+id/scan_Qr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-</FrameLayout>
+        <FrameLayout
+            android:id="@+id/layout_bottom_checkin_result"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:visibility="gone"
+            android:animateLayoutChanges="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <ProgressBar
+                android:id="@+id/pb_loading_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N17DCCN066 - pass"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textSize="18sp"
+                app:drawableEndCompat="@drawable/ic_bottom_sheet_close" />
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -18,36 +18,36 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_studentId"
+                android:id="@+id/tv_classId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:textAlignment="textStart"
-                android:text="N17DCCN066"
+                android:text="INT123456"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_studentName"
+                android:id="@+id/tv_className"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:text="Nguyễn Đức Khải"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_studentId"
-                app:layout_constraintEnd_toStartOf="@id/tv_status"
-                app:layout_constraintStart_toEndOf="@id/tv_studentId" />
+                android:text="HDV"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_classId"
+                app:layout_constraintEnd_toStartOf="@id/tv_classSize"
+                app:layout_constraintStart_toEndOf="@id/tv_classId" />
 
             <TextView
-                android:id="@+id/tv_status"
+                android:id="@+id/tv_classSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:textAlignment="textEnd"
                 android:text="pass"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_studentName"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_className"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tv_studentName" />
+                app:layout_constraintStart_toEndOf="@id/tv_className" />
             <View
                 android:id="@+id/view"
                 android:layout_width="0dp"
@@ -57,7 +57,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_status"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_classSize"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

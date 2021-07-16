@@ -4,64 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="adapter"
+            type="com.example.rollcall.adapter.ItemUserAdapter" />
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
-        <include
-            android:id="@+id/layout_classInfo"
-            layout="@layout/layout_class_info"/>
+        android:layout_height="match_parent">
+
         <LinearLayout
-            android:id="@+id/list_student_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_classInfo">
-
-            <TextView
-                android:id="@+id/tv_studentID"
-                android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/_36dp"
+            android:paddingBottom="@dimen/_16dp"
+            android:orientation="vertical">
+            <include
+                android:id="@+id/layout_header"
+                layout="@layout/layout_header"/>
+            <include
+                android:id="@+id/layout_classInfo"
+                layout="@layout/layout_class_info" />
+            <LinearLayout
+                android:id="@+id/list_student_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:padding="10dp"
-                android:text="Mã sinh viên"
-                android:textAlignment="center" />
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/_16dp"
+                android:layout_marginEnd="@dimen/_16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_classInfo">
 
-            <TextView
-                android:id="@+id/tv_studentName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="15"
-                android:padding="10dp"
-                android:text="Tên sinh viên"
-                android:textAlignment="center" />
+                <TextView
+                    android:id="@+id/tv_list_student_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="10dp"
+                    android:text="Danh sách sinh viên"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textAlignment="center" />
 
-            <TextView
-                android:id="@+id/tv_status"
-                android:layout_width="wrap_content"
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_classes"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:padding="10dp"
-                android:text="Trạng thái"
-                android:textAlignment="center" />
+                android:layout_marginTop="@dimen/_16dp"
+                android:layout_marginStart="@dimen/_16dp"
+                android:layout_marginEnd="@dimen/_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/list_student_title"
+                android:adapter="@{adapter}"/>
 
         </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_classes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/list_student_title"
-            tools:listitem="@layout/item_student" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>
