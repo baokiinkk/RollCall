@@ -1,13 +1,12 @@
 package com.example.rollcall.data.respository.admin
 
-import android.util.Log
 import com.example.rollcall.data.api.ApiService
 import com.example.rollcall.data.model.*
 import com.google.gson.Gson
 import retrofit2.HttpException
 import javax.inject.Inject
 
-class AdminRepositoryImpl @Inject constructor(val apiService: ApiService) : AdminRepository {
+class AdminRepositoryImpl @Inject constructor(private val apiService: ApiService) : AdminRepository {
 
     //------------------------ Users --------------------------------------
     override suspend fun login(login: LoginUser): Users =
@@ -54,7 +53,6 @@ class AdminRepositoryImpl @Inject constructor(val apiService: ApiService) : Admi
 
     override suspend fun editPasswordUser(tokenAdmin: String, user: User): Users =
         try {
-            Log.d("quocbao",user.toString())
             apiService.editPasswordUser(tokenAdmin,user.id,user)
         } catch (cause: HttpException) {
             Gson().fromJson(cause.response()?.errorBody()?.string(),Users::class.java)

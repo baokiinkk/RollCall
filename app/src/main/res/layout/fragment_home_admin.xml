@@ -16,14 +16,23 @@
         android:layout_height="match_parent"
         >
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:loadImage="@{viewmodel.img}"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewStudent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="10dp"
+            app:cardBackgroundColor="#80FBFBFB"
             app:cardCornerRadius="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:text="Hinh"
+                    android:drawableStart="@drawable/ic_students"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -76,18 +85,19 @@
             android:id="@+id/cardViewTeacher"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             app:cardCornerRadius="5dp"
+            app:cardBackgroundColor="#80FBFBFB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardViewStudent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
 
                 <TextView
                     android:id="@+id/txtNameTeacher"
@@ -119,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:text="Hinh"
+                    android:drawableStart="@drawable/ic_teacher"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -132,18 +142,19 @@
             android:id="@+id/cardViewClass"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             app:cardCornerRadius="5dp"
+            app:cardBackgroundColor="#80FBFBFB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardViewTeacher">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
 
                 <TextView
                     android:id="@+id/txtNameClass"
@@ -165,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:text="Số lượng lớp"
+                    android:text="Số lượng lớp học"
                     android:textColor="#000"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -175,7 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:text="Hinh"
+                    android:drawableStart="@drawable/ic_classes"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

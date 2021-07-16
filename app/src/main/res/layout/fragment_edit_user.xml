@@ -88,7 +88,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="30dp"
-            android:hint="Nhập Mã số sinh viên"
+            android:hint="Nhập Mã Số "
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -97,8 +97,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewmodel.id}"
                 android:focusable="false"
+                android:text="@={viewmodel.id}"
                 app:endIconMode="clear_text" />
         </com.google.android.material.textfield.TextInputLayout>
 

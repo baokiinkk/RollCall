@@ -108,11 +108,23 @@
            android:textAllCaps="false"
            android:textColor="#fff"
            android:textSize="20sp"
-           app:defaultColor="#FA3E7E"
+           app:defaultColor="#B3FA3E7E"
            app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="@+id/edtPassword"
            app:layout_constraintStart_toStartOf="@+id/edtPassword"
            app:loaderColor="#fff" />
+
+       <ImageView
+           android:id="@+id/imageView2"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:scaleType="centerCrop"
+           android:loadImage="@{viewmodel.logo}"
+           app:layout_constraintBottom_toTopOf="@+id/edtEmail"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="@+id/imageView"
+           tools:srcCompat="@tools:sample/avatars" />
 
    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -15,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel@Inject constructor(private val repo: AdminRepository):ViewModel() {
-    val img = R.drawable.brlogin
+    val img = R.drawable.loginscreen
+    val logo = R.drawable.logoptit
     var email = ""
     var password = ""
     var user:MutableLiveData<Users?> = MutableLiveData(null)
