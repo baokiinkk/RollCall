@@ -33,7 +33,7 @@
         android:layout_marginTop="@dimen/_10dp"
         android:text="cho phép trễ"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutTitle" />
+        app:layout_constraintTop_toBottomOf="@id/picker_pickTime"/>
 
 
     <TextView
@@ -45,18 +45,19 @@
         android:text="Thời gian điểm danh"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_allow_late" />
+        app:layout_constraintTop_toBottomOf="@id/layoutTitle" />
 
-    <NumberPicker
-        android:id="@+id/NumPicker_pickTime"
+    <TimePicker
+        android:id="@+id/picker_pickTime"
         android:layout_width="210dp"
         android:layout_height="150dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:clickable="false"
         android:focusable="false"
+        android:timePickerMode="spinner"
         app:layout_constraintStart_toEndOf="@id/tv_pickTime"
-        app:layout_constraintTop_toBottomOf="@id/tv_allow_late" />
+        app:layout_constraintTop_toBottomOf="@id/layoutTitle" />
 
     <com.royrodriguez.transitionbutton.TransitionButton
         android:id="@+id/button_confirm"
@@ -72,7 +73,7 @@
         android:theme="@style/ButtonDefaultNormal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/NumPicker_pickTime"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_allow_late"/>
 
     <ImageView
         android:id="@+id/imageViewClose"

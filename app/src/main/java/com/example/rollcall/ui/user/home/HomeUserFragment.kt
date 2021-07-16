@@ -1,37 +1,28 @@
-package com.example.rollcall.ui.teacher.home
+package com.example.rollcall.ui.user.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.data.model.User
-import com.example.rollcall.databinding.FragmentClassInfoBinding
-import com.example.rollcall.databinding.FragmentHomeTeacherBinding
-import com.example.rollcall.ui.admin.home.HomeAdminFragment
-import com.example.rollcall.ui.admin.home.HomeAdminViewModel
-import com.example.rollcall.ui.teacher.CheckQR.CheckinQRCodeFragment
-import com.example.rollcall.ui.teacher.DashBoard.DashBoardClassFragment
-import com.example.rollcall.ui.teacher.listclassess.ListClassesOfTeacherFragment
+import com.example.rollcall.databinding.FragmentHomeUserBinding
+import com.example.rollcall.ui.user.CheckQR.CheckinQRCodeFragment
+import com.example.rollcall.ui.user.DashBoard.DashBoardClassFragment
+import com.example.rollcall.ui.user.listclassess.ListClassesOfTeacherFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
-import com.example.rollcall.utils.Utils.fingerPrint
-import com.example.rollcall.utils.Utils.gotoFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeTeacherFragment : BaseFragment<FragmentHomeTeacherBinding>() {
+class HomeUserFragment : BaseFragment<FragmentHomeUserBinding>() {
 
     override fun getLayoutRes(): Int {
-        return R.layout.fragment_home_teacher
+        return R.layout.fragment_home_user
     }
     //-------------------------------- Variable ----------------------------------------
-    val viewModel by viewModels<HomeTeacherViewModel>()
+    val viewModel by viewModels<HomeUserViewModel>()
     private var token: String? = null
     private var user: User? = null
     private val fragListClass = ListClassesOfTeacherFragment()
@@ -51,7 +42,7 @@ class HomeTeacherFragment : BaseFragment<FragmentHomeTeacherBinding>() {
         baseBinding.apply {
             viewmodel = viewModel
         }
-        setCurrentFragment(requireActivity(),fragListClass)
+        setCurrentFragment(requireActivity(),fragDashBoard)
     }
 
     private fun getData() {

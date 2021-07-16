@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.teacher.CheckQR.CheckinQRCodeFragment">
+        tools:context=".ui.user.CheckQR.CheckinQRCodeFragment">
         <me.dm7.barcodescanner.zxing.ZXingScannerView
             android:id="@+id/scan_Qr"
             android:layout_width="match_parent"

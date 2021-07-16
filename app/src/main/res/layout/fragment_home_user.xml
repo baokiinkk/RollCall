@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.rollcall.ui.teacher.home.HomeTeacherViewModel" />
+            type="com.example.rollcall.ui.user.home.HomeUserViewModel" />
 
     </data>
     <FrameLayout
@@ -16,9 +16,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.teacher.home.HomeTeacherFragment">
-
-
+            tools:context=".ui.user.home.HomeUserFragment">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:loadImage="@{viewmodel.img}"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragContainer"
                 android:layout_width="match_parent"
