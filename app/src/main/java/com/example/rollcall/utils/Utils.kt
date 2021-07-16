@@ -36,8 +36,16 @@ object Utils {
     const val CREATESUCCESS = "Tạo thành công"
     const val ERROREMPTY = "không được phép rỗng!"
 
-    fun gotoFragment(activity: FragmentActivity, fragment: Fragment) {
-        activity.supportFragmentManager.beginTransaction()
+    fun gotoFragment(activity: FragmentActivity, fragment: Fragment, isAnim: Boolean = true) {
+        activity.supportFragmentManager.beginTransaction().apply {
+            if (isAnim)
+                setCustomAnimations(
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left,
+                    android.R.anim.fade_in,
+                    android.R.anim.slide_out_right
+                )
+        }
             .replace(R.id.container, fragment)
             .addToBackStack(HomeAdminFragment::class.java.simpleName)
             .commit()

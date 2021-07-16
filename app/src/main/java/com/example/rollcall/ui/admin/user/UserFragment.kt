@@ -13,6 +13,7 @@ import com.example.rollcall.ui.admin.ediuser.EditUserFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.CLASS
+import com.example.rollcall.utils.Utils.STUDENT
 import com.example.rollcall.utils.Utils.TEACHER
 import com.example.rollcall.utils.Utils.TOKEN
 import com.example.rollcall.utils.Utils.USER
@@ -58,6 +59,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
         }
         viewModel.apply {
             user?.let { user ->
+                title = if(user == STUDENT) "Sinh Viên" else "Giảng Viên"
                 token?.let { token ->
                     getUsers(token, user)
                 }
