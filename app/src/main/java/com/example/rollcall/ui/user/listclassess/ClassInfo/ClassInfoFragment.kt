@@ -82,47 +82,9 @@ class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>(), View.OnClick
                 dialog = openBottomSheet(requireContext(), layoutInflater)
                 dialog.show()
             }
-            R.id.btn_create_report -> {
-                val fragment = CreateUserFragment()
-                fragment.arguments = Bundle().apply {
-                    putString(Utils.TOKEN, token)
-                    putString(Utils.USER, user)
-                }
-                Utils.gotoFragment(requireActivity(), fragment)
-            }
-            }
         }
     }
 
-    private fun openBottomSheet(
-        context: Context,
-        layoutInflater: LayoutInflater,
-        data: MutableList<User>,
-        adapterTeacher: ItemUserAdapter? = null,
-        adapterStudent: SelectItemUserAdapter? = null,
-        idClass: String? = null,
-    ): BottomSheetDialog {
-        val sheetDialog = BottomSheetDialog(context, R.style.SheetDialog)
-        val viewDialog: View = layoutInflater.inflate(R.layout.user_dialog, null)
-        val textLayout = viewDialog.findViewById<TextInputLayout>(R.id.edtSearch)
-        viewDialog.findViewById<RecyclerView>(R.id.recyclerViewUserDialog).apply {
-            adapter = adapterStudent ?: adapterTeacher
-            layoutManager = GridLayoutManager(context, 1)
-        }
-        textLayout.apply {
-            editText?.doOnTextChanged { inputText, _, _, _ ->
-                adapterStudent?.filter(inputText, data)
-                adapterTeacher?.filter(inputText, data)
-            }
-            idClass?.let {
-                editText?.setText(it)
-            }
-        }
-        adapterTeacher?.submitList(data)
-
-        sheetDialog.setContentView(viewDialog)
-        return sheetDialog
-    }
 
     private fun openBottomSheet(
         context: Context,

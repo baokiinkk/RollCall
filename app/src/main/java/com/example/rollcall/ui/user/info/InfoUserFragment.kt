@@ -1,4 +1,4 @@
-package com.example.rollcall.ui.teacher.info
+package com.example.rollcall.ui.user.info
 
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
 
     override fun getLayoutRes(): Int {
-        return R.layout.fragment_home_teacher
+        return R.layout.fragment_info_user
     }
     //-------------------------------- Variable ----------------------------------------
     val viewModel by viewModels<InfoUserViewModel>()

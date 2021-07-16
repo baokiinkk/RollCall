@@ -9,7 +9,7 @@ import com.example.rollcall.R
 import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.FragmentHomeUserBinding
 import com.example.rollcall.ui.user.CheckQR.CheckinQRCodeFragment
-import com.example.rollcall.ui.user.DashBoard.DashBoardClassFragment
+import com.example.rollcall.ui.user.info.InfoUserFragment
 import com.example.rollcall.ui.user.listclassess.ListClassesOfTeacherFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
@@ -27,6 +27,7 @@ class HomeUserFragment : BaseFragment<FragmentHomeUserBinding>() {
     private var user: User? = null
     private val fragListClass = ListClassesOfTeacherFragment()
     private val fragQRScan = CheckinQRCodeFragment()
+    private val fragInfo = InfoUserFragment()
 
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
@@ -41,7 +42,7 @@ class HomeUserFragment : BaseFragment<FragmentHomeUserBinding>() {
         baseBinding.apply {
             viewmodel = viewModel
         }
-        setCurrentFragment(requireActivity(),fragDashBoard)
+        setCurrentFragment(requireActivity(),fragInfo)
     }
 
     private fun getData() {
@@ -68,8 +69,8 @@ class HomeUserFragment : BaseFragment<FragmentHomeUserBinding>() {
                 true
             }
 
-            R.id.navDashBoard -> {
-                setCurrentFragment(requireActivity(),InfoUserFragment())
+            R.id.navInfo -> {
+                setCurrentFragment(requireActivity(),fragInfo)
                 true
             }
 
