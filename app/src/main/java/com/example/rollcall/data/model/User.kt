@@ -2,7 +2,6 @@ package com.example.rollcall.data.model
 
 import java.io.Serializable
 
-
 data class LoginUser(val id: String, val password: String)
 data class Users(
     val count: String? = null,
@@ -18,6 +17,7 @@ data class User(
     val old_password:String? = null,
     val password: String? = null,
     val avtUrl: String? = null,
+    val qrUrl:String? = null,
     val classes: MutableList<String>? = null,
     val token: String? = null,
     var selected:Boolean = false

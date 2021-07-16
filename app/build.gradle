@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.rollcall"
-        minSdkVersion 26
+        minSdkVersion 25
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -35,9 +35,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        dataBinding true
-    }
+
 }
 
 dependencies {
@@ -58,11 +56,18 @@ dependencies {
     ktx()
     hilt()
     lib()
+    qrCode()
 
 }
 private void lib(){
     // button
     dependencies.implementation "com.royrodriguez:transitionbutton:0.2.0"
+
+    //calender
+    dependencies.implementation 'com.code-troopers.betterpickers:library:3.1.0'
+
+    //van tay
+    dependencies.implementation 'androidx.biometric:biometric:1.1.0'
 }
 private void retrofit(){
     dependencies.implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -94,4 +99,8 @@ private void ktx(){
 private void hilt() {
     dependencies.implementation "com.google.dagger:hilt-android:$hilt_version"
     dependencies.kapt "com.google.dagger:hilt-compiler:$hilt_version"
+}
+private void qrCode() {
+    dependencies.implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+    dependencies.implementation 'com.karumi:dexter:5.0.0'
 }

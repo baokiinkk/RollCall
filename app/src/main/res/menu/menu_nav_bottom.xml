@@ -5,8 +5,8 @@
         android:title="@string/label_list_classes"
         android:icon="@drawable/ic_nav_list_class"/>
     <item
-        android:id="@+id/navDashBoard"
-        android:title="@string/label_dash_board"
+        android:id="@+id/navInfo"
+        android:title="@string/label_info_user"
         android:icon="@drawable/ic_nav_dash_board"/>
     <item
         android:id="@+id/navQR"
