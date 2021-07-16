@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.rollcall.ui.teacher.listclassess.ListClassesOfTeacherViewModel" />
+            type="com.example.rollcall.ui.user.listclassess.ListClassesOfTeacherViewModel" />
         <variable
             name="adapter"
             type="com.example.rollcall.adapter.ItemClassAdapter" />

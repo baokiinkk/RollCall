@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:cardBackgroundColor="#80FBFBFB"
+        app:cardBackgroundColor="@color/_color80FBFBFB"
         app:cardCornerRadius="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

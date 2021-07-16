@@ -1,4 +1,4 @@
-package com.example.rollcall.ui.teacher.listclassess.ClassInfo
+package com.example.rollcall.ui.user.listclassess.ClassInfo
 
 import androidx.lifecycle.ViewModel
 import com.example.rollcall.data.respository.user.UserRepository

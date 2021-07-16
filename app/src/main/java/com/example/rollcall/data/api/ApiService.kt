@@ -68,9 +68,10 @@ interface ApiService {
     ): Class
 
     //----------------------------------- Teacher --------------------------------------------------
-    @GET("teachers/{id}/class")
+    @GET("{user}/{id}/class")
     suspend fun getClassOfTeacher(
         @Header("Authorization") tokenAdmin: String,
         @Path("id") id: String,
+        @Path("user")user: String
     ): Class
 }

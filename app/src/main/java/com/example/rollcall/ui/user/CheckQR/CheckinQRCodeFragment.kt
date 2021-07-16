@@ -1,15 +1,9 @@
-package com.example.rollcall.ui.teacher.CheckQR
+package com.example.rollcall.ui.user.CheckQR
 
 import android.Manifest
-import android.content.Context
-import android.content.DialogInterface
-import android.database.Cursor
 import android.view.View
 import android.view.animation.TranslateAnimation
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentCheckinQrcodeBinding
@@ -21,7 +15,6 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener.Builder.withContext
 import com.karumi.dexter.listener.single.PermissionListener
 import dagger.hilt.android.AndroidEntryPoint
 import me.dm7.barcodescanner.zxing.ZXingScannerView

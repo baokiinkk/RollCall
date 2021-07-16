@@ -6,7 +6,7 @@ import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentLoginBinding
 import com.example.rollcall.ui.admin.home.HomeAdminFragment
-import com.example.rollcall.ui.teacher.home.HomeTeacherFragment
+import com.example.rollcall.ui.user.home.HomeUserFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.TOKEN
@@ -53,12 +53,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                                     Bundle().apply { putString(TOKEN, it.data[0].token) }
                                 gotoFragment(requireActivity(), fragment,false)
                             }
-                            "teacher" -> {
-                                val fragment = HomeTeacherFragment()
+                            else -> {
+                                val fragment = HomeUserFragment()
                                 fragment.arguments =
                                     Bundle().apply {
-                                        putString(TOKEN, it.data[0].token)
-                                    putSerializable(USER, it.data[0])}
+                                        putString(TOKEN, it.data?.get(0)?.token)
+                                    putSerializable(USER, it.data?.get(0))}
                                 gotoFragment(requireActivity(), fragment,false)
                             }
                         }
