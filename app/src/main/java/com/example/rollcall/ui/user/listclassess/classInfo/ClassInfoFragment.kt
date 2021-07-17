@@ -35,11 +35,12 @@ class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>(), TimePicker.O
     private var user: User? = null
     private lateinit var dialog: BottomSheetDialog
     val viewModel by viewModels<ClassInfoViewModel>()
-    private var mIgnoreEvent = false
     private var currentHour = 0
     private var currentMinute = 0
     private var maxHour = 0
     private var maxMinute = 0
+    private var minHour = 0
+    private var minMinute = 0
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
         getArgument()
@@ -49,6 +50,9 @@ class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>(), TimePicker.O
     }
     //-------------------------------- Func ----------------------------------------
     private fun setup() {
+        if(user?.role == Utils.STUDENT) {
+            baseBinding.btnCreateReport.visibility = View.GONE
+        }
         val itemUserAdapter = ItemUserAdapter {
         }
         itemUserAdapter.submitList(classInfo?.students)
@@ -157,21 +161,41 @@ class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>(), TimePicker.O
     }
 
     private fun setMaxTime() {
+        val dateTime = Calendar.getInstance()
+        dateTime.timeZone = TimeZone.getTimeZone("Asia/Ho_Chi_Minh")
+        currentHour = dateTime.get(Calendar.HOUR)
+        currentMinute = dateTime.get(Calendar.MINUTE)
+
         if(classInfo?.shift == "0")
         {
             maxHour = 11
             maxMinute = 15
+            minHour = 7
+            minMinute = 30
         } else {
             maxHour = 16
             maxMinute = 30
+            minHour = 12
+            minMinute = 50
         }
     }
 
     override fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int) {
         //init current time
-        if (hourOfDay > maxHour || (hourOfDay == maxHour && minute > maxMinute)) {
-            view?.currentHour = currentHour
-            view?.currentMinute = currentMinute
+        if(currentHour in (minHour + 1) until maxHour){
+            minHour = currentHour
+        }
+
+        if(hourOfDay < minHour) {
+            view?.hour = maxHour
+        } else if(hourOfDay > maxHour) {
+            view?.hour = minHour
+        }
+
+        if(hourOfDay == minHour && minute < minMinute) {
+            view?.minute = minMinute
+        } else if(hourOfDay == maxHour && minute > maxMinute) {
+            view?.minute = maxMinute
         }
     }
 }
