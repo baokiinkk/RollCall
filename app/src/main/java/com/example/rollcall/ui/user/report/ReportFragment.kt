@@ -1,26 +1,27 @@
-package com.example.rollcall.ui.user.info
+package com.example.rollcall.ui.user.report
 
-import android.util.Log
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
-import com.example.rollcall.data.model.User
-import com.example.rollcall.databinding.FragmentInfoUserBinding
-import com.example.rollcall.ui.login.LoginFragment
+import com.example.rollcall.adapter.ItemUserReportAdapter
+import com.example.rollcall.databinding.FragmentUsersReportBinding
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
+class ReportFragment : BaseFragment<FragmentUsersReportBinding>() {
 
     override fun getLayoutRes(): Int {
-        return R.layout.fragment_info_user
+        return R.layout.fragment_users_report
     }
+
     //-------------------------------- Variable ----------------------------------------
-    val viewModel by viewModels<InfoUserViewModel>()
+    val viewModel by viewModels<ReportViewModel>()
     private var token: String? = null
-    private var user: User? = null
+    private var idClass: String? = null
+    private val itemUserReportAdapter: ItemUserReportAdapter by lazy {
+        ItemUserReportAdapter()
+    }
 
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
@@ -33,21 +34,24 @@ class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
     private fun setup() {
         baseBinding.apply {
             viewmodel = viewModel
+            adapter = itemUserReportAdapter
         }
+        viewModel.getReport(idClass, token)
+
     }
 
     private fun getData() {
-        viewModel.getInfoUser(token,user?.id)
-        viewModel.isLogOut.observe(viewLifecycleOwner,{
+
+        viewModel.users.observe(viewLifecycleOwner,{
             it?.let {
-                Utils.gotoFragment(requireActivity(),LoginFragment())
+                itemUserReportAdapter.submitList(it.data[0].content)
             }
         })
     }
 
     private fun getArgument() {
         token = arguments?.getString(Utils.TOKEN)
-        user = arguments?.getSerializable(Utils.USER) as User?
+        idClass = arguments?.getString(Utils.CLASS)
     }
 
 

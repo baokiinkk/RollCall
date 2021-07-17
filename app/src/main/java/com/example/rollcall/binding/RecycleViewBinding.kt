@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rollcall.adapter.ItemClassAdapter
 import com.example.rollcall.adapter.ItemUserAdapter
+import com.example.rollcall.adapter.ItemUserReportAdapter
 import com.example.rollcall.adapter.SelectItemUserAdapter
 import com.example.rollcall.data.model.Class
 import com.example.rollcall.data.model.Users
@@ -105,6 +106,15 @@ class RecycleViewBinding {
                 }
 
             })
+        }
+
+        @BindingAdapter("android:adapter")
+        @JvmStatic
+        fun loadRecycleReport(view: RecyclerView,itemUserAdapter: ItemUserReportAdapter) {
+            view.apply {
+                layoutManager = GridLayoutManager(view.context,1)
+                adapter = itemUserAdapter
+            }
         }
     }
 

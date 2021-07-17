@@ -15,10 +15,19 @@ import javax.inject.Inject
 class HomeAdminViewModel@Inject constructor(private val repo: AdminRepository):ViewModel() {
     val dashBoard:MutableLiveData<DashBoard?> = MutableLiveData(null)
     val img = R.drawable.home
+    val isLogOut:MutableLiveData<Boolean?> = MutableLiveData(null)
+    var token = ""
     fun getData(token:String){
+        this.token = token
        viewModelScope.launch(Dispatchers.IO){
            dashBoard.postValue(repo.getDashBoard(token))
            
        }
+    }
+    fun logout(){
+        viewModelScope.launch(Dispatchers.IO){
+            if(repo.logOut(token).message == "Success")
+                isLogOut.postValue(true)
+        }
     }
 }

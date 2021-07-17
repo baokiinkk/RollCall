@@ -21,7 +21,7 @@ data class User(
     val classes: MutableList<String>? = null,
     val token: String? = null,
     var selected:Boolean = false
-
 ):Serializable
+
 
 

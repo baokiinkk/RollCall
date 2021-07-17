@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="viewmodel"
+            type="com.example.rollcall.ui.user.listclassess.classInfo.ClassInfoViewModel" />
+        <variable
             name="adapter"
             type="com.example.rollcall.adapter.ItemUserAdapter" />
     </data>
@@ -28,6 +31,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <include
+                    android:viewmodel="@{viewmodel}"
                     android:id="@+id/layout_classInfo"
                     layout="@layout/layout_class_info" />
                 <LinearLayout

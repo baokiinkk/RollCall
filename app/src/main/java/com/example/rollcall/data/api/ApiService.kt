@@ -45,6 +45,9 @@ interface ApiService {
         @Path("id") id: String,
     ): Users
 
+    @POST("users/logout")
+    suspend fun logout(@Header("Authorization") tokenAdmin: String): Users
+
     //----------------------------------- Class ----------------------------------------------------
     @GET("classes/")
     suspend fun getClass(@Header("Authorization") tokenAdmin: String): Class
@@ -59,7 +62,7 @@ interface ApiService {
     suspend fun editClass(
         @Header("Authorization") tokenAdmin: String,
         @Body dataClass: DataClass
-    ):Class
+    ): Class
 
     @DELETE("classes/{id}")
     suspend fun deleteClass(
@@ -72,6 +75,30 @@ interface ApiService {
     suspend fun getClassOfTeacher(
         @Header("Authorization") tokenAdmin: String,
         @Path("id") id: String,
-        @Path("user")user: String
+        @Path("user") user: String
     ): Class
+
+
+    //----------------------------------- Report --------------------------------------------------
+    @POST("reports/{class_id}")
+    suspend fun postReport(
+        @Path("class_id") id: String,
+        @Body data:ReportBody,
+        @Header("Authorization") tokenAdmin: String
+    ):DataReport
+
+    @GET("reports/{id}/status")
+    suspend fun getReport(
+        @Path("id") id: String,
+        @Header("Authorization") tokenAdmin: String
+    ):DataReport
+
+
+    @GET("reports/{class_id}/{date}/status")
+    suspend fun getReportStatus(
+        @Path("class_id") id: String,
+        @Path("date")date:String,
+        @Header("Authorization") tokenAdmin: String
+    ):DataReport
+
 }

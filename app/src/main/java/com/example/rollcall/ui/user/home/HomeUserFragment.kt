@@ -42,7 +42,6 @@ class HomeUserFragment : BaseFragment<FragmentHomeUserBinding>() {
         baseBinding.apply {
             viewmodel = viewModel
         }
-        setCurrentFragment(requireActivity(),fragInfo)
     }
 
     private fun getData() {
