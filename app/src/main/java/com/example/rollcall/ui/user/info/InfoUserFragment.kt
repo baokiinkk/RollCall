@@ -1,12 +1,15 @@
 package com.example.rollcall.ui.user.info
 
+import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.FragmentInfoUserBinding
 import com.example.rollcall.ui.login.LoginFragment
+import com.example.rollcall.ui.user.CheckQR.CheckinQRCodeFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +37,9 @@ class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
 
     //-------------------------------- Func ----------------------------------------
     private fun setup() {
+        if(user?.role == Utils.STUDENT) {
+            baseBinding.buttonQrCode.visibility = View.VISIBLE
+        }
         baseBinding.apply {
             viewmodel = viewModel
         }
@@ -55,7 +61,12 @@ class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
 
     private fun clickView() {
         baseBinding.buttonQrCode.setOnClickListener {
-
+            val fragment = CheckinQRCodeFragment()
+            fragment.arguments = Bundle().apply {
+                putString(Utils.TOKEN, token)
+                putSerializable(Utils.USER, user)
+            }
+            Utils.gotoFragment(requireActivity(),fragment)
         }
     }
 

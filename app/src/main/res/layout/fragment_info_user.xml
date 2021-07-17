@@ -73,6 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="QR Code Scan"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:backgroundTint="#80FBFBFB"
             app:layout_constraintBottom_toTopOf="@id/button"
