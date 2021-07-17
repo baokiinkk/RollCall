@@ -49,7 +49,6 @@ class ListClassesFragment : BaseFragment<FragmentListClassesBinding>() {
         }
 
         // observe list class
-
         token?.let {
             user?.let { it1 ->
                 viewModel.getListClass(it, it1.id, if(it1.role == Utils.TEACHER) "teachers" else "students")

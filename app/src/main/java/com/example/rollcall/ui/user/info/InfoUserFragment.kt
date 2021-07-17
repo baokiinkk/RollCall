@@ -33,8 +33,6 @@ class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
         clickView()
     }
 
-
-
     //-------------------------------- Func ----------------------------------------
     private fun setup() {
         if(user?.role == Utils.STUDENT) {
@@ -46,6 +44,7 @@ class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
     }
 
     private fun getData() {
+
         viewModel.getInfoUser(token,user?.id)
         viewModel.isLogOut.observe(viewLifecycleOwner,{
             it?.let {
@@ -70,5 +69,8 @@ class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
         }
     }
 
-
+    override fun onResume() {
+        super.onResume()
+        setup()
+    }
 }
