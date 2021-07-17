@@ -1,8 +1,8 @@
 package com.example.rollcall.data.respository.user
 
 import com.example.rollcall.data.model.Class
-import retrofit2.http.Header
-import retrofit2.http.Path
+import com.example.rollcall.data.model.Users
+
 import javax.inject.Singleton
 
 
@@ -13,5 +13,9 @@ interface UserRepository {
         id: String,
     ): Class
 
+    suspend fun getInfoUser(
+        token: String,
+        id: String,
+    ): Users
 
 }

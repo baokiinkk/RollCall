@@ -39,6 +39,11 @@ interface ApiService {
         @Path("id") id: String
     ): Users
 
+    @GET("users/{id}")
+    suspend fun getInfoUser(
+        @Header("Authorization") tokenAdmin: String,
+        @Path("id") id: String,
+    ): Users
 
     //----------------------------------- Class ----------------------------------------------------
     @GET("classes/")

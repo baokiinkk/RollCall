@@ -2,26 +2,17 @@ package com.example.rollcall.ui.teacher.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.data.model.User
-import com.example.rollcall.databinding.FragmentClassInfoBinding
 import com.example.rollcall.databinding.FragmentHomeTeacherBinding
-import com.example.rollcall.ui.admin.home.HomeAdminFragment
-import com.example.rollcall.ui.admin.home.HomeAdminViewModel
 import com.example.rollcall.ui.teacher.CheckQR.CheckinQRCodeFragment
-import com.example.rollcall.ui.teacher.DashBoard.DashBoardClassFragment
+import com.example.rollcall.ui.teacher.info.InfoUserFragment
 import com.example.rollcall.ui.teacher.listclassess.ListClassesOfTeacherFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
-import com.example.rollcall.utils.Utils.fingerPrint
-import com.example.rollcall.utils.Utils.gotoFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,7 +26,6 @@ class HomeTeacherFragment : BaseFragment<FragmentHomeTeacherBinding>() {
     private var token: String? = null
     private var user: User? = null
     private val fragListClass = ListClassesOfTeacherFragment()
-    private val fragDashBoard = DashBoardClassFragment()
     private val fragQRScan = CheckinQRCodeFragment()
 
     //-------------------------------- createView ----------------------------------------
@@ -79,7 +69,7 @@ class HomeTeacherFragment : BaseFragment<FragmentHomeTeacherBinding>() {
             }
 
             R.id.navDashBoard -> {
-                setCurrentFragment(requireActivity(),fragDashBoard)
+                setCurrentFragment(requireActivity(),InfoUserFragment())
                 true
             }
 
@@ -102,6 +92,5 @@ class HomeTeacherFragment : BaseFragment<FragmentHomeTeacherBinding>() {
             .replace(R.id.fragContainer, fragment)
             .commit()
     }
-
 
 }
