@@ -24,7 +24,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
 @AndroidEntryPoint
-class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXingScannerView.ResultHandler, View.OnClickListener {
+class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(),
+    ZXingScannerView.ResultHandler,
+    View.OnClickListener {
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_checkin_qrcode
@@ -65,6 +67,7 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
                 }
             }).check()
     }
+
     private fun getArgument() {
         token = arguments?.getString(Utils.TOKEN)
         user = arguments?.getSerializable(Utils.USER) as User?
@@ -85,12 +88,12 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
     }
 
     private fun slideDown(view: View) {
+        view.visibility = View.GONE
         val translateAnimation = TranslateAnimation(0.0f, 0.0f, 0.0f,
-            view.height.toFloat())
+            view.height.toFloat()*2)
         translateAnimation.duration = 300
         translateAnimation.fillAfter = true
         view.startAnimation(translateAnimation)
-        view.visibility = View.GONE
 
     }
 
@@ -120,12 +123,12 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
             R.id.tv_result -> {
 
                 slideDown(baseBinding.layoutBottomCheckinResult)
-                Utils.fingerPrint(requireActivity(), {
-                    Toast.makeText(requireContext(), "fail!", Toast.LENGTH_SHORT).show()
-                }) {
-
-                    Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
-                }
+//                Utils.fingerPrint(requireActivity(), {
+//                    Toast.makeText(requireContext(), "fail!", Toast.LENGTH_SHORT).show()
+//                }) {
+//
+//                    Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
+//                }
                 // continue
                 baseBinding.scanQr.resumeCameraPreview(this@CheckinQRCodeFragment)
                 baseBinding.scanQr.startCamera()
