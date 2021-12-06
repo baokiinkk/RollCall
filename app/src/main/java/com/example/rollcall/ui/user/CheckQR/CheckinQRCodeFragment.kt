@@ -97,7 +97,7 @@ class CheckinQRCodeFragment : BaseFragment<FragmentCheckinQrcodeBinding>(), ZXin
     override fun handleResult(rawResult: Result?) {
         val scanResult = rawResult!!.text
         val userId = UserId(scanResult)
-        if(user?.role == "teacher") {
+        if(user?.role == Utils.TEACHER) {
             token?.let { viewModel.checkinByTeacher(it,report?.id, userId) }
         } else {
 
