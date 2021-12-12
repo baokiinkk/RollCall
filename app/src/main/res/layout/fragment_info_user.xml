@@ -11,7 +11,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/infoBackground"
+        >
 
         <ImageView
             android:id="@+id/imageView5"
@@ -23,76 +25,312 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
+        <TableLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@{viewmodel.users.data.get(0).name}"
-            android:textColor="#fff"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/cardAvt"
-            app:layout_constraintStart_toEndOf="@+id/cardAvt"
-            app:layout_constraintTop_toBottomOf="@id/txtId" />
-
-        <TextView
-            android:id="@+id/txtId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@{viewmodel.users.data.get(0).id}"
-            android:textColor="#fff"
-            app:layout_constraintBottom_toTopOf="@id/txtName"
-            app:layout_constraintStart_toEndOf="@+id/cardAvt"
-            app:layout_constraintTop_toTopOf="@+id/cardAvt" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardAvt"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            app:cardCornerRadius="25dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/day_background"
+            android:padding="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView5">
 
-            <ImageView
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/txtMaSVTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Mã GV"
+                    android:textColor="@color/colorThongTinSinhVien"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/txtMaSV"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="@{viewmodel.users.data.get(0).id}"
+                    android:textColor="@color/colorThongTinSinhVien" />
+            </TableRow>
+
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:loadImage="@{viewmodel.users.data.get(0).avtUrl}"
-                android:scaleType="centerCrop"
+                android:layout_weight="1">
 
-                />
-        </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/txtTenSVTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Tên GV"
+                    android:textColor="@color/colorThongTinSinhVien"
+                    tools:ignore="HardcodedText" />
 
-        <Button
+                <TextView
+                    android:id="@+id/txtTenSV"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="@{viewmodel.users.data.get(0).name}"
+                    android:textColor="@color/colorThongTinSinhVien" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Phái"
+                    android:textColor="@color/colorThongTinSinhVien"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/txtPhai"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Nam"
+                    android:textColor="@color/colorThongTinSinhVien" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Nơi sinh"
+                    android:textColor="@color/colorThongTinSinhVien"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/txtNoiSinh"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Đồng Nai"
+                    android:textColor="@color/colorThongTinSinhVien" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/lop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Lớp"
+                    android:textColor="@color/colorThongTinSinhVien"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/txtlop"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="D17CQCN01-N(ĐHCQ - Ngành CNTT - Công nghệ phần mềm - 2017-1)"
+                    android:textColor="@color/colorThongTinSinhVien" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Ngành"
+                    android:textColor="@color/colorThongTinSinhVien"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/txtNganh"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Công nghệ phần mềm"
+                    android:textColor="@color/colorThongTinSinhVien" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Khoa"
+                    android:textColor="@color/colorThongTinSinhVien"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/txtKhoa"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Công nghệ thông tin 2"
+                    android:textColor="@color/colorThongTinSinhVien" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Hệ đào tạo"
+                    android:textColor="@color/colorThongTinSinhVien"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/txtHedt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Đại học chính quy"
+                    android:textColor="@color/colorThongTinSinhVien" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/khoahoc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="Khóa học"
+                    android:textColor="@color/colorThongTinSinhVien"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/txtKhoahoc"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/paddingThongTinSinhVien"
+                    android:paddingBottom="@dimen/paddingThongTinSinhVien"
+                    android:text="2017-2022"
+                    android:textColor="@color/colorThongTinSinhVien" />
+            </TableRow>
+
+        </TableLayout>
+
+
+        <TextView
             android:id="@+id/button_qr_code"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/_5dp"
+            android:background="@drawable/logout_button"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:text="QR Code Scan"
+            android:textColor="#4000D7C1"
             android:visibility="gone"
-            android:textColor="@color/black"
-            android:backgroundTint="#80FBFBFB"
-            app:layout_constraintBottom_toTopOf="@id/button"
+            app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
+        <TextView
             android:id="@+id/button"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Log out"
-            android:textColor="@color/black"
-            android:backgroundTint="#80FBFBFB"
+            android:background="@drawable/logout_button"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="Đăng xuất"
+            android:textColor="#4000D7C1"
+            android:textStyle="bold"
+            app:elevation="0dp"
             android:onClick="@{()->viewmodel.logout()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -26,7 +26,21 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
+    <!--    tablayout-->
+    <style name="AppTabLayout" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="tabGravity">fill</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabIconTint">@color/selected_tab_text_color</item>
+        <item name="tabIndicatorColor">@color/textToday</item>
+        <item name="tabTextColor">@color/selected_tab_text_color</item>
+        <item name="android:textSize">12sp</item>
 
+    </style>
+
+    <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
 
 
 </resources>

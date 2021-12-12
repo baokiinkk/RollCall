@@ -12,12 +12,19 @@
             type="com.example.rollcall.adapter.ItemClassAdapter" />
 
     </data>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_classes"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/_16dp"
-        android:layout_marginEnd="@dimen/_16dp"
-        android:layout_marginTop="@dimen/_46dp"
-        android:adapter="@{adapter}" />
+        android:background="@color/infoBackground"
+
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_classes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_20dp"
+            tools:listitem="@layout/item_class"
+            android:adapter="@{adapter}" />
+    </FrameLayout>
+
 </layout>

@@ -17,6 +17,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
 
+    companion object{
+        fun instance(token:String?,user:User?) : InfoUserFragment{
+            val bundle = Bundle().apply {
+                putString(Utils.TOKEN, token)
+                putSerializable(Utils.USER, user)}
+            val fragment = InfoUserFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
     override fun getLayoutRes(): Int {
         return R.layout.fragment_info_user
     }
@@ -37,6 +47,10 @@ class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
     private fun setup() {
         if(user?.role == Utils.STUDENT) {
             baseBinding.buttonQrCode.visibility = View.VISIBLE
+            baseBinding.lop.visibility = View.VISIBLE
+            baseBinding.khoahoc.visibility = View.VISIBLE
+            baseBinding.txtMaSVTitle.text = "Mã SV"
+            baseBinding.txtTenSVTitle.text = "Tên SV"
         }
         baseBinding.apply {
             viewmodel = viewModel
@@ -67,10 +81,5 @@ class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
             }
             Utils.gotoFragment(requireActivity(),fragment)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setup()
     }
 }

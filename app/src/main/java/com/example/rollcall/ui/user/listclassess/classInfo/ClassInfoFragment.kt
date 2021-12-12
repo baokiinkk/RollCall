@@ -134,7 +134,7 @@ class ClassInfoFragment : BaseFragment<FragmentClassInfoBinding>(), TimePicker.O
         return sheetDialog
     }
 
-    fun getTimeCurrent(): String {
+    private fun getTimeCurrent(): String {
         val date = Calendar.getInstance()
         date.timeZone = TimeZone.getTimeZone("Asia/Ho_Chi_Minh")
         val year = date.get(Calendar.YEAR)
