@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    >
 
     <data>
         <variable
@@ -9,48 +9,47 @@
             type="com.example.rollcall.ui.user.home.HomeUserViewModel" />
 
     </data>
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".ui.user.home.HomeUserFragment">
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:loadImage="@{viewmodel.img}"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragContainer"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@id/bottomNavMain"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adapter_viewpager="@{viewmodel.adapter}"
+            android:tab_layout="@{tabLayout}"
+            app:layout_constraintBottom_toTopOf="@+id/cardTab"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavMain"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardTab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/_10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                style="@style/AppTabLayout"
+                app:tabTextAppearance="@style/TabLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_46dp"
-                android:background="@drawable/bg_solid_white_line_top"
-                android:theme="@style/BottomNavigationMenu"
-                app:itemTextAppearanceActive="@style/BottomNavigationMenu"
-                app:itemTextAppearanceInactive="@style/BottomNavigationMenu"
-                app:labelVisibilityMode="labeled"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:menu="@menu/menu_nav_bottom" />
+                android:background="@color/cardBackground"
+               >
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_classes"
+                    android:text="aaaaaa" />
+            </com.google.android.material.tabs.TabLayout>
+        </androidx.cardview.widget.CardView>
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

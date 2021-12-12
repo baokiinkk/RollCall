@@ -17,6 +17,7 @@ interface AdminRepository{
    suspend fun editUser(tokenAdmin:String,user: User):Users
    suspend fun editPasswordUser(tokenAdmin:String,user: User):Users
    suspend fun deleteUser(tokenAdmin:String,user: User):Users
+   suspend fun logOut(token: String):Users
 
    //------------------------ Class --------------------------------------
    suspend fun getClass(tokenAdmin:String):Class

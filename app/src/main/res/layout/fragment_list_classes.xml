@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.rollcall.ui.user.listclassess.ListClassesViewModel" />
+        <variable
+            name="adapter"
+            type="com.example.rollcall.adapter.ItemClassAdapter" />
+
+    </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/infoBackground"
+
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_classes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_20dp"
+            tools:listitem="@layout/item_class"
+            android:adapter="@{adapter}" />
+    </FrameLayout>
+
+</layout>

@@ -5,17 +5,24 @@
 
     <data>
         <variable
+            name="viewmodel"
+            type="com.example.rollcall.ui.user.listclassess.classInfo.ClassInfoViewModel" />
+        <variable
             name="adapter"
             type="com.example.rollcall.adapter.ItemUserAdapter" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/_36dp"
+        android:paddingTop="@dimen/_16dp"
         android:paddingBottom="@dimen/_16dp">
+
         <include
             android:id="@+id/layout_header"
-            layout="@layout/layout_header"/>
+            layout="@layout/layout_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -28,8 +35,10 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <include
+                    android:viewmodel="@{viewmodel}"
                     android:id="@+id/layout_classInfo"
-                    layout="@layout/layout_class_info" />
+                    layout="@layout/layout_class_info"
+                    />
                 <LinearLayout
                     android:id="@+id/list_student_title"
                     android:layout_width="match_parent"

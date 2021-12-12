@@ -178,7 +178,7 @@ class EditClassFragment : BaseFragment<FragmentEditClassBinding>() {
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 baseBinding.txtPickDate.editText?.setText(
-                    "$dayOfMonth-$monthOfYear-$year"
+                    "$dayOfMonth-${monthOfYear+1}-$year"
                 )
 
             }

@@ -16,6 +16,8 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment() {
     // Tạo ra baseBinding để sử dụng
     protected lateinit var baseBinding: VB
 
+    protected var savedInstanceState: Bundle? = null
+
     // // Return lại layout id
     abstract fun getLayoutRes(): Int
 
@@ -29,6 +31,7 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment() {
     ): View? {
         baseBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
         baseBinding.lifecycleOwner = this
+        this.savedInstanceState = savedInstanceState
         onCreateViews()
         return baseBinding.root
 

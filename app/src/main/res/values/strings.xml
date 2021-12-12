@@ -11,4 +11,9 @@
     <string name="label_qr_checkin">QR Code Scan</string>
     <string name="fab_content_desc">Thêm</string>
     <string name="label_info_user">Thông tin cá nhân</string>
+    <string name="request_fail">Lỗi! Vui lòng kiểm tra lại</string>
+    <string name="ten_mon">Tên Môn</string>
+    <string name="thi">Thi</string>
+    <string name="tong">Tổng</string>
+    <string name="ket_qua">Kết quả</string>
 </resources>

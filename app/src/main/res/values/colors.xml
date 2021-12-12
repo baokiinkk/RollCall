@@ -10,4 +10,20 @@
     <color name="color666666">#666666</color>
     <color name="colorPrimaryDark">#00000000</color>
     <color name="_color80FBFBFB">#80FBFBFB</color>
+    <color name="colorAccent0">#00B4FF</color>
+
+    <color name="background_main_color">#101415</color>
+    <color name="color_select_icon">@color/selected_tab_color</color>
+    <color name="red_color">#0073D8</color>
+    <color name="color_icon">#B2B7BA</color>
+    <color name="colorThongTinSinhVien">#CDFFFFFF</color>
+    <color name="infoBackground">#252C3F</color>
+    <color name="colorTomorrow">#293346</color>
+    <color name="textToday">@color/colorAccent0</color>
+    <color name="textTomorrow">#00D7C1</color>
+    <color name="cardTitle">#ECEDEF</color>
+    <color name="cardBackground">#293346</color>
+    <color name="diemCacMon">#FFFFFF</color>
+    <color name="diemCacMonTitle">#00D7C1</color>
+
 </resources>

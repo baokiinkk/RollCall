@@ -8,21 +8,34 @@ import androidx.fragment.app.viewModels
 import com.example.rollcall.R
 import com.example.rollcall.adapter.ItemClassAdapter
 import com.example.rollcall.data.model.User
-import com.example.rollcall.databinding.FragmentListClassesOfTeacherBinding
-import com.example.rollcall.ui.user.listclassess.ClassInfo.ClassInfoFragment
+import com.example.rollcall.databinding.FragmentListClassesBinding
+import com.example.rollcall.ui.user.info.InfoUserFragment
+import com.example.rollcall.ui.user.listclassess.classInfo.ClassInfoFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
+import com.example.rollcall.utils.Utils.gotoFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ListClassesOfTeacherFragment : BaseFragment<FragmentListClassesOfTeacherBinding>() {
+class ListClassesFragment : BaseFragment<FragmentListClassesBinding>() {
 
     override fun getLayoutRes(): Int {
-        return R.layout.fragment_list_classes_of_teacher
+        return R.layout.fragment_list_classes
+    }
+
+    companion object{
+        fun instance(token:String?,user:User?) : ListClassesFragment {
+            val bundle = Bundle().apply {
+                putString(Utils.TOKEN, token)
+                putSerializable(Utils.USER, user)}
+            val fragment = ListClassesFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 
     //-------------------------------- Variable ----------------------------------------
-    val viewModel: ListClassesOfTeacherViewModel by viewModels()
+    val viewModel: ListClassesViewModel by viewModels()
     private var token: String? = null
     private var user: User? = null
 
@@ -39,8 +52,9 @@ class ListClassesOfTeacherFragment : BaseFragment<FragmentListClassesOfTeacherBi
             fragment.arguments = Bundle().apply {
                 putString(Utils.TOKEN, token)
                 putSerializable(Utils.CLASS, it)
+                putSerializable(Utils.USER, user)
             }
-            setCurrentFragment(requireActivity(), fragment)
+            gotoFragment(requireActivity(), fragment,true)
         }
         baseBinding.apply {
             viewmodel = viewModel
@@ -48,10 +62,9 @@ class ListClassesOfTeacherFragment : BaseFragment<FragmentListClassesOfTeacherBi
         }
 
         // observe list class
-
         token?.let {
             user?.let { it1 ->
-                viewModel.getListClassTeacher(it, it1.id, if(it1.role == Utils.TEACHER) "teachers" else "students")
+                viewModel.getListClass(it, it1.id, if(it1.role == Utils.TEACHER) "teachers" else "students")
             }
         }
         viewModel.classes.observe(viewLifecycleOwner, {
@@ -63,12 +76,6 @@ class ListClassesOfTeacherFragment : BaseFragment<FragmentListClassesOfTeacherBi
         })
     }
 
-    private fun setCurrentFragment(activity: FragmentActivity, fragment: Fragment) {
-        activity.supportFragmentManager.beginTransaction()
-            .replace(R.id.fragContainer, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
 
     private fun getArgument() {
         token = arguments?.getString(Utils.TOKEN)
@@ -79,8 +86,4 @@ class ListClassesOfTeacherFragment : BaseFragment<FragmentListClassesOfTeacherBi
     private fun clickView() {
     }
 
-    override fun onResume() {
-        super.onResume()
-        setup()
-    }
 }

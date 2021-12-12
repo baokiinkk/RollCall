@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <!--<variable
-            name="viewmodel"
-            type="com.example.rollcall.ui.teacher.CheckQR.CheckinQRCodeViewModel" />-->
 
     </data>
 
@@ -14,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.user.CheckQR.CheckinQRCodeFragment">
+
         <me.dm7.barcodescanner.zxing.ZXingScannerView
             android:id="@+id/scan_Qr"
             android:layout_width="match_parent"
@@ -23,24 +21,19 @@
             android:id="@+id/layout_bottom_checkin_result"
             android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="@dimen/_46dp"
             android:visibility="gone"
             android:animateLayoutChanges="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
-            <ProgressBar
-                android:id="@+id/pb_loading_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_gravity="center"/>
-
             <TextView
                 android:id="@+id/tv_result"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N17DCCN066 - pass"
+                android:text="@string/request_fail"
+                android:maxLines="2"
                 android:padding="10dp"
                 android:gravity="center"
                 android:textSize="18sp"

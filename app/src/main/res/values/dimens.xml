@@ -7,4 +7,13 @@
     <dimen name="_26dp">26dp</dimen>
     <dimen name="_10dp">10dp</dimen>
     <dimen name="_5dp">5dp</dimen>
+    <dimen name="paddingThongTinSinhVien">7dp</dimen>
+    <dimen name="shadow">5dp</dimen>
+    <dimen name="sizeTextTitle">40sp</dimen>
+    <dimen name="sizeTextTitleHint">15sp</dimen>
+    <dimen name="textSizeMark">30sp</dimen>
+    <dimen name="textSizeMarkHint">8sp</dimen>
+    <dimen name="sizeTextCard">17sp</dimen>
+    <dimen name="sizeTenMonTkb_phong">28sp</dimen>
+    <dimen name="sizeTenMonTkb_infor">10sp</dimen>
 </resources>

@@ -6,7 +6,9 @@ import com.example.rollcall.R
 import com.example.rollcall.databinding.FragmentHomeAdminBinding
 import com.example.rollcall.ui.admin.classes.ClassFragment
 import com.example.rollcall.ui.admin.user.UserFragment
+import com.example.rollcall.ui.login.LoginFragment
 import com.example.rollcall.utils.BaseFragment
+import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.CLASS
 import com.example.rollcall.utils.Utils.STUDENT
 import com.example.rollcall.utils.Utils.TEACHER
@@ -41,6 +43,11 @@ class HomeAdminFragment : BaseFragment<FragmentHomeAdminBinding>() {
         baseBinding.apply {
             viewmodel = viewModel
         }
+        viewModel.isLogOut.observe(viewLifecycleOwner,{
+            it?.let {
+                gotoFragment(requireActivity(), LoginFragment())
+            }
+        })
     }
 
     private fun getData() {
