@@ -9,9 +9,11 @@ import com.example.rollcall.R
 import com.example.rollcall.adapter.ItemClassAdapter
 import com.example.rollcall.data.model.User
 import com.example.rollcall.databinding.FragmentListClassesBinding
+import com.example.rollcall.ui.user.info.InfoUserFragment
 import com.example.rollcall.ui.user.listclassess.classInfo.ClassInfoFragment
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
+import com.example.rollcall.utils.Utils.gotoFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +21,17 @@ class ListClassesFragment : BaseFragment<FragmentListClassesBinding>() {
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_list_classes
+    }
+
+    companion object{
+        fun instance(token:String?,user:User?) : ListClassesFragment {
+            val bundle = Bundle().apply {
+                putString(Utils.TOKEN, token)
+                putSerializable(Utils.USER, user)}
+            val fragment = ListClassesFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 
     //-------------------------------- Variable ----------------------------------------
@@ -41,7 +54,7 @@ class ListClassesFragment : BaseFragment<FragmentListClassesBinding>() {
                 putSerializable(Utils.CLASS, it)
                 putSerializable(Utils.USER, user)
             }
-            setCurrentFragment(requireActivity(), fragment)
+            gotoFragment(requireActivity(), fragment,true)
         }
         baseBinding.apply {
             viewmodel = viewModel
@@ -63,12 +76,6 @@ class ListClassesFragment : BaseFragment<FragmentListClassesBinding>() {
         })
     }
 
-    private fun setCurrentFragment(activity: FragmentActivity, fragment: Fragment) {
-        activity.supportFragmentManager.beginTransaction()
-            .replace(R.id.fragContainer, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
 
     private fun getArgument() {
         token = arguments?.getString(Utils.TOKEN)
@@ -79,8 +86,4 @@ class ListClassesFragment : BaseFragment<FragmentListClassesBinding>() {
     private fun clickView() {
     }
 
-    override fun onResume() {
-        super.onResume()
-        setup()
-    }
 }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.example.rollcall.data.model.Mark" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_mark_info"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingStart="10dp"
+            android:collapseColumns="*"
+            tools:ignore="RtlSymmetry,UselessParent">
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tenMon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="start"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="@{data.objectName}"
+                    android:textColor="@color/diemCacMon" />
+                <TextView
+                    android:id="@+id/DiemThi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:text="@{data.thi1}"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="#BFFFFFFF"
+                    android:textStyle="normal"
+                    android:fontFamily="sans-serif-medium"
+                    />
+                <TextView
+                    android:id="@+id/ketQua"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="@{data.tk10}"
+                    android:textColor="#BFFFFFFF"
+                    android:textStyle="normal"
+                    android:fontFamily="sans-serif-medium"
+                    />
+                <TextView
+                    android:id="@+id/ketQuaChu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="@{data.TKCH}"
+                    android:layout_weight="1"
+                    android:textColor="@color/diemCacMon"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
+                    />
+            </TableRow>
+
+        </TableLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/green_gradient_line"></View>
+
+    </LinearLayout>
+
+</layout>

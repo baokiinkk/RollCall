@@ -14,11 +14,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/_36dp"
+        android:paddingTop="@dimen/_16dp"
         android:paddingBottom="@dimen/_16dp">
+
         <include
             android:id="@+id/layout_header"
-            layout="@layout/layout_header"/>
+            layout="@layout/layout_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
