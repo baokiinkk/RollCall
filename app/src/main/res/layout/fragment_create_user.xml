@@ -12,131 +12,191 @@
             type="com.example.rollcall.ui.admin.createuser.CreateUserViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:loadImage="@{viewmodel.img}"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <TextView
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:drawableStart="@drawable/ic_back"
-            app:layout_constraintBottom_toBottomOf="@+id/textView11"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView11" />
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Tạo user"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/day_background">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtPassword"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:hint="Nhập Password"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtEmail" >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@={viewmodel.password}"
-                app:endIconMode="clear_text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="20dp"
+                android:drawableStart="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="@+id/textView11"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView11" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtEmail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:hint="nhập Email"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:layout_constraintEnd_toEndOf="@+id/edtId"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/edtId"
-            app:layout_constraintTop_toBottomOf="@+id/edtname" >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@={viewmodel.email}"
-                app:endIconMode="clear_text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="30dp"
+                android:text="Tạo user"
+                android:textColor="@color/bpBlue"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtId"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
-            android:hint="Nhập Mã Số "
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtId"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@={viewmodel.id}"
-                app:endIconMode="clear_text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:hint="Nhập Mã Số "
+                android:textColorHint="@color/color_icon"
+                app:hintTextColor="@color/color_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView11">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtname"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:hint="Nhập Tên"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:layout_constraintEnd_toEndOf="@+id/edtId"
-            app:layout_constraintStart_toStartOf="@+id/edtId"
-            app:layout_constraintTop_toBottomOf="@+id/edtId" >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewmodel.id}"
+                    android:textColor="@color/white"
+                    app:endIconMode="clear_text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtfirstName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@={viewmodel.name}"
-                app:endIconMode="clear_text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="30dp"
+                android:hint="Nhập Tên"
+                android:textColorHint="@color/color_icon"
+                app:hintTextColor="@color/color_icon"
+                app:layout_constraintEnd_toEndOf="@+id/edtId"
+                app:layout_constraintStart_toStartOf="@+id/edtId"
+                app:layout_constraintTop_toBottomOf="@+id/edtId">
 
-        <com.royrodriguez.transitionbutton.TransitionButton
-            android:id="@+id/btnCreate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/br_btn_login"
-            android:paddingHorizontal="50dp"
-            android:paddingVertical="15dp"
-            android:text="Tạo user"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            app:defaultColor="#FA3E7E"
-            app:layout_constraintEnd_toEndOf="@+id/edtPassword"
-            app:layout_constraintTop_toBottomOf="@+id/edtPassword"
-            app:loaderColor="#fff" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewmodel.firstName}"
+                    android:textColor="@color/white"
+                    app:endIconMode="clear_text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtlastName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Nhập họ"
+                android:textColorHint="@color/color_icon"
+                app:hintTextColor="@color/color_icon"
+                app:layout_constraintEnd_toEndOf="@+id/edtId"
+                app:layout_constraintStart_toStartOf="@+id/edtId"
+                app:layout_constraintTop_toBottomOf="@+id/edtfirstName">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewmodel.lastName}"
+                    android:textColor="@color/white"
+                    app:endIconMode="clear_text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="nhập Email"
+                android:textColorHint="@color/color_icon"
+                app:hintTextColor="@color/color_icon"
+                app:layout_constraintEnd_toEndOf="@+id/edtId"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/edtId"
+                app:layout_constraintTop_toBottomOf="@+id/edtlastName">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewmodel.email}"
+                    android:textColor="@color/white"
+                    app:endIconMode="clear_text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtMajor"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="nhập khoa id"
+                android:textColorHint="@color/color_icon"
+                app:hintTextColor="@color/color_icon"
+                app:layout_constraintEnd_toEndOf="@+id/edtId"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/edtId"
+                app:layout_constraintTop_toBottomOf="@+id/edtEmail">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewmodel.major}"
+                    android:textColor="@color/white"
+                    app:endIconMode="clear_text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:hint="Nhập Password"
+                android:textColorHint="@color/color_icon"
+                app:hintTextColor="@color/color_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtMajor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewmodel.password}"
+                    android:textColor="@color/white"
+                    app:endIconMode="clear_text" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.royrodriguez.transitionbutton.TransitionButton
+                android:id="@+id/btnCreate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/br_btn_login"
+                android:paddingHorizontal="50dp"
+                android:paddingVertical="15dp"
+                android:text="Tạo user"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                app:defaultColor="#FA3E7E"
+                app:layout_constraintEnd_toEndOf="@+id/edtPassword"
+                app:layout_constraintTop_toBottomOf="@+id/edtPassword"
+                app:loaderColor="#fff" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </layout>

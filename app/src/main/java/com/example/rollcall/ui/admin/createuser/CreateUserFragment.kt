@@ -80,15 +80,17 @@ class CreateUserFragment : BaseFragment<FragmentCreateUserBinding>() {
         val checkId = checkNull(baseBinding.edtId)
         val checkPassword = checkNull(baseBinding.edtPassword)
         val checkEmail = checkNull(baseBinding.edtEmail)
-        val checkName = checkNull(baseBinding.edtname)
-        return checkEmail && checkPassword && checkId && checkName
+        val checkFirstName = checkNull(baseBinding.edtfirstName)
+        val checkLastName = checkNull(baseBinding.edtlastName)
+        return checkEmail && checkPassword && checkId && checkFirstName && checkLastName
     }
     private fun clearValidate(){
         baseBinding.apply {
             edtEmail.error = null
             edtId.error = null
             edtPassword.error = null
-            edtname.error = null
+            edtfirstName.error = null
+            edtlastName.error = null
         }
     }
 

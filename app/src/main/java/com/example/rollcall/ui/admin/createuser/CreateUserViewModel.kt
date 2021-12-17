@@ -17,16 +17,18 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateUserViewModel@Inject constructor(private val repo: AdminRepository) :ViewModel(){
     var id:String = ""
-    var name:String = ""
+    var firstName:String = ""
+    var lastName:String = ""
     var email:String = ""
     var password:String = ""
+    var major:String = ""
     val users: MutableLiveData<Users?> = MutableLiveData(null)
-    val img = R.drawable.edit
+    val img = R.drawable.background
 
     fun createUser(token:String,typeUser:String){
         viewModelScope.launch(Dispatchers.IO){
             delay(1000)
-            val user = User(id,name,email,typeUser,password=password)
+            val user = User(id,firstName,lastName,email,typeUser,password)
             users.postValue(repo.createUser(token,user))
         }
     }

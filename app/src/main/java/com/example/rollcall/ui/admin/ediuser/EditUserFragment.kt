@@ -81,8 +81,8 @@ class EditUserFragment : BaseFragment<FragmentEditUserBinding>() {
         user = arguments?.getSerializable(Utils.USER) as User?
         user?.let {
             viewModel.apply {
-                id = it.id
-                name = it.name
+                id = it.userId
+                name = it.firstName
                 email = it.email
             }
         }

@@ -47,21 +47,21 @@ class AdminRepositoryImpl @Inject constructor(private val apiService: ApiService
 
     override suspend fun editUser(tokenAdmin: String, user: User): Users =
         try {
-            apiService.editUser(tokenAdmin, user.id, user)
+            apiService.editUser(tokenAdmin, user.userId, user)
         } catch (cause: HttpException) {
             Gson().fromJson(cause.response()?.errorBody()?.string(), Users::class.java)
         }
 
     override suspend fun editPasswordUser(tokenAdmin: String, user: User): Users =
         try {
-            apiService.editPasswordUser(tokenAdmin, user.id, user)
+            apiService.editPasswordUser(tokenAdmin, user.userId, user)
         } catch (cause: HttpException) {
             Gson().fromJson(cause.response()?.errorBody()?.string(), Users::class.java)
         }
 
     override suspend fun deleteUser(tokenAdmin: String, user: User): Users =
         try {
-            apiService.deleteUser(tokenAdmin, user.id)
+            apiService.deleteUser(tokenAdmin, user.userId)
         } catch (cause: HttpException) {
             Users(message = "0")
 

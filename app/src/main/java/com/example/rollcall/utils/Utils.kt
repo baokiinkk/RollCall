@@ -33,7 +33,7 @@ object Utils {
     const val REPORT = "report"
     const val CREATESUCCESS = "Tạo thành công"
     const val ERROREMPTY = "không được phép rỗng!"
-    const val BASE_URL = "https://tncnhan.codes/api/reports/"
+    const val BASE_URL = "http://54.254.154.61:3000/api/reports/"
 
     fun gotoFragment(activity: FragmentActivity, fragment: Fragment, isAnim: Boolean = true) {
         activity.supportFragmentManager.beginTransaction().apply {
