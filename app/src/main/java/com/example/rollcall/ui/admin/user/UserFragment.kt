@@ -59,7 +59,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
         }
         viewModel.apply {
             user?.let { user ->
-                title = if(user == STUDENT) "Sinh Viên" else "Giảng Viên"
+                title = if (user == STUDENT) "Sinh Viên" else "Giảng Viên"
                 token?.let { token ->
                     getUsers(token, user)
                 }
@@ -67,7 +67,9 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
             }
             users.observe(viewLifecycleOwner, {
                 it?.let {
-                    itemUserAdapter.submitList(it.data)
+                    itemUserAdapter.submitList(it.data?.filter { user ->
+                        user.status != "DELETED"
+                    })
                 }
             })
         }

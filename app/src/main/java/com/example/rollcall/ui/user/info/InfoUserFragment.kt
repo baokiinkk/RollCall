@@ -59,7 +59,7 @@ class InfoUserFragment : BaseFragment<FragmentInfoUserBinding>() {
 
     private fun getData() {
 
-        viewModel.getInfoUser(token,user?.id)
+        viewModel.getInfoUser(token,user?.userId)
         viewModel.isLogOut.observe(viewLifecycleOwner,{
             it?.let {
                 Utils.gotoFragment(requireActivity(),LoginFragment())

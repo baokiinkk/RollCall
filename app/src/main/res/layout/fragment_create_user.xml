@@ -14,13 +14,14 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/day_background"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/day_background">
-
+            >
             <TextView
                 android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
@@ -133,24 +134,24 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edtMajor"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:hint="nhập khoa id"
                 android:textColorHint="@color/color_icon"
                 app:hintTextColor="@color/color_icon"
+                android:load_data="@{viewmodel.majorData}"
                 app:layout_constraintEnd_toEndOf="@+id/edtId"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/edtId"
                 app:layout_constraintTop_toBottomOf="@+id/edtEmail">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={viewmodel.major}"
                     android:textColor="@color/white"
-                    app:endIconMode="clear_text" />
+                    android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

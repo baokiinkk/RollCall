@@ -15,23 +15,28 @@ import javax.inject.Inject
 @HiltViewModel
 class InfoUserViewModel @Inject constructor(private val repo: UserRepository) : ViewModel() {
     val users: MutableLiveData<Users?> = MutableLiveData(null)
-    val isLogOut:MutableLiveData<Boolean?> = MutableLiveData(null)
+    val isLogOut: MutableLiveData<Boolean?> = MutableLiveData(null)
     var token = ""
     fun getInfoUser(token: String?, id: String?) {
         token?.let { this.token = it }
         viewModelScope.launch(Dispatchers.IO) {
             users.postValue(
-                token?.let {token->
-                    id?.let { id->
-                        repo.getInfoUser(token, id)
+                token?.let { token ->
+                    id?.let { id ->
+                        repo.getInfoUser(token, id).apply {
+                            data?.map {
+                                it.sex = if (it.sex == "0") "Nam" else "Nữ"
+                            }
+                        }
                     }
 
-            })
+                })
         }
     }
-    fun logout(){
-        viewModelScope.launch(Dispatchers.IO){
-            if(repo.logOut(token).message == "Success")
+
+    fun logout() {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (repo.logOut(token).message == "Success")
                 isLogOut.postValue(true)
         }
     }

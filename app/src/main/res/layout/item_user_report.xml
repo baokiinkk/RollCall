@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:text="@{data.user.id}"
+                android:text="@{data.user.userId}"
                 android:textColor="#000"
                 app:layout_constraintStart_toEndOf="@+id/cardAvt"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -63,7 +63,7 @@
                     android:gravity="center_vertical"
                     android:paddingTop="@dimen/paddingThongTinSinhVien"
                     android:paddingBottom="@dimen/paddingThongTinSinhVien"
-                    android:text="@{viewmodel.users.data.get(0).id}"
+                    android:text="@{viewmodel.users.data.get(0).userId}"
                     android:textColor="@color/colorThongTinSinhVien" />
             </TableRow>
 
@@ -120,7 +120,7 @@
                     android:gravity="center_vertical"
                     android:paddingTop="@dimen/paddingThongTinSinhVien"
                     android:paddingBottom="@dimen/paddingThongTinSinhVien"
-                    android:text="Nam"
+                    android:text="@{viewmodel.users.data.get(0).sex}"
                     android:textColor="@color/colorThongTinSinhVien" />
             </TableRow>
 
@@ -148,7 +148,7 @@
                     android:gravity="center_vertical"
                     android:paddingTop="@dimen/paddingThongTinSinhVien"
                     android:paddingBottom="@dimen/paddingThongTinSinhVien"
-                    android:text="Đồng Nai"
+                    android:text="@{viewmodel.users.data.get(0).birthplace}"
                     android:textColor="@color/colorThongTinSinhVien" />
             </TableRow>
 
@@ -206,7 +206,7 @@
                     android:gravity="center_vertical"
                     android:paddingTop="@dimen/paddingThongTinSinhVien"
                     android:paddingBottom="@dimen/paddingThongTinSinhVien"
-                    android:text="Công nghệ phần mềm"
+                    android:text="@{viewmodel.users.data.get(0).majorId.name}"
                     android:textColor="@color/colorThongTinSinhVien" />
             </TableRow>
 
@@ -234,7 +234,7 @@
                     android:gravity="center_vertical"
                     android:paddingTop="@dimen/paddingThongTinSinhVien"
                     android:paddingBottom="@dimen/paddingThongTinSinhVien"
-                    android:text="Công nghệ thông tin 2"
+                    android:text="@{viewmodel.users.data.get(0).majorId.departmentId.name}"
                     android:textColor="@color/colorThongTinSinhVien" />
             </TableRow>
 

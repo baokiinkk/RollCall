@@ -57,7 +57,7 @@ class SelectItemUserAdapter:
             }
             submitList(list.filter {
                 it.name.lowercase().contains(output.trim()) ||
-                        it.id.lowercase().contains(output.trim()) ||
+                        it.userId.lowercase().contains(output.trim()) ||
                         checkClasses(it.classes,output)
             })
             notifyDataSetChanged()

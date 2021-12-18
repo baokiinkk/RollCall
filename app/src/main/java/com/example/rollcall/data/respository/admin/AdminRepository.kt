@@ -13,11 +13,14 @@ interface AdminRepository{
    suspend fun getStudent(tokenAdmin:String):Users
    suspend fun getTeacher(tokenAdmin:String):Users
    suspend fun getDashBoard(tokenAdmin:String):DashBoard
-   suspend fun createUser(tokenAdmin:String,user: User):Users
-   suspend fun editUser(tokenAdmin:String,user: User):Users
-   suspend fun editPasswordUser(tokenAdmin:String,user: User):Users
-   suspend fun deleteUser(tokenAdmin:String,user: User):Users
+   suspend fun createUser(tokenAdmin:String,user: UserPost):Boolean
+   suspend fun editUser(tokenAdmin:String,user: UserPost):Users
+   suspend fun editPasswordUser(tokenAdmin:String,user: UserPost):Users
+   suspend fun deleteUser(tokenAdmin:String,user: UserPost):Users
    suspend fun logOut(token: String):Users
+
+   //------------------------ Major --------------------------------------
+   suspend fun getMajors(tokenAdmin:String):MajorReponse
 
    //------------------------ Class --------------------------------------
    suspend fun getClass(tokenAdmin:String):Class

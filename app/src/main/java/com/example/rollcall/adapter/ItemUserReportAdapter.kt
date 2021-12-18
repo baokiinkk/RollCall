@@ -60,7 +60,7 @@ class ItemUserReportAdapter :
             }
             submitList(list.filter {
                 it.user.name.lowercase().contains(output.trim()) ||
-                        it.user.id.lowercase().contains(output.trim()) ||
+                        it.user.userId.lowercase().contains(output.trim()) ||
                         checkClasses(it.user.classes, output)
             })
             notifyDataSetChanged()
@@ -92,7 +92,7 @@ class ItemUserReportDiffUtil : DiffUtil.ItemCallback<Content>() {
         oldItem: Content,
         newItem: Content
     ): Boolean { // cho biết item_detail khi nào cùng nội dung
-        return oldItem.user.id == newItem.user.id
+        return oldItem.user.userId == newItem.user.userId
     }
 
 }

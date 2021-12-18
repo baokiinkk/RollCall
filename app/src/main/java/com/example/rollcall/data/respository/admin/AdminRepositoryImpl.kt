@@ -1,5 +1,6 @@
 package com.example.rollcall.data.respository.admin
 
+import android.util.Log
 import com.example.rollcall.data.api.ApiService
 import com.example.rollcall.data.model.*
 import com.google.gson.Gson
@@ -38,32 +39,29 @@ class AdminRepositoryImpl @Inject constructor(private val apiService: ApiService
             Gson().fromJson(cause.response()?.errorBody()?.string(), DashBoard::class.java)
         }
 
-    override suspend fun createUser(tokenAdmin: String, users: User): Users =
-        try {
-            apiService.createUser(tokenAdmin, users)
-        } catch (cause: HttpException) {
-            Gson().fromJson(cause.response()?.errorBody()?.string(), Users::class.java)
-        }
-
-    override suspend fun editUser(tokenAdmin: String, user: User): Users =
+    override suspend fun createUser(tokenAdmin: String, users: UserPost): Boolean {
+        val response = apiService.createUser(tokenAdmin, users)
+        return response.isSuccessful
+    }
+    override suspend fun editUser(tokenAdmin: String, user: UserPost): Users =
         try {
             apiService.editUser(tokenAdmin, user.userId, user)
         } catch (cause: HttpException) {
             Gson().fromJson(cause.response()?.errorBody()?.string(), Users::class.java)
         }
 
-    override suspend fun editPasswordUser(tokenAdmin: String, user: User): Users =
+    override suspend fun editPasswordUser(tokenAdmin: String, user: UserPost): Users =
         try {
             apiService.editPasswordUser(tokenAdmin, user.userId, user)
         } catch (cause: HttpException) {
             Gson().fromJson(cause.response()?.errorBody()?.string(), Users::class.java)
         }
 
-    override suspend fun deleteUser(tokenAdmin: String, user: User): Users =
+    override suspend fun deleteUser(tokenAdmin: String, user: UserPost): Users =
         try {
             apiService.deleteUser(tokenAdmin, user.userId)
         } catch (cause: HttpException) {
-            Users(message = "0")
+            Gson().fromJson(cause.response()?.errorBody()?.string(), Users::class.java)
 
         }
 
@@ -73,6 +71,13 @@ class AdminRepositoryImpl @Inject constructor(private val apiService: ApiService
         } catch (cause: HttpException) {
             Gson().fromJson(cause.response()?.errorBody()?.string(), Users::class.java)
 
+        }
+
+    override suspend fun getMajors(tokenAdmin: String): MajorReponse=
+        try {
+            apiService.getMajors(tokenAdmin)
+        } catch (cause: HttpException) {
+            Gson().fromJson(cause.response()?.errorBody()?.string(), MajorReponse::class.java)
         }
 
 

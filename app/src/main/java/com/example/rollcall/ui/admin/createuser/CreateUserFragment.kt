@@ -1,5 +1,7 @@
 package com.example.rollcall.ui.admin.createuser
 
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
@@ -19,14 +21,14 @@ class CreateUserFragment : BaseFragment<FragmentCreateUserBinding>() {
 
     //-------------------------------- Variable ----------------------------------------
     val viewModel: CreateUserViewModel by viewModels()
+    lateinit var listMajor:List<String>
     private var token: String? = null
     private var user: String? = null
 
-
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
-        setup()
         getArgument()
+        setup()
         clickView()
     }
 
@@ -35,10 +37,9 @@ class CreateUserFragment : BaseFragment<FragmentCreateUserBinding>() {
         baseBinding.apply {
             viewmodel = viewModel
         }
-
         viewModel.users.observe(viewLifecycleOwner, {
             it?.let {
-                if (it.message == null) {
+                if (it) {
                     baseBinding.btnCreate.stopAnimation(
                         TransitionButton.StopAnimationStyle.EXPAND
                     ) {
@@ -50,10 +51,11 @@ class CreateUserFragment : BaseFragment<FragmentCreateUserBinding>() {
                         TransitionButton.StopAnimationStyle.SHAKE,
                         null
                     )
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Tạo không thành công", Toast.LENGTH_SHORT).show()
                 }
             }
         })
+        token?.let { viewModel.getMajor(it) }
     }
 
     private fun getArgument() {

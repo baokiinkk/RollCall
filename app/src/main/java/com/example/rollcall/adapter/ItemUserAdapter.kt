@@ -56,7 +56,7 @@ class ItemUserAdapter(private val onClick: (User) -> Unit) :
             }
             submitList(list.filter {
                 it.name.lowercase().contains(output.trim()) ||
-                        it.id.lowercase().contains(output.trim()) ||
+                        it.userId.lowercase().contains(output.trim()) ||
                         checkClasses(it.classes, output)
             })
             notifyDataSetChanged()
@@ -81,7 +81,7 @@ class ItemUserDiffUtil : DiffUtil.ItemCallback<User>() {
         oldItem: User,
         newItem: User
     ): Boolean { // cho máy biết 2 item_detail khi nào giống
-        return oldItem.id == newItem.id // dung
+        return oldItem.userId == newItem.userId // dung
     }
 
     override fun areContentsTheSame(

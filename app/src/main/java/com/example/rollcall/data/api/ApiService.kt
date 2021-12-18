@@ -1,6 +1,7 @@
 package com.example.rollcall.data.api
 
 import com.example.rollcall.data.model.*
+import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
@@ -17,20 +18,20 @@ interface ApiService {
     suspend fun getDashBoard(@Header("Authorization") tokenAdmin: String): DashBoard
 
     @POST("users")
-    suspend fun createUser(@Header("Authorization") tokenAdmin: String, @Body user: User): Users
+    suspend fun createUser(@Header("Authorization") tokenAdmin: String, @Body user: UserPost): Response<Users>
 
     @PUT("users/{id}")
     suspend fun editUser(
         @Header("Authorization") tokenAdmin: String,
         @Path("id") id: String,
-        @Body user: User
+        @Body user: UserPost
     ): Users
 
     @PUT("users/{id}/password")
     suspend fun editPasswordUser(
         @Header("Authorization") tokenAdmin: String,
         @Path("id") id: String,
-        @Body user: User
+        @Body user: UserPost
     ): Users
 
     @DELETE("users/{id}")
@@ -49,22 +50,22 @@ interface ApiService {
     suspend fun logout(@Header("Authorization") tokenAdmin: String): Users
 
     //----------------------------------- Class ----------------------------------------------------
-    @GET("classes/")
+    @GET("subjects/")
     suspend fun getClass(@Header("Authorization") tokenAdmin: String): Class
 
-    @POST("classes/")
+    @POST("subjects/")
     suspend fun createClass(
         @Header("Authorization") tokenAdmin: String,
         @Body classes: DataClass
     ): Class
 
-    @PUT("classes/")
+    @PUT("subjects/")
     suspend fun editClass(
         @Header("Authorization") tokenAdmin: String,
         @Body dataClass: DataClass
     ): Class
 
-    @DELETE("classes/{id}")
+    @DELETE("subjects/{id}")
     suspend fun deleteClass(
         @Header("Authorization") tokenAdmin: String,
         @Path("id") id: String
@@ -100,6 +101,10 @@ interface ApiService {
         @Path("date")date:String,
         @Header("Authorization") tokenAdmin: String
     ):DataReport
+    @GET("majors")
+    suspend fun getMajors(
+        @Header("Authorization") tokenAdmin: String
+    ):MajorReponse
 
     @POST("reports/{id}/checkin")
     suspend fun checkin(

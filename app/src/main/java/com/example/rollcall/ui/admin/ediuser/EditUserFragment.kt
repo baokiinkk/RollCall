@@ -1,5 +1,7 @@
 package com.example.rollcall.ui.admin.ediuser
 
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.rollcall.R
@@ -8,8 +10,11 @@ import com.example.rollcall.databinding.FragmentEditUserBinding
 import com.example.rollcall.utils.BaseFragment
 import com.example.rollcall.utils.Utils
 import com.example.rollcall.utils.Utils.showAlertDialog
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.royrodriguez.transitionbutton.TransitionButton
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -22,7 +27,9 @@ class EditUserFragment : BaseFragment<FragmentEditUserBinding>() {
     val viewModel: EditUserViewModel by viewModels()
     private var token: String? = null
     private var user: User? = null
-
+    private val dfShow =  SimpleDateFormat("yyyy-MM-dd").apply {
+        timeZone = TimeZone.getTimeZone("Asia/Ho_Chi_Minh")
+    }
 
     //-------------------------------- createView ----------------------------------------
     override fun onCreateViews() {
@@ -82,12 +89,18 @@ class EditUserFragment : BaseFragment<FragmentEditUserBinding>() {
         user?.let {
             viewModel.apply {
                 id = it.userId
-                name = it.firstName
+                lastName = it.lastName
+                firstName = it.firstName
                 email = it.email
+                majorId = it.majorId.majorId
+                phone = it.phone
+                birthplace = it.birthplace
+                sex = if(it.sex == "0") "Nữ" else "Nam"
+                birthDay = if(it.birthDate != null) dfShow.format(dfShow.parse(it.birthDate)) else ""
             }
         }
+        token?.let { viewModel.getMajor(it) }
     }
-
     private fun clickView() {
         baseBinding.btnOk.apply {
             setOnClickListener {
@@ -98,6 +111,9 @@ class EditUserFragment : BaseFragment<FragmentEditUserBinding>() {
                     }
                 }
             }
+        }
+        baseBinding.inputDate.setOnClickListener {
+            dateOfBirth(it)
         }
         baseBinding.btnBack.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
@@ -119,15 +135,31 @@ class EditUserFragment : BaseFragment<FragmentEditUserBinding>() {
         clearError()
         val checkId = Utils.checkNull(baseBinding.edtId)
         val checkEmail = Utils.checkNull(baseBinding.edtEmail)
-        val checkName = Utils.checkNull(baseBinding.edtname)
-        return checkEmail && checkId && checkName
+        val checkFirstName = Utils.checkNull(baseBinding.edtfirstName)
+        val checkLastName = Utils.checkNull(baseBinding.edtlastName)
+        return checkEmail  && checkId && checkFirstName && checkLastName
     }
+
     private fun clearError() {
         baseBinding.apply {
-            edtId.error = null
             edtEmail.error = null
-            edtname.error = null
+            edtId.error = null
+            edtfirstName.error = null
+            edtlastName.error = null
         }
     }
 
+    private fun dateOfBirth(view:View) {
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .setTitleText("Add date of birth").build()
+
+        datePicker.show(requireActivity().supportFragmentManager, datePicker.toString())
+        datePicker.addOnPositiveButtonClickListener {
+            val date = Date(it)
+            viewModel.datePicker = date
+            baseBinding.inputDate.setText(dfShow.format(date))
+        }
+
+    }
 }
